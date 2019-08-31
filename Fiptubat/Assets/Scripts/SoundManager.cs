@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour {
+	
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start () {
-		
+		audioSource = GetComponent<AudioSource>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	private void PlaySound(AudioClip audioClip) {
+		audioSource.PlayOneShot(audioClip);
 	}
+
 }

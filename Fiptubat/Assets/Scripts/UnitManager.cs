@@ -1,0 +1,46 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+/// <summary>
+/// 
+/// </summary>
+public class UnitManager : MonoBehaviour {
+
+	public List<BaseUnit> units;
+	private List<BaseUnit> activeUnits;
+
+	public bool isPlayer = false;
+
+	private GameStateManager gameStateManager;
+
+	// Use this for initialization
+	void Start () {
+		units.ForEach(unit => unit.SetUnitManager(this));
+	}
+	
+	public void UnitDied(BaseUnit unit) {
+		units.Remove(unit);
+		activeUnits.Remove(unit);
+		if (units.Count == 0) {
+			gameStateManager.FactionDefeated(this);
+		}
+	}
+
+	public void StartTurn() {
+		activeUnits = units;
+	}
+
+	public void UnitFinished(BaseUnit unit) {
+		activeUnits.Remove(unit);
+		if(activeUnits.Count == 0) {
+			gameStateManager.EndTurn(this);
+		}
+	}
+
+	public void SetGameManager(GameStateManager manager) {
+		this.gameStateManager = manager;
+	}
+	
+}
