@@ -21,6 +21,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	private NavMeshAgent navMeshAgent;
 
 	private UnitManager unitManager;
+
+	private NavMeshHit navMeshHit;
 	
 	protected void Start() {
 		navMeshAgent = GetComponent<NavMeshAgent>();
@@ -33,13 +35,16 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
 		// find the closest edge
-		if (navMeshAgent.FindClosestEdge(out NavMeshHit hit)) {
-			SetDestination(hit.position);
+
+		if (navMeshAgent.FindClosestEdge(out navMeshHit)) {
+			SetDestination(navMeshHit.position);
+		} else {
+			Debug.LogFormat("{0} cannot find cover!", unitName);
 		}
 	}
 
 	public void Damage(DamageType damageType, int damageAmount) {
-		if (damageType == DamageType.ARMOUR_PIERCING) {
+		if (damageType != DamageType.ARMOUR_PIERCING) {
 			damageAmount -= armour;
 		} 
 

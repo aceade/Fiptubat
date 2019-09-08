@@ -2,17 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the UI. This is basically the player's controller.
+/// </summary>
 public class UIManager : MonoBehaviour {
 	
-	
+	public UnitManager unitManager;
 
-	// Use this for initialization
-	void Start () {
-		
+	public GameStateManager gameStateManager;	
+
+	public void Pause() {
+		gameStateManager.Pause();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void Resume() {
+		gameStateManager.Resume();
+	}
+
+	public void EndTurn() {
+		unitManager.EndTurn();
+	}
+
+	public void CycleUnit() {
+		unitManager.CycleUnit();
 	}
 }

@@ -44,14 +44,14 @@ Line of sight and hearing. Line of sight based on raycasting. Sound detection ba
 Covers health of living and non-living objects (e.g. cover)
 
 **Open questions**
-How does cover affect combat?
+* How does cover affect combat?
 
 ### Weapon system
 Manages the low-level weapon physics, animations, etc.
 
 **Open questions**
-Should aiming be free-form, or based on selecting visible unit?
-Can weapons suppress targets?
+* Should aiming be free-form, or based on selecting visible unit?
+* Can weapons suppress targets?
 
 ### Sound manager
 Manages music and environmental sounds.

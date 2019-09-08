@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,9 @@ public class UnitManager : MonoBehaviour {
 	public List<BaseUnit> units;
 	private List<BaseUnit> activeUnits;
 
+	private int currentUnit = 0;
+	private BaseUnit selectedUnit;
+
 	public bool isPlayer = false;
 
 	private GameStateManager gameStateManager;
@@ -18,9 +22,15 @@ public class UnitManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		units.ForEach(unit => unit.SetUnitManager(this));
+		selectedUnit = units[currentUnit];
 	}
-	
-	public void UnitDied(BaseUnit unit) {
+
+    public void EndTurn()
+    {
+        gameStateManager.EndTurn(this);
+    }
+
+    public void UnitDied(BaseUnit unit) {
 		units.Remove(unit);
 		activeUnits.Remove(unit);
 		if (units.Count == 0) {
@@ -30,6 +40,14 @@ public class UnitManager : MonoBehaviour {
 
 	public void StartTurn() {
 		activeUnits = units;
+	}
+
+	public void CycleUnit() {
+		currentUnit ++;
+		if (currentUnit >= activeUnits.Count) {
+			currentUnit = 0;
+		}
+		selectedUnit = activeUnits[currentUnit];
 	}
 
 	public void UnitFinished(BaseUnit unit) {
