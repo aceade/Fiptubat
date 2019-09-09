@@ -6,7 +6,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Common methods and properties for a unit.
 /// </summary>
-public class BaseUnit : MonoBehaviour, IDamage {
+public abstract class BaseUnit : MonoBehaviour, IDamage {
 
 	public string unitName;
 
@@ -24,7 +24,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	private NavMeshHit navMeshHit;
 	
-	protected void Start() {
+	protected virtual void Start() {
 		navMeshAgent = GetComponent<NavMeshAgent>();
 	}
 	
@@ -32,6 +32,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		Debug.LogFormat("{0} moving to {1}", unitName, position);
 		navMeshAgent.SetDestination(position);
 	}
+
+	public abstract void SelectUnit();
+
+	public abstract void DeselectUnit();
 
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
 		// find the closest edge
