@@ -6,7 +6,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Common methods and properties for a unit.
 /// </summary>
-public abstract class BaseUnit : MonoBehaviour, IDamage {
+public class BaseUnit : MonoBehaviour, IDamage {
 
 	public string unitName;
 
@@ -33,9 +33,13 @@ public abstract class BaseUnit : MonoBehaviour, IDamage {
 		navMeshAgent.SetDestination(position);
 	}
 
-	public abstract void SelectUnit();
+	public virtual void SelectUnit() {
+        // no-op
+    }
 
-	public abstract void DeselectUnit();
+	public virtual void DeselectUnit() {
+        // no-op
+    }
 
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
 		// find the closest edge

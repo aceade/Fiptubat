@@ -7,11 +7,11 @@ using UnityEngine;
 /// </summary>
 public class PlayerUnit : BaseUnit {
 
-    private Camera myCamera;
+
+    private PlayerUnitControl unitControl;
 
     protected override void Start() {
-        myCamera = GetComponent<Camera>();
-        myCamera.enabled = false;
+        unitControl = GetComponent<PlayerUnitControl>();
         base.Start();
     }
 
@@ -19,13 +19,13 @@ public class PlayerUnit : BaseUnit {
     /// Select the unit and activate their camera.
     /// </summary>
     public override void SelectUnit() {
-        myCamera.enabled = true;
+        unitControl.enabled = true;
     }
 
     /// <summary>
     /// Deselect the unit. In this case, deactivate their camera.
     /// </summary>
     public override void DeselectUnit() {
-        myCamera.enabled = false;
+        unitControl.enabled = false;
     }
 }

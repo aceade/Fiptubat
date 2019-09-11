@@ -7,9 +7,12 @@ public class GameStateManager : MonoBehaviour {
 	private SoundManager soundManager;
 	
 	private bool isPaused = false;
+
+	public List<UnitManager> factions;
 	
 	void Start() {
 		soundManager = GetComponent<SoundManager>();
+		factions[0].StartTurn();
 	}
 
 	public void Pause() {
@@ -38,10 +41,10 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	private void GameOver() {
-
+        throw new System.NotImplementedException("Defeat has not been considered yet!");
 	}
 
 	private void Victory() {
-
+        throw new System.NotImplementedException("We won! Now what?");
 	}
 }

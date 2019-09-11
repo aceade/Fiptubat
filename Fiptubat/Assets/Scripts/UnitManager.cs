@@ -26,8 +26,7 @@ public class UnitManager : MonoBehaviour {
 		selectedUnit.SelectUnit();
 	}
 
-    public void EndTurn()
-    {
+    public void EndTurn() {
         gameStateManager.EndTurn(this);
     }
 

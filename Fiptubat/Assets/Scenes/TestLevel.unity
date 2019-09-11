@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 154236227}
   - component: {fileID: 154236226}
   - component: {fileID: 154236225}
+  - component: {fileID: 154236231}
   m_Layer: 0
   m_Name: Unit 1
   m_TagString: Untagged
@@ -550,6 +551,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154236231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 154236224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffc6234aadcc4437acd47e0609cebb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 20
 --- !u!1 &164099756
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +680,7 @@ GameObject:
   - component: {fileID: 242598951}
   - component: {fileID: 242598950}
   - component: {fileID: 242598949}
+  - component: {fileID: 242598955}
   m_Layer: 0
   m_Name: Unit 2
   m_TagString: Untagged
@@ -780,6 +794,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &242598955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242598948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffc6234aadcc4437acd47e0609cebb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 20
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,6 +1538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34239258774544d33912bdd85a9f0ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factions: []
 --- !u!4 &1247843730
 Transform:
   m_ObjectHideFlags: 0
@@ -1858,8 +1885,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   units:
-  - {fileID: 154236226}
-  - {fileID: 242598950}
+  - {fileID: 0}
+  - {fileID: 0}
   isPlayer: 1
 --- !u!114 &2039679856
 MonoBehaviour:
