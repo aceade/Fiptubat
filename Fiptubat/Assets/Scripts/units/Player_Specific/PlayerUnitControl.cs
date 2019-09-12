@@ -19,6 +19,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public float maxDistance = 20f;
 
+    public float rotationSpeed = 20f;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
@@ -27,6 +29,9 @@ public class PlayerUnitControl : MonoBehaviour {
     }
 
     void OnEnable() {
+        if (myCamera == null) {
+            myCamera = GetComponentInChildren<Camera>();
+        }
         myCamera.enabled = true;
     }
 
@@ -36,23 +41,29 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void Update() {
 
+        myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
+
         // hold down the right mouse button to get paths/positions
-        if (Input.GetButton("Fire 2")) {
+        if (Input.GetButton("Fire2")) {
+            Vector3 myPositoin = myTransform.position;
+            Debug.DrawLine(myPositoin, myPositoin + (myCamera.transform.forward * maxDistance), Color.red);
 
-            Debug.DrawRay(myTransform.position + Vector3.up, myCamera.transform.forward, Color.red);
-
+            Vector3 possibleDestination;
             
-
-            if (Physics.CapsuleCast(myTransform.position, myTransform.position + (Vector3.up * navMeshAgent.height), navMeshAgent.radius, myTransform.forward, maxDistance)) {
+            if (Physics.Raycast(myPositoin + Vector3.up, myTransform.forward, out raycastHit, maxDistance)) {
                 // put arrow here to show where they're probably going and check the width
+                // TODO: check for ladders or other interactable objects
 
+                possibleDestination = raycastHit.point;
+   
+            } else {
+                possibleDestination = myPositoin + (myTransform.forward * maxDistance);
+            }
 
-
-
-                // left click to select it
-                if (Input.GetButtonDown("Fire 1")) {
-                    unit.SetDestination(raycastHit.point);
-                }
+            // left click to select it
+            Debug.LogFormat("Possible destination is {0}", possibleDestination);
+            if (Input.GetButtonDown("Fire1")) {
+                unit.SetDestination(possibleDestination);
             }
 
             

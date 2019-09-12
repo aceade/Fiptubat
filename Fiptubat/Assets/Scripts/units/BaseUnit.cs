@@ -63,6 +63,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public void SetUnitManager(UnitManager manager) {
+		DeselectUnit();
 		this.unitManager = manager;
 	}
 
