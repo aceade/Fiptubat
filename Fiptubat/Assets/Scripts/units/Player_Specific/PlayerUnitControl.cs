@@ -12,6 +12,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private Camera myCamera;
     private Transform myTransform;
+    private Vector3 myPosition;
 
     private RaycastHit raycastHit;
 
@@ -41,23 +42,27 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void Update() {
 
+        myPosition = myTransform.position;
         myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
+        myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
 
         // hold down the right mouse button to get paths/positions
-        if (Input.GetButton("Fire2")) {
-            Vector3 myPositoin = myTransform.position;
-            Debug.DrawLine(myPositoin, myPositoin + (myCamera.transform.forward * maxDistance), Color.red);
+        bool selectingPath = Input.GetButton("Fire2");
+
+        
+        if (selectingPath) {
+            Debug.DrawLine(myPosition, myPosition + (myCamera.transform.forward * maxDistance), Color.red);
 
             Vector3 possibleDestination;
             
-            if (Physics.Raycast(myPositoin + Vector3.up, myTransform.forward, out raycastHit, maxDistance)) {
-                // put arrow here to show where they're probably going and check the width
+            if (Physics.Raycast(myPosition + Vector3.up, myTransform.forward, out raycastHit, maxDistance)) {
+                // TODO: put arrow here to show where they're probably going and check the width
                 // TODO: check for ladders or other interactable objects
 
                 possibleDestination = raycastHit.point;
    
             } else {
-                possibleDestination = myPositoin + (myTransform.forward * maxDistance);
+                possibleDestination = myPosition + (myTransform.forward * maxDistance);
             }
 
             // left click to select it

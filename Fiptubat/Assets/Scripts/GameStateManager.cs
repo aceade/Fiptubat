@@ -12,20 +12,24 @@ public class GameStateManager : MonoBehaviour {
 	
 	void Start() {
 		soundManager = GetComponent<SoundManager>();
+		factions.ForEach (faction => faction.SetGameManager(this));
 		factions[0].StartTurn();
 	}
 
 	public void Pause() {
 		if (!isPaused) {
 			isPaused = true;
+			Time.timeScale = 0f;
 		}
 	}
 
 	public void Resume() {
 		isPaused = false;
+		Time.timeScale = 1f;
 	}
 	
 	public void EndTurn(UnitManager manager) {
+		Debug.LogFormat("{0} has ended their turn", manager);
 		if (isPaused) {
 			return;
 		}
