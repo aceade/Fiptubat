@@ -18,6 +18,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private PlayerUnit unit;
 
+    public UIManager uiManager;
+
     public float maxDistance = 20f;
 
     public float rotationSpeed = 20f;
@@ -56,14 +58,16 @@ public class PlayerUnitControl : MonoBehaviour {
             Vector3 possibleDestination;
             
             if (Physics.Raycast(myPosition + Vector3.up, myTransform.forward, out raycastHit, maxDistance)) {
-                // TODO: put arrow here to show where they're probably going and check the width
-                // TODO: check for ladders or other interactable objects
-
                 possibleDestination = raycastHit.point;
    
             } else {
                 possibleDestination = myPosition + (myTransform.forward * maxDistance);
             }
+
+            // show the player how much it costs
+            int moveCost = unit.GetMoveCost(myPosition, raycastHit.point);
+            float distance = Vector3.Distance(myPosition, raycastHit.point);
+            uiManager.ShowDistanceCost(distance, moveCost);
 
             // left click to select it
             Debug.LogFormat("Possible destination is {0}", possibleDestination);
@@ -72,6 +76,8 @@ public class PlayerUnitControl : MonoBehaviour {
             }
 
             
+        } else {
+            uiManager.ClearDistanceText();
         }
     }
 }

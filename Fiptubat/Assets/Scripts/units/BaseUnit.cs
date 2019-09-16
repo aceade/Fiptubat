@@ -71,4 +71,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		Debug.LogFormat("{0} is dead!", this.unitName);
 		unitManager.UnitDied(this);
 	}
+
+	public int GetMoveCost(Vector3 start, Vector3 destination) {
+		return Mathf.RoundToInt((Vector3.Distance(start, destination) / 2));
+	}
+
+	public int GetMaxMoveDistance() {
+		return (actionPoints / 2);
+	}
 }
