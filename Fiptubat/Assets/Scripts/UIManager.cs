@@ -33,8 +33,8 @@ public class UIManager : MonoBehaviour {
 	/// <summary>
 	/// Show the user the distance to their possible target.
 	/// </summary>
-	public void ShowDistanceCost(float distance, int cost) {
-		playerDistanceText.text = string.Format("Cost: {0}\nDistance: {1}", distance, cost);
+	public void ShowDistanceCost(float distance, int cost, int remainingPoints) {
+		playerDistanceText.text = string.Format("Cost: {0}/{1}\nDistance: {2}", cost, remainingPoints, distance);
 	}
 
 	public void ClearDistanceText() {

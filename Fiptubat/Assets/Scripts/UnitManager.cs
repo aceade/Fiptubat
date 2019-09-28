@@ -40,6 +40,7 @@ public class UnitManager : MonoBehaviour {
 
 	public void StartTurn() {
 		activeUnits = units;
+		activeUnits.ForEach(unit => unit.StartTurn());
 	}
 
 	public void CycleUnit() {

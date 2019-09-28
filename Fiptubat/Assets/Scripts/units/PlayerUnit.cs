@@ -32,4 +32,10 @@ public class PlayerUnit : BaseUnit {
         unitControl.enabled = false;
         base.DeselectUnit();
     }
+
+    void Update() {
+        if (!navMeshAgent.isStopped) {
+            
+        }
+    }
 }

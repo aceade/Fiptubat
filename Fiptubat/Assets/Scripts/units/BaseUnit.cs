@@ -15,22 +15,37 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public int armour = 0;
 	
 	public int actionPoints = 50;
+	private int currentActionPoints;
 	
 	public bool isCrouched = false;
 	
-	private NavMeshAgent navMeshAgent;
+	protected NavMeshAgent navMeshAgent;
 
-	private UnitManager unitManager;
+	protected UnitManager unitManager;
 
 	private NavMeshHit navMeshHit;
 	
 	protected virtual void Start() {
+		currentActionPoints = actionPoints;
 		navMeshAgent = GetComponent<NavMeshAgent>();
+	}
+
+	private void LogPath() {
+		bool hasPath = navMeshAgent.hasPath;
+		Debug.LogFormat("[{0}] moving to [{1}]. Does it have a path: [{2}]. What status is the path in: [{3}]. Remaining distance: [{4}]. Is it actually stopped? [{5}]", 
+		unitName, navMeshAgent.destination, 
+			hasPath,  navMeshAgent.path.status, 
+			navMeshAgent.remainingDistance, navMeshAgent.isStopped);
 	}
 	
 	public void SetDestination(Vector3 position) {
-		Debug.LogFormat("{0} moving to {1}", unitName, position);
 		navMeshAgent.SetDestination(position);
+		LogPath();
+		
+	}
+
+	public void StartTurn() {
+		currentActionPoints = actionPoints;
 	}
 
 	public virtual void SelectUnit() {
@@ -78,5 +93,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public int GetMaxMoveDistance() {
 		return (actionPoints / 2);
+	}
+
+	public int GetRemainingActionPoints() {
+		return currentActionPoints;
 	}
 }
