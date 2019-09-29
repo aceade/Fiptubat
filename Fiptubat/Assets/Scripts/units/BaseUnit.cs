@@ -38,10 +38,22 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			navMeshAgent.remainingDistance, navMeshAgent.isStopped);
 	}
 	
-	public void SetDestination(Vector3 position) {
-		navMeshAgent.SetDestination(position);
-		currentActionPoints -= GetMoveCost(transform.position, position);
-		LogPath();
+	/// <summary>
+	/// Set the targeted destination, if possible
+	/// </summary>
+	/// <param name="newDestination">Coordinates of the endpoint</param>
+	/// <returns>True if able to set the destination, false otherwise</returns>
+	public bool SetDestination(Vector3 newDestination) {
+		int potentialCost = GetMoveCost(transform.position, newDestination);
+		if (potentialCost <= GetRemainingActionPoints()) {
+			navMeshAgent.SetDestination(newDestination);
+			currentActionPoints -= potentialCost;
+			LogPath();
+			return true;
+		} else {
+			Debug.LogFormat("{0}'s selected destination ({1}) is too far away!", unitName, newDestination);
+			return false;
+		}
 		
 	}
 

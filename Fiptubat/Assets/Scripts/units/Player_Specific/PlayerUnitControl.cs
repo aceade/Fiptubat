@@ -107,9 +107,9 @@ public class PlayerUnitControl : MonoBehaviour {
             Debug.LogFormat("Possible destination is {0}", possibleDestination);
             if (Input.GetButtonDown("Fire1")) {
                 lastStationaryPosition = myPosition;
-                unit.SetDestination(possibleDestination);
+                bool canReachDestination = unit.SetDestination(possibleDestination);
+                moveMarker.SetPosition(possibleDestination, canReachDestination);
             }
-
             
         } else {
             uiManager.ClearDistanceText();
