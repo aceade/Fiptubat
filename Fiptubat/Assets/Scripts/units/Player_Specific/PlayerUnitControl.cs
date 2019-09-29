@@ -47,16 +47,43 @@ public class PlayerUnitControl : MonoBehaviour {
         myCamera.enabled = false;
     }
 
+    public void MoveCamera(float yOffset) {
+        myCamera.transform.Translate(0f, yOffset, 0f);
+    }
+
     void Update() {
 
         myPosition = myTransform.position;
         myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
         myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
 
-        // hold down the right mouse button to get paths/positions, if stopped
-        bool selectingPath = Input.GetButton("Fire2");
+        // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
+        // TODO: move ALL keycodes into InputManager
+        if (Input.GetKey(KeyCode.LeftArrow)) {
+            myTransform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        }
 
+        // hold down the right mouse button to get paths/positions
+        bool selectingPath = Input.GetButton("Fire2");
+        HandlePath(selectingPath);
         
+        if(Input.GetKeyDown(KeyCode.C)) {
+            unit.Crouch();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
+            uiManager.CycleUnit();
+        }
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            uiManager.EndTurn();
+        }
+        
+    }
+
+    private void HandlePath(bool selectingPath) {
         if (selectingPath) {
             Debug.DrawLine(myPosition, myPosition + (myCamera.transform.forward * maxDistance), Color.red);
 

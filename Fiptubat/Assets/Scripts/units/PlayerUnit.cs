@@ -33,9 +33,9 @@ public class PlayerUnit : BaseUnit {
         base.DeselectUnit();
     }
 
-    void Update() {
-        if (!navMeshAgent.isStopped) {
-            
-        }
+    public override void Crouch() {
+        base.Crouch();
+        float offset = isCrouched ? -0.6f : 0.6f;
+        unitControl.MoveCamera(offset);
     }
 }

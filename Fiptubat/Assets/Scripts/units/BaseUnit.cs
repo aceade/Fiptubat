@@ -40,6 +40,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	
 	public void SetDestination(Vector3 position) {
 		navMeshAgent.SetDestination(position);
+		currentActionPoints -= GetMoveCost(transform.position, position);
 		LogPath();
 		
 	}
@@ -66,6 +67,27 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		}
 	}
 
+	/// <summary>
+	/// Crouching will result in greater move costs, increased accuracy, 
+	/// and decreased chance to be hit.
+	/// </summary>
+	public virtual void Crouch() {
+		isCrouched = !isCrouched;
+		currentActionPoints -= 4;
+		if (isCrouched) {
+			navMeshAgent.height = 1f;
+			// TODO: cache the collider
+			GetComponent<CapsuleCollider>().height = 1f;
+		} else {
+			navMeshAgent.height = 2f;
+			GetComponent<CapsuleCollider>().height = 2f;
+		}
+	}
+
+	public virtual void TargetLocated(IDamage target) {
+		// no-op
+	}
+
 	public void Damage(DamageType damageType, int damageAmount) {
 		if (damageType != DamageType.ARMOUR_PIERCING) {
 			damageAmount -= armour;
@@ -88,11 +110,19 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public int GetMoveCost(Vector3 start, Vector3 destination) {
-		return Mathf.RoundToInt((Vector3.Distance(start, destination) / 2));
+		int baseCost = Mathf.RoundToInt((Vector3.Distance(start, destination) / 2));
+		if (isCrouched) {
+			return Mathf.RoundToInt(baseCost * 1.5f);
+		}
+		return baseCost;
 	}
 
 	public int GetMaxMoveDistance() {
-		return (actionPoints / 2);
+		int baseDistance = actionPoints / 2;
+		if (isCrouched) {
+			return Mathf.RoundToInt(baseDistance / 1.5f);
+		}
+		return baseDistance;
 	}
 
 	public int GetRemainingActionPoints() {

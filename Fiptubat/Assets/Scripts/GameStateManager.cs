@@ -10,9 +10,18 @@ public class GameStateManager : MonoBehaviour {
 
 	public List<UnitManager> factions;
 	
+	private int currentFactionIndex = 0;
+
 	void Start() {
 		soundManager = GetComponent<SoundManager>();
 		factions.ForEach (faction => faction.SetGameManager(this));
+		Invoke("StartTheFirstTurn", 0.1f);
+	}
+
+	/// <summary>
+	/// Gives the level time to set up
+	/// <summary>
+	private void StartTheFirstTurn() {
 		factions[0].StartTurn();
 	}
 
@@ -29,10 +38,16 @@ public class GameStateManager : MonoBehaviour {
 	}
 	
 	public void EndTurn(UnitManager manager) {
-		Debug.LogFormat("{0} has ended their turn", manager);
 		if (isPaused) {
 			return;
 		}
+
+		Debug.LogFormat("{0} has ended their turn", manager);
+		currentFactionIndex ++;
+		if (currentFactionIndex >= factions.Count) {
+			currentFactionIndex = 0;
+		}
+		factions[currentFactionIndex].StartTurn();
 	}
 
 	public void FactionDefeated(UnitManager manager) {

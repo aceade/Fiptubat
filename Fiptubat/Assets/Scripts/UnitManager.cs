@@ -23,7 +23,7 @@ public class UnitManager : MonoBehaviour {
 	void Start () {
 		units.ForEach(unit => unit.SetUnitManager(this));
 		selectedUnit = units[currentUnit];
-		selectedUnit.SelectUnit();
+		//selectedUnit.SelectUnit();
 	}
 
     public void EndTurn() {
@@ -41,6 +41,7 @@ public class UnitManager : MonoBehaviour {
 	public void StartTurn() {
 		activeUnits = units;
 		activeUnits.ForEach(unit => unit.StartTurn());
+		selectedUnit.SelectUnit();
 	}
 
 	public void CycleUnit() {

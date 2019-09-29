@@ -34,7 +34,8 @@ public class UIManager : MonoBehaviour {
 	/// Show the user the distance to their possible target.
 	/// </summary>
 	public void ShowDistanceCost(float distance, int cost, int remainingPoints) {
-		playerDistanceText.text = string.Format("Cost: {0}/{1}\nDistance: {2}", cost, remainingPoints, distance);
+		int roundedDistance = (Mathf.RoundToInt(distance * 10)/ 10);
+		playerDistanceText.text = string.Format("Cost: {0}/{1}\nDistance: {2}", cost, remainingPoints, roundedDistance);
 	}
 
 	public void ClearDistanceText() {
