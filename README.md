@@ -38,7 +38,7 @@ Main controller for the game logic. Handles the following functionality:
 Effectively another player. Can choose which unit moves when (likely round-robin at first).
 
 ### Detection system
-Line of sight and hearing. Line of sight based on raycasting. Sound detection based on distance inside a collider.
+Line of sight and hearing. Line of sight based on raycasting inside a collider. Sound detection based on distance inside a collider.
 
 ### Damage system
 Covers health of living and non-living objects (e.g. cover)
@@ -47,11 +47,8 @@ Covers health of living and non-living objects (e.g. cover)
 * How does cover affect combat?
 
 ### Weapon system
-Manages the low-level weapon physics, animations, etc.
-
-**Open questions**
-* Should aiming be free-form, or based on selecting visible unit?
-* Can weapons suppress targets?
+Manages the low-level weapon physics, animations, etc. Aiming will be free-form for player units; computer-controlled units will select form a list of visible units.
+Units may be able to suppress targets by means of dumping ammo into the targets' surroundings.
 
 ### Sound manager
 Manages music and environmental sounds.
@@ -77,9 +74,6 @@ Music TBD
 
 ## Required levels
 
-1. Main menu
-Very bare-bones - just links to the main level or the options panel.
+1. Main menu. This will be very bare-bones - just links to the main level or the options panel.
 
-2. Main level
-The player's goal will be for at least one unit to reach the far end of the level (referred to henceforth as the "extraction point").
-The AI player will attempt to stop them.
+2. Main level. This will involve a "corridor" through various buildings. The player's goal will be for at least one unit to reach the far end of the level (referred to henceforth as the "extraction point"). The AI player will attempt to stop them.
