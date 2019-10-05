@@ -441,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d14992a12e9f0419fa2a49fa621dbf16, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.79
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d14992a12e9f0419fa2a49fa621dbf16, type: 3}
       propertyPath: m_LocalPosition.z
@@ -709,7 +709,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154236224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.952, z: -42.1}
+  m_LocalPosition: {x: 0, y: 1.78, z: -42.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1151022721}
@@ -744,7 +744,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1045,7 +1045,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -1687,7 +1687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4bcb0df5a09984cbc9de590a418d6768, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.73
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4bcb0df5a09984cbc9de590a418d6768, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2723,7 +2723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 067a571735d3742eb829c7b6876e0e8b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7500012
+      value: 0.58
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 067a571735d3742eb829c7b6876e0e8b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3747,7 +3747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 4bcb0df5a09984cbc9de590a418d6768, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.18
+      value: -0.42
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bcb0df5a09984cbc9de590a418d6768, type: 3}
