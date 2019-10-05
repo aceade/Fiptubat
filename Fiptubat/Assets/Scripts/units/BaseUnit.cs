@@ -26,9 +26,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	private NavMeshHit navMeshHit;
 
 	protected bool isStillMoving;
+
+	private Rigidbody myBody;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
+		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 	}
 
@@ -155,5 +158,15 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public int GetRemainingActionPoints() {
 		return currentActionPoints;
+	}
+
+	void OnCollisionEnter(Collision coll) {
+		int layer = coll.gameObject.layer;
+
+		// avoid being repelled by steps
+		if (layer == LayerMask.NameToLayer("Scenery")) {
+			myBody.isKinematic = true;
+			myBody.isKinematic = false;
+		}
 	}
 }
