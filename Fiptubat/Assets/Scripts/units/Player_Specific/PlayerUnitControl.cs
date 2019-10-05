@@ -28,6 +28,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private Vector3 lastStationaryPosition;
 
+    private bool canMove = true;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
@@ -41,14 +43,26 @@ public class PlayerUnitControl : MonoBehaviour {
             myCamera = GetComponentInChildren<Camera>();
         }
         myCamera.enabled = true;
+        canMove = true;
     }
 
     void OnDisable() {
         myCamera.enabled = false;
+        canMove = false;
     }
 
     public void MoveCamera(float yOffset) {
         myCamera.transform.Translate(0f, yOffset, 0f);
+    }
+
+    public void AllowMovement() {
+        canMove = true;
+        Debug.LogFormat("{0} should be able to move now", unit.unitName);
+    }
+
+    public void ForbidMovement() {
+        canMove = false;
+        Debug.LogFormat("{0} should NOT be able to move now", unit.unitName);
     }
 
     void Update() {
@@ -67,7 +81,7 @@ public class PlayerUnitControl : MonoBehaviour {
         }
 
         // hold down the right mouse button to get paths/positions
-        bool selectingPath = Input.GetButton("Fire2");
+        bool selectingPath = Input.GetButton("Fire2") && canMove;
         HandlePath(selectingPath);
         
         if(Input.GetKeyDown(KeyCode.C)) {
@@ -76,9 +90,11 @@ public class PlayerUnitControl : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Tab)) {
             uiManager.CycleUnit();
+            canMove = false;
         }
         if (Input.GetKeyDown(KeyCode.Backspace)) {
             uiManager.EndTurn();
+            canMove = false;
         }
         
     }
@@ -104,7 +120,6 @@ public class PlayerUnitControl : MonoBehaviour {
             uiManager.ShowDistanceCost(distance, moveCost, remainingPoints);
 
             // left click to select it
-            Debug.LogFormat("Possible destination is {0}", possibleDestination);
             if (Input.GetButtonDown("Fire1")) {
                 lastStationaryPosition = myPosition;
                 bool canReachDestination = unit.SetDestination(possibleDestination);

@@ -17,17 +17,28 @@ public class UnitManager : MonoBehaviour {
 
 	public bool isPlayer = false;
 
+	public string factionName;
+
 	private GameStateManager gameStateManager;
 
 	// Use this for initialization
 	void Start () {
+		if (String.IsNullOrWhiteSpace(factionName)) {
+			factionName = transform.name;
+		}
 		units.ForEach(unit => unit.SetUnitManager(this));
 		selectedUnit = units[currentUnit];
 		//selectedUnit.SelectUnit();
 	}
 
     public void EndTurn() {
-        gameStateManager.EndTurn(this);
+		int stillMovingUnits = units.FindAll(unit => unit.IsStillMoving()).Count;
+		Debug.LogFormat("{0} still has {1} moving units", factionName, stillMovingUnits);
+		if (stillMovingUnits == 0) {
+			units.ForEach(unit => unit.StandDown());
+        	gameStateManager.EndTurn(this);
+		}
+		
     }
 
     public void UnitDied(BaseUnit unit) {

@@ -24,6 +24,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected UnitManager unitManager;
 
 	private NavMeshHit navMeshHit;
+
+	protected bool isStillMoving;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
@@ -59,6 +61,16 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void StartTurn() {
 		currentActionPoints = actionPoints;
+		isStillMoving = true;
+	}
+
+	protected virtual void FinishedTurn() {
+		isStillMoving = false;
+		unitManager.UnitFinished(this);
+	}
+
+	public virtual bool IsStillMoving() {
+		return isStillMoving;
 	}
 
 	public virtual void SelectUnit() {
@@ -94,6 +106,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			navMeshAgent.height = 2f;
 			GetComponent<CapsuleCollider>().height = 2f;
 		}
+	}
+
+	public virtual void StandDown() {
+		// no-op. Mainly used to tell player they can't move!
 	}
 
 	public virtual void TargetLocated(IDamage target) {

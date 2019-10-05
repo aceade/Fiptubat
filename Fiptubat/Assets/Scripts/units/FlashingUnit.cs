@@ -24,7 +24,7 @@ public class FlashingUnit : BaseUnit
         }
         flashLight.color = selectedColour;
         StartCoroutine(rotateLight());
-        FinishTurn();
+        Invoke("FinishTurn", 3f);
     }
 
     IEnumerator rotateLight() {
@@ -42,7 +42,7 @@ public class FlashingUnit : BaseUnit
     }
 
     private void FinishTurn() {
-        unitManager.UnitFinished(this);
+        base.FinishedTurn();
     }
 
 }

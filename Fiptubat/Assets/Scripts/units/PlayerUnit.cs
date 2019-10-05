@@ -22,6 +22,7 @@ public class PlayerUnit : BaseUnit {
         Debug.LogFormat("Selecting {0}", unitName);
         unitControl.enabled = true;
         base.SelectUnit();
+        unitControl.AllowMovement();    // work around a timing issue of some kind
     }
 
     /// <summary>
@@ -31,6 +32,15 @@ public class PlayerUnit : BaseUnit {
         Debug.LogFormat("Deselecting {0}", unitName);
         unitControl.enabled = false;
         base.DeselectUnit();
+    }
+
+    public override void StandDown() {
+        Debug.LogFormat("{0}, stand down for this turn!", unitName);
+        unitControl.ForbidMovement();
+    }
+
+    public override bool IsStillMoving() {
+        return !Mathf.Approximately(navMeshAgent.velocity.magnitude, 0);
     }
 
     public override void Crouch() {

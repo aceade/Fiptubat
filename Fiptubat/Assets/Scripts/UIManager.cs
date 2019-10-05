@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour {
 
 	public Text playerDistanceText;
 
+	public Text turnEndedText;
+
 	public void Pause() {
 		gameStateManager.Pause();
 	}
@@ -40,5 +42,14 @@ public class UIManager : MonoBehaviour {
 
 	public void ClearDistanceText() {
 		playerDistanceText.text = "";
+	}
+
+	public void AnnounceTurn(string playerName) {
+		turnEndedText.text = playerName + " Turn";
+		Invoke("ClearAnnounceText", 2f);
+	}
+
+	private void ClearAnnounceText() {
+		turnEndedText.text = "";
 	}
 }

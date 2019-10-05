@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameStateManager : MonoBehaviour {
 	
 	private SoundManager soundManager;
+
+	public UIManager uiManager;
 	
 	private bool isPaused = false;
 
@@ -41,12 +43,18 @@ public class GameStateManager : MonoBehaviour {
 		if (isPaused) {
 			return;
 		}
+		Debug.LogFormat("{0} wants to end their turn. Current player is {1}", manager, factions[currentFactionIndex]);
+		if (factions.IndexOf(manager) != currentFactionIndex) {
+			Debug.LogFormat("{0}, wait your turn!", manager);
+			return;
+		}
 
-		Debug.LogFormat("{0} has ended their turn", manager);
+		
 		currentFactionIndex ++;
 		if (currentFactionIndex >= factions.Count) {
 			currentFactionIndex = 0;
 		}
+		uiManager.AnnounceTurn(factions[currentFactionIndex].factionName);
 		factions[currentFactionIndex].StartTurn();
 	}
 
