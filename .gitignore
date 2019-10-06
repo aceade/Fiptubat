@@ -5,6 +5,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+## Allow the ProtoType build files
+!Fiptubat/Releases/ProtoType/Build/
+
 # Visual Studio cache directory
 .vs/
 
