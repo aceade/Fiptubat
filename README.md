@@ -3,6 +3,9 @@ A prototype for a first-person turn-based tactics game.
 
 Turn-based tactics games such as XCOM, Silent Storm, Jagged Alliance, etc. are based around the idea of the player commanding a small group (e.g. a fireteam) in a small-scale combat scenario. Usually, these are done from a third-person perspective, i.e. the player is commanding the unit remotely. The purpose of this is to see if this can be done from a first-person perspective, i.e. from the point-of-view of the units on the field.
 
+## Current Prototype Link
+You can find the WebGL prototype [here](../Releases/ProtoType/)
+
 ## Required systems/components
 
 ### Unit
