@@ -27,7 +27,7 @@ public class FlashingUnit : BaseUnit
         Invoke("FinishTurn", 3f);
     }
 
-    IEnumerator rotateLight() {
+    private IEnumerator rotateLight() {
         int rotationCount = 0;
         
         while (rotationCount < 3) {
@@ -39,6 +39,12 @@ public class FlashingUnit : BaseUnit
             yield return flashlightRotationCycle;
         }
         
+    }
+
+    public override void TargetLocated(IDamage target) {
+        Debug.Log("I can see {0}! But all I can do is change colour! Grrr!");
+        flashLight.color = seenEnemyColour;
+        StartCoroutine(rotateLight());
     }
 
     private void FinishTurn() {

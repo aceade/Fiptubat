@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Aceade.AI;
 
 /// <summary>
 /// Common methods and properties for a unit.
@@ -28,9 +29,13 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected bool isStillMoving;
 
 	private Rigidbody myBody;
+
+	protected BasicLineOfSight lineOfSight;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
+		lineOfSight = GetComponentInChildren<BasicLineOfSight>();
+		lineOfSight.SetBrain(this);
 		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 	}

@@ -10,11 +10,13 @@ namespace Aceade.AI {
 	/// </summary>
 	public interface IDetection {
 
+		void SetBrain(BaseUnit unit);
+
 		void OnTriggerEnter(Collider coll);
 
 		void OnTriggerExit(Collider coll);
 
-		IEnumerator ProcessColliders();
+		void ClearColliders();
 	}
 
 }
