@@ -34,6 +34,11 @@ public class PlayerUnit : BaseUnit {
         base.DeselectUnit();
     }
 
+    public override void TargetLocated(IDamage target) {
+        Debug.LogFormat("{0}: made contact! {1}", unitName, target.GetTransform());
+        // waiting for vocal confirmation mechanism
+    }
+
     public override void StandDown() {
         Debug.LogFormat("{0}, stand down for this turn!", unitName);
         unitControl.ForbidMovement();

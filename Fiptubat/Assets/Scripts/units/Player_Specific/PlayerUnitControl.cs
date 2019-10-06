@@ -57,6 +57,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public void AllowMovement() {
         canMove = true;
+        myCamera.transform.forward = myTransform.forward;
         Debug.LogFormat("{0} should be able to move now", unit.unitName);
     }
 

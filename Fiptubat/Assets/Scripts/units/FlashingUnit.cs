@@ -57,7 +57,7 @@ public class FlashingUnit : BaseUnit
     }
 
     public override void TargetLocated(IDamage target) {
-        Debug.Log("I can see {0}! But all I can do is change colour and glare at them! Grrr!", target.GetTransform());
+        Debug.LogFormat("I can see {0}! But all I can do is change colour and stare at them!", target.GetTransform());
         flashLight.color = seenEnemyColour;
         rotateTowardsTarget(target.GetTransform());
         if (!rotatingLight) {

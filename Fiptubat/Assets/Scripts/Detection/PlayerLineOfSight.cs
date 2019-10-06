@@ -10,7 +10,13 @@ namespace Aceade.AI {
     public class PlayerLineOfSight : BasicLineOfSight {
 
 		public override void OnTriggerEnter(Collider coll) {
-            // no-op
+            Debug.LogFormat("PlayerUnit {0} examining {1} in layer", this, coll, LayerMask.LayerToName(coll.transform.root.gameObject.layer));
+            if (detectionLayers.Contains(coll.transform.root.gameObject.layer)) {
+                var damageScript = coll.GetComponent<IDamage>();
+                if (damageScript != null) {
+                    brain.TargetLocated(damageScript);
+                }
+            }
         }
 
 		public override void OnTriggerExit(Collider coll) {

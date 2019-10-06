@@ -19,7 +19,7 @@ namespace Aceade.AI {
 
 		protected bool isProcessing = false;
 
-		private BaseUnit brain;
+		protected BaseUnit brain;
 
 		// Use this for initialization
 		void Start () 

@@ -1214,7 +1214,7 @@ GameObject:
   - component: {fileID: 438185537}
   - component: {fileID: 438185536}
   m_Layer: 2
-  m_Name: GameObject
+  m_Name: Unit2 LOS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionInterval: 0.2
-  detectionLayers: 
+  detectionLayers: 0b000000
 --- !u!135 &438185537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 824113128}
   - component: {fileID: 824113127}
   m_Layer: 2
-  m_Name: GameObject
+  m_Name: Unit1 LOS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionInterval: 0.2
-  detectionLayers: 
+  detectionLayers: 0b000000
 --- !u!135 &824113128
 SphereCollider:
   m_ObjectHideFlags: 0
