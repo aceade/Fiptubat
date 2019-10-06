@@ -135,6 +135,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		}
 	}
 
+	public Transform GetTransform() {
+		return transform;
+	}
+
+
 	public void SetUnitManager(UnitManager manager) {
 		DeselectUnit();
 		this.unitManager = manager;
@@ -165,6 +170,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		return currentActionPoints;
 	}
 
+	
 	void OnCollisionEnter(Collision coll) {
 		int layer = coll.gameObject.layer;
 

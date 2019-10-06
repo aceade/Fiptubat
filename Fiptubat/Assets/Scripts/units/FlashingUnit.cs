@@ -13,6 +13,8 @@ public class FlashingUnit : BaseUnit
 
     public Color selectedColour, deselectedColour, seenEnemyColour, heardEnemyColour;
     
+    private bool rotatingLight = false;
+
     protected override void Start() {
         flashLight = GetComponentInChildren<Light>();
         base.Start();
@@ -23,11 +25,17 @@ public class FlashingUnit : BaseUnit
             flashLight = GetComponentInChildren<Light>();
         }
         flashLight.color = selectedColour;
-        StartCoroutine(rotateLight());
+        if (!rotatingLight) {
+            StartCoroutine(rotateLight());
+        }
         Invoke("FinishTurn", 3f);
+        
     }
 
     private IEnumerator rotateLight() {
+        if (!rotatingLight) {
+            rotatingLight = true;
+        }
         int rotationCount = 0;
         
         while (rotationCount < 3) {
@@ -38,13 +46,24 @@ public class FlashingUnit : BaseUnit
             }
             yield return flashlightRotationCycle;
         }
+        rotatingLight = false;
         
     }
 
+    private void rotateTowardsTarget(Transform target) {
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0;
+        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+    }
+
     public override void TargetLocated(IDamage target) {
-        Debug.Log("I can see {0}! But all I can do is change colour! Grrr!");
+        Debug.Log("I can see {0}! But all I can do is change colour and glare at them! Grrr!", target.GetTransform());
         flashLight.color = seenEnemyColour;
-        StartCoroutine(rotateLight());
+        rotateTowardsTarget(target.GetTransform());
+        if (!rotatingLight) {
+            StartCoroutine(rotateLight());
+        }
+        
     }
 
     private void FinishTurn() {
