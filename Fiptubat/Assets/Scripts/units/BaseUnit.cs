@@ -106,14 +106,28 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public virtual void Crouch() {
 		isCrouched = !isCrouched;
 		currentActionPoints -= 4;
-		if (isCrouched) {
-			navMeshAgent.height = 1f;
-			// TODO: cache the collider
+		CrouchAnimation(isCrouched);
+	}
+
+	/// <summary>
+	/// Separate animations from code
+	/// </summary>
+	public virtual void CrouchAnimation(bool crouched) {
+		if (crouched) {
+			// TODO: cache the collider and add animation class.
 			GetComponent<CapsuleCollider>().height = 1f;
 		} else {
-			navMeshAgent.height = 2f;
 			GetComponent<CapsuleCollider>().height = 2f;
 		}
+	}
+
+	public virtual void Vault() {
+		GetComponent<Rigidbody>().AddForce(Vector3.up * 2f, ForceMode.Impulse);
+		// will need animations
+	}
+
+	public virtual void Climb() {
+		// no-op - will need animations
 	}
 
 	public virtual void StandDown() {
@@ -175,9 +189,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		int layer = coll.gameObject.layer;
 
 		// avoid being repelled by steps
-		if (layer == LayerMask.NameToLayer("Scenery")) {
+		if (layer == LayerMask.NameToLayer("Scenery") && !coll.collider.isTrigger) {
+			Debug.LogFormat("{0} trying not to suffer Doorstep Repulsion Effect from {1}", unitName, coll.gameObject);
 			myBody.isKinematic = true;
-			myBody.isKinematic = false;
+			myBody.isKinematic = false;	
 		}
 	}
+
 }

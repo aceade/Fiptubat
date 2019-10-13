@@ -19,7 +19,6 @@ public class PlayerUnit : BaseUnit {
     /// Select the unit and activate their camera.
     /// </summary>
     public override void SelectUnit() {
-        Debug.LogFormat("Selecting {0}", unitName);
         unitControl.enabled = true;
         base.SelectUnit();
         unitControl.AllowMovement();    // work around a timing issue of some kind
@@ -29,7 +28,6 @@ public class PlayerUnit : BaseUnit {
     /// Deselect the unit. In this case, deactivate their camera.
     /// </summary>
     public override void DeselectUnit() {
-        Debug.LogFormat("Deselecting {0}", unitName);
         unitControl.enabled = false;
         base.DeselectUnit();
     }

@@ -80,6 +80,12 @@ public class PlayerUnitControl : MonoBehaviour {
         if (Input.GetKey(KeyCode.RightArrow)) {
             myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         }
+        if (Input.GetKey(KeyCode.UpArrow)) {
+            myCamera.transform.Rotate(-rotationSpeed * Time.deltaTime, 0f, 0f);
+        }
+        if (Input.GetKey(KeyCode.DownArrow)) {
+            myCamera.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+        }
 
         // hold down the right mouse button to get paths/positions
         bool selectingPath = Input.GetButton("Fire2") && canMove;

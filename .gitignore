@@ -8,6 +8,10 @@ Assets/AssetStoreTools*
 ## Allow the ProtoType build files
 !Fiptubat/Releases/ProtoType/Build/
 
+## Third-party components
+Fiptubat/Assets/NavMeshComponents/**
+Fiptubat/Assets/Sounds/
+
 # Visual Studio cache directory
 .vs/
 

@@ -80,3 +80,7 @@ Music TBD
 1. Main menu. This will be very bare-bones - just links to the main level or the options panel.
 
 2. Main level. This will involve a "corridor" through various buildings. The player's goal will be for at least one unit to reach the far end of the level (referred to henceforth as the "extraction point"). The AI player will attempt to stop them.
+
+## Third-party components used
+
+* Unity NavMeshComponents
