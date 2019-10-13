@@ -52,4 +52,8 @@ public class UIManager : MonoBehaviour {
 	private void ClearAnnounceText() {
 		turnEndedText.text = "";
 	}
+
+	public void SelectUnit(int unitIndex) {
+		unitManager.SelectUnit(unitIndex);
+	}
 }

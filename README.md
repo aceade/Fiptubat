@@ -83,4 +83,9 @@ Music TBD
 
 ## Third-party components used
 
+### Code
 * Unity NavMeshComponents
+
+### Images
+* Smiley face: https://commons.wikimedia.org/wiki/File:Face-smile.svg (public domain)
+* Sad face: https://commons.wikimedia.org/wiki/File:Face-sad.svg (public domain)

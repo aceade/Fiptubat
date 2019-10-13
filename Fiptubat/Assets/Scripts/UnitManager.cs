@@ -66,6 +66,16 @@ public class UnitManager : MonoBehaviour {
 		selectedUnit.SelectUnit();
 	}
 
+	public void SelectUnit(int unitIndex) {
+		if (unitIndex < 0 || unitIndex >= activeUnits.Count) {
+			unitIndex = 0;
+		}
+		selectedUnit.DeselectUnit();
+		currentUnit = unitIndex;
+		selectedUnit = activeUnits[currentUnit];
+		selectedUnit.SelectUnit();
+	}
+
 	public void UnitFinished(BaseUnit unit) {
 		activeUnits.Remove(unit);
 		if(activeUnits.Count == 0) {
