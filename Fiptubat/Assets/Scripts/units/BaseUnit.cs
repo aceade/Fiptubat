@@ -28,6 +28,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected bool isStillMoving;
 
+	protected bool isSelected;
+
 	private Rigidbody myBody;
 
 	protected BasicLineOfSight lineOfSight;
@@ -81,11 +83,17 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		return isStillMoving;
 	}
 
+	public bool IsSelected() {
+		return isSelected;
+	}
+
 	public virtual void SelectUnit() {
+		isSelected = true;
         // no-op
     }
 
 	public virtual void DeselectUnit() {
+		isSelected = false;
         // no-op
     }
 

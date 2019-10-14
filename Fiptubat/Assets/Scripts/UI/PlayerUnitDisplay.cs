@@ -4,15 +4,20 @@ using System;
 
 public class PlayerUnitDisplay: MonoBehaviour {
 
-    public Text healthBar;
+    private Text healthBar;
 
-    public Text actionPointsBar;
+    private Text actionPointsBar;
 
-    public Text armourBar;
+    private Text armourBar;
 
-    public Text ammoCount;
+    private Text ammoCounter;
 
-    public Image statusImage;
+    private Text nameField;
+
+    private Image statusImage;
+
+    [Tooltip("The button that selects this unit")]
+    public Image parentImage;
 
     public Sprite healthyImage, damagedSprite, criticalSprite, deadSprite;
 
@@ -27,18 +32,39 @@ public class PlayerUnitDisplay: MonoBehaviour {
         maxHealth = unit.health;
         maxPoints = unit.actionPoints;
         maxArmour = unit.armour;
+        statusImage = parentImage.GetComponentInChildren<Image>();
+        Text[] texts = parentImage.GetComponentsInChildren<Text>();
+        healthBar = texts[0];
+        actionPointsBar = texts[1];
+        armourBar = texts[2];
+        ammoCounter = texts[3];
+        nameField = texts[4];
+        nameField.text = unit.unitName;
     }
 
     void Update() {
         healthBar.text = string.Format("{0}/{1}", unit.health, maxHealth);
         actionPointsBar.text = string.Format("{0}/{1}", unit.actionPoints, maxPoints);
         armourBar.text = string.Format("{0}/{1}", unit.armour, maxArmour);
-        ammoCount.text = string.Format("{0}/{1}", 0, 0);
+        ammoCounter.text = string.Format("{0}/{1}", 0, 0);
 
         if (unit.health < maxHealth) {
             SetImage(unit.health);
         }
 
+        ShowIfSelected(unit.IsSelected());
+    }
+
+    private void ShowIfSelected(bool selected) {
+        if (selected) {
+            nameField.canvasRenderer.SetAlpha(1f);
+            nameField.color = Color.red;
+            nameField.fontStyle = FontStyle.Bold;
+        } else {
+            nameField.canvasRenderer.SetAlpha(0.5f);
+            nameField.color = Color.white;
+            nameField.fontStyle = FontStyle.Normal;
+        }
     }
 
     private void SetImage(int health) {
