@@ -103,6 +103,22 @@ public class PlayerUnitControl : MonoBehaviour {
             uiManager.EndTurn();
             canMove = false;
         }
+
+        // side-step
+        if (Vector3.Distance(myPosition, lastStationaryPosition) <= 1f) {
+            if (Input.GetKeyDown(KeyCode.W)) {
+                unit.SideStep(myTransform.forward);
+            }
+            if (Input.GetKeyDown(KeyCode.A)) {
+                unit.SideStep(myTransform.right * -1);
+            }
+            if (Input.GetKeyDown(KeyCode.S)) {
+                unit.SideStep(myTransform.forward * -1);
+            }
+            if (Input.GetKeyDown(KeyCode.D)) {
+                unit.SideStep(myTransform.right);
+            }
+        }
         
     }
 

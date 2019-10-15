@@ -97,6 +97,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
         // no-op
     }
 
+	public void SideStep(Vector3 direction) {
+		transform.Translate(direction * 0.9f);
+	}
+
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
 		// find the closest edge
 
