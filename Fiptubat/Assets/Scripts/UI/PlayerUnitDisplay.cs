@@ -44,7 +44,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     void Update() {
         healthBar.text = string.Format("{0}/{1}", unit.health, maxHealth);
-        actionPointsBar.text = string.Format("{0}/{1}", unit.actionPoints, maxPoints);
+        actionPointsBar.text = string.Format("{0}/{1}", unit.GetCurrentActionPoints(), maxPoints);
         armourBar.text = string.Format("{0}/{1}", unit.armour, maxArmour);
         ammoCounter.text = string.Format("{0}/{1}", 0, 0);
 

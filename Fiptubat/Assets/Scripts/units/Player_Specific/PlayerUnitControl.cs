@@ -26,7 +26,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public float rotationSpeed = 20f;
 
-    private Vector3 lastStationaryPosition;
+    private Vector3 lastStationaryPosition, destination;
 
     private bool canMove = true;
 
@@ -104,19 +104,31 @@ public class PlayerUnitControl : MonoBehaviour {
             canMove = false;
         }
 
-        // side-step
-        if (Vector3.Distance(myPosition, lastStationaryPosition) <= 1f) {
-            if (Input.GetKeyDown(KeyCode.W)) {
-                unit.SideStep(myTransform.forward);
+        if (!unit.IsStillMoving()) {
+            bool steppingLeft = Input.GetKey(KeyCode.A);
+            bool steppingRight = Input.GetKey(KeyCode.D);
+
+            // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
+            // reverting is a bit of a pain, so not going to bother
+            // navigation appears to interfere with this
+            if (steppingLeft) {
+                unit.SideStep(lastStationaryPosition, Vector3.left);
+                navMeshAgent.enabled = false;
             }
-            if (Input.GetKeyDown(KeyCode.A)) {
-                unit.SideStep(myTransform.right * -1);
+            else if (steppingRight) {
+                unit.SideStep(lastStationaryPosition, Vector3.right);
+                navMeshAgent.enabled = false;
+            } else {
+                navMeshAgent.enabled = true;
             }
-            if (Input.GetKeyDown(KeyCode.S)) {
-                unit.SideStep(myTransform.forward * -1);
-            }
-            if (Input.GetKeyDown(KeyCode.D)) {
-                unit.SideStep(myTransform.right);
+            
+            
+        } else {
+            // if close to their destination, mark this as their last stationary position
+            Vector3 displacement = destination-myPosition;
+            displacement.y = 0;
+            if (displacement.magnitude <= 1f) {
+                lastStationaryPosition = myPosition;
             }
         }
         
@@ -145,6 +157,7 @@ public class PlayerUnitControl : MonoBehaviour {
             // left click to select it
             if (Input.GetButtonDown("Fire1")) {
                 lastStationaryPosition = myPosition;
+                destination = possibleDestination;
                 bool canReachDestination = unit.SetDestination(possibleDestination);
                 moveMarker.SetPosition(possibleDestination, canReachDestination);
             }

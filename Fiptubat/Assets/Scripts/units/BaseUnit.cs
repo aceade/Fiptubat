@@ -33,6 +33,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	private Rigidbody myBody;
 
 	protected BasicLineOfSight lineOfSight;
+
+	protected Vector3 targetLocation;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
@@ -58,6 +60,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public bool SetDestination(Vector3 newDestination) {
 		int potentialCost = GetMoveCost(transform.position, newDestination);
 		if (potentialCost <= GetRemainingActionPoints()) {
+			targetLocation = newDestination;
+			isStillMoving = true;
 			navMeshAgent.SetDestination(newDestination);
 			currentActionPoints -= potentialCost;
 			LogPath();
@@ -97,8 +101,13 @@ public class BaseUnit : MonoBehaviour, IDamage {
         // no-op
     }
 
-	public void SideStep(Vector3 direction) {
-		transform.Translate(direction * 0.9f);
+	public void SideStep(Vector3 startPosition, Vector3 direction) {
+		direction.y = 0f;
+		transform.Translate(direction * Time.deltaTime);
+		float distance = Vector3.Distance(transform.position, startPosition);
+		if (distance >= 1f) {
+			transform.Translate(direction * -0.02f);
+		}
 	}
 
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
@@ -163,6 +172,14 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public Transform GetTransform() {
 		return transform;
+	}
+
+	public Vector3 GetTargetLocation() {
+		return targetLocation;
+	}
+
+	public int GetCurrentActionPoints() {
+		return currentActionPoints;
 	}
 
 

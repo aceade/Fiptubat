@@ -43,7 +43,7 @@ public class PlayerUnit : BaseUnit {
     }
 
     public override bool IsStillMoving() {
-        return !Mathf.Approximately(navMeshAgent.velocity.magnitude, 0);
+        return (navMeshAgent.velocity.sqrMagnitude > 0.1f);
     }
 
     public override void Crouch() {
@@ -51,4 +51,5 @@ public class PlayerUnit : BaseUnit {
         float offset = isCrouched ? -0.6f : 0.6f;
         unitControl.MoveCamera(offset);
     }
+
 }
