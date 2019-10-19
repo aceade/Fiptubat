@@ -78,7 +78,7 @@ namespace Aceade.AI {
 				Debug.LogFormat("{0} can see {1}. Is this the target? {2}", brain.unitName, hit.transform, hit.transform == coll.transform);
 				if (hit.transform == coll.transform) {
 					var damageScript = coll.GetComponent<IDamage>();
-					brain.TargetLocated(damageScript);
+					brain.TargetSpotted(damageScript);
 				}
 			}
 		}

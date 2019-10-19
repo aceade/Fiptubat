@@ -35,11 +35,14 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected BasicLineOfSight lineOfSight;
 
 	protected Vector3 targetLocation;
+
+	protected VoiceSystem voiceSystem;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
 		lineOfSight = GetComponentInChildren<BasicLineOfSight>();
 		lineOfSight.SetBrain(this);
+		voiceSystem = GetComponentInChildren<VoiceSystem>();
 		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 	}
@@ -63,6 +66,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			targetLocation = newDestination;
 			isStillMoving = true;
 			navMeshAgent.SetDestination(newDestination);
+			voiceSystem.Moving();
 			currentActionPoints -= potentialCost;
 			LogPath();
 			return true;
@@ -157,8 +161,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		// no-op. Mainly used to tell player they can't move!
 	}
 
-	public virtual void TargetLocated(IDamage target) {
-		// no-op
+	public virtual void TargetSpotted(IDamage target) {
+		voiceSystem.TargetSpotted();
+	}
+
+	public virtual void TargetHeard(IDamage target) {
+		voiceSystem.TargetHeard();
 	}
 
 	public void Damage(DamageType damageType, int damageAmount) {
@@ -168,7 +176,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 		health -= damageAmount;
 		if (health <= 0) {
+			voiceSystem.Die();
 			Die();
+		} else {
+			voiceSystem.Hit();
 		}
 	}
 

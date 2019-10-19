@@ -13,7 +13,7 @@ namespace Aceade.AI {
             if (detectionLayers.Contains(coll.transform.root.gameObject.layer)) {
                 var damageScript = coll.GetComponent<IDamage>();
                 if (damageScript != null) {
-                    brain.TargetLocated(damageScript);
+                    brain.TargetSpotted(damageScript);
                 }
             }
         }

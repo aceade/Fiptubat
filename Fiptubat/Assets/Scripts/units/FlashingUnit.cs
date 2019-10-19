@@ -21,6 +21,7 @@ public class FlashingUnit : BaseUnit
     }
 
     public override void SelectUnit() {
+        voiceSystem.Moving();
         if (flashLight == null) {
             flashLight = GetComponentInChildren<Light>();
         }
@@ -33,9 +34,7 @@ public class FlashingUnit : BaseUnit
     }
 
     private IEnumerator rotateLight() {
-        if (!rotatingLight) {
-            rotatingLight = true;
-        }
+        rotatingLight = true;
         int rotationCount = 0;
         
         while (rotationCount < 3) {
@@ -56,11 +55,12 @@ public class FlashingUnit : BaseUnit
         transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
     }
 
-    public override void TargetLocated(IDamage target) {
+    public override void TargetSpotted(IDamage target) {
         Debug.LogFormat("I can see {0}! But all I can do is change colour and stare at them!", target.GetTransform());
         flashLight.color = seenEnemyColour;
         rotateTowardsTarget(target.GetTransform());
         if (!rotatingLight) {
+            base.TargetSpotted(target);
             StartCoroutine(rotateLight());
         }
         
