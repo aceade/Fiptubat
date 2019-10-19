@@ -107,10 +107,8 @@ public class PlayerUnitControl : MonoBehaviour {
         if (!unit.IsStillMoving()) {
             bool steppingLeft = Input.GetKey(KeyCode.A);
             bool steppingRight = Input.GetKey(KeyCode.D);
-            bool reverting = Input.GetKey(KeyCode.S);
 
             // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
-            // reverting is a bit of a pain, so not going to bother
             // navigation appears to interfere with this
             if (steppingLeft) {
                 unit.SideStep(lastStationaryPosition, Vector3.left);
@@ -121,9 +119,7 @@ public class PlayerUnitControl : MonoBehaviour {
                 navMeshAgent.enabled = false;
             } else {
                 navMeshAgent.enabled = true;
-                if (reverting) {
-                    RevertToStationary();
-                }
+                RevertToStationary();
             }
             
             
