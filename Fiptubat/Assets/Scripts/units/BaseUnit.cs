@@ -37,6 +37,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected Vector3 targetLocation;
 
 	protected UnitVoiceSystem voiceSystem;
+
+	protected UnitTargetSelection targetSelection;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
@@ -45,6 +47,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		voiceSystem = GetComponentInChildren<UnitVoiceSystem>();
 		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
+		targetSelection = GetComponent<UnitTargetSelection>();
 	}
 
 	private void LogPath() {
@@ -162,6 +165,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public virtual void TargetSpotted(IDamage target) {
+		targetSelection.AddTarget(target);
 		voiceSystem.TargetSpotted();
 	}
 
@@ -187,7 +191,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		return transform;
 	}
 
-	public Vector3 GetTargetLocation() {
+	public Vector3 GetCurrentDestination() {
 		return targetLocation;
 	}
 
@@ -203,6 +207,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected virtual void Die() {
 		Debug.LogFormat("{0} is dead!", this.unitName);
+		lineOfSight.enabled = false;
 		unitManager.UnitDied(this);
 	}
 

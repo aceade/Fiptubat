@@ -11,9 +11,12 @@ public class FlashingUnit : BaseUnit
 
     private WaitForSeconds flashlightRotationCycle = new WaitForSeconds(0.1f);
 
+    private WaitForSeconds targetTrackerCycle = new WaitForSeconds(0.05f);
+
     public Color selectedColour, deselectedColour, seenEnemyColour, heardEnemyColour;
     
     private bool rotatingLight = false;
+    private bool trackingTarget = false;
 
     protected override void Start() {
         flashLight = GetComponentInChildren<Light>();
@@ -49,6 +52,16 @@ public class FlashingUnit : BaseUnit
         
     }
 
+    private IEnumerator trackTarget() {
+        while (trackingTarget) {
+            // find the nearest target only
+            IDamage nearestTarget = targetSelection.SelectTarget();
+            rotateTowardsTarget(nearestTarget.GetTransform());
+            yield return flashlightRotationCycle;
+        }
+        
+    }
+
     private void rotateTowardsTarget(Transform target) {
         Vector3 direction = target.position - transform.position;
         direction.y = 0;
@@ -56,12 +69,15 @@ public class FlashingUnit : BaseUnit
     }
 
     public override void TargetSpotted(IDamage target) {
-        Debug.LogFormat("I can see {0}! But all I can do is change colour and stare at them!", target.GetTransform());
         flashLight.color = seenEnemyColour;
-        rotateTowardsTarget(target.GetTransform());
         if (!rotatingLight) {
             base.TargetSpotted(target);
             StartCoroutine(rotateLight());
+        }
+
+        if (!trackingTarget) {
+            trackingTarget = true;
+            StartCoroutine(trackTarget());
         }
         
     }
