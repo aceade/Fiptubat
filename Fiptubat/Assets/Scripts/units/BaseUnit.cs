@@ -36,13 +36,13 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected Vector3 targetLocation;
 
-	protected VoiceSystem voiceSystem;
+	protected UnitVoiceSystem voiceSystem;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
 		lineOfSight = GetComponentInChildren<BasicLineOfSight>();
 		lineOfSight.SetBrain(this);
-		voiceSystem = GetComponentInChildren<VoiceSystem>();
+		voiceSystem = GetComponentInChildren<UnitVoiceSystem>();
 		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 	}

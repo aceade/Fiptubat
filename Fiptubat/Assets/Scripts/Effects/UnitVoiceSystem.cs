@@ -3,7 +3,7 @@ using Unity;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(AudioSource))]
-public class VoiceSystem : MonoBehaviour {
+public class UnitVoiceSystem : MonoBehaviour {
 
     private AudioSource voice;
 
