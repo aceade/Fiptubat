@@ -6,6 +6,14 @@ Turn-based tactics games such as XCOM, Silent Storm, Jagged Alliance, etc. are b
 ## Current Prototype Link
 You can find the WebGL prototype [here](https://aceade.github.io/Fiptubat/Fiptubat/Releases/ProtoType/index.html)
 
+Controls:
+* Use the mouse or arrow keys to rotate the current unit. This will be used to aim later.
+* Hold down right mouse to view possible positions; left click to set your destination.
+* Cycle units using Tab
+* End your turn using Backspace. If you have units moving, this will be rejected.
+* Crouch or stand up using C.
+* Sidestep by holding A/D.
+
 ## Required systems/components
 
 ### Unit
