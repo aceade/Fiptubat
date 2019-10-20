@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour {
 
 	public Image gameOverScreen;
 
+	public Text gameStatusText;
+
 	void Start() {
 		gameOverScreen.gameObject.SetActive(false);
 	}
@@ -68,7 +70,10 @@ public class UIManager : MonoBehaviour {
 	public void ShowGameOverScreen(bool victory) {
 
 		if (victory) {
-			// TODO: show different image
+			// TODO: show different background image
+			gameStatusText.text = "VICTORY!";
+		} else {
+			gameStatusText.text = "GAME\nOVER!";
 		}
 
 		mainScreen.gameObject.SetActive(false);
