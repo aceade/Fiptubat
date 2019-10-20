@@ -67,6 +67,12 @@ public class GameStateManager : MonoBehaviour {
 		}
 	}
 
+	public void FactionEscaped(UnitManager manager) {
+		if (manager.isPlayer) {
+			Victory();
+		}
+	}
+
 	private void GameOver() {
         throw new System.NotImplementedException("Defeat has not been considered yet!");
 	}

@@ -28,7 +28,6 @@ public class UnitManager : MonoBehaviour {
 		}
 		units.ForEach(unit => unit.SetUnitManager(this));
 		selectedUnit = units[currentUnit];
-		//selectedUnit.SelectUnit();
 	}
 
     public void EndTurn() {
@@ -47,6 +46,10 @@ public class UnitManager : MonoBehaviour {
 		if (units.Count == 0) {
 			gameStateManager.FactionDefeated(this);
 		}
+	}
+
+	public void AllUnitsExtracted() {
+		gameStateManager.FactionEscaped(this);
 	}
 
 	public void StartTurn() {
@@ -85,6 +88,10 @@ public class UnitManager : MonoBehaviour {
 
 	public void SetGameManager(GameStateManager manager) {
 		this.gameStateManager = manager;
+	}
+
+	public int GetRemainingUnitCount() {
+		return units.Count;
 	}
 	
 }
