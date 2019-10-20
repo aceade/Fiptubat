@@ -1205,6 +1205,7 @@ GameObject:
   - component: {fileID: 242598950}
   - component: {fileID: 242598956}
   - component: {fileID: 242598957}
+  - component: {fileID: 242598958}
   m_Layer: 10
   m_Name: Unit 2
   m_TagString: Untagged
@@ -1378,6 +1379,18 @@ MonoBehaviour:
   criticalSprite: {fileID: 21300000, guid: b266a1e96bcbff99ead9b9fae7c2706d, type: 3}
   deadSprite: {fileID: 21300000, guid: 677d3e941ea35aaae8c8a491bc7fa418, type: 3}
   criticalDamageThreshold: 0.3
+--- !u!114 &242598958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242598948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5fd587c92586703a80da176e160e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &290788893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,7 +2836,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813261976}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -2882,8 +2895,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813261976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.3, y: 1, z: 36.8}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: -10.8, y: 1, z: 39.5}
+  m_LocalScale: {x: 10, y: 2, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -7929,6 +7942,7 @@ GameObject:
   - component: {fileID: 1008975555}
   - component: {fileID: 1008975554}
   - component: {fileID: 1008975553}
+  - component: {fileID: 1008975562}
   m_Layer: 10
   m_Name: Unit 3
   m_TagString: Untagged
@@ -8102,6 +8116,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 15.476001, z: 0}
+--- !u!114 &1008975562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008975552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee5fd587c92586703a80da176e160e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1046271684
 GameObject:
   m_ObjectHideFlags: 0
@@ -11306,7 +11332,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2082065285}
   - component: {fileID: 2082065287}
-  - component: {fileID: 2082065286}
   - component: {fileID: 2082065288}
   m_Layer: 10
   m_Name: Voice
@@ -11329,54 +11354,6 @@ Transform:
   m_Father: {fileID: 1841730311}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2082065286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082065284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a057f221cf777938ba92bd792dad0a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  voice: {fileID: 0}
-  targetSpottedLines:
-  - {fileID: 8300000, guid: 48629fd151b6c4e059766022c6b98e7e, type: 3}
-  - {fileID: 8300000, guid: 31c41f33bbd988e50b161af4310a13ce, type: 3}
-  - {fileID: 8300000, guid: 258f9155f02d66f42b0988b082898da6, type: 3}
-  targetHeardLines:
-  - {fileID: 8300000, guid: 43a47178466b5a12998e99d4a375ec3d, type: 3}
-  - {fileID: 8300000, guid: d91e5bee9bc7fa2e59d90f066f16621c, type: 3}
-  - {fileID: 8300000, guid: 649ced080572d09119b03fdf88ce82f0, type: 3}
-  targetDestroyedLines:
-  - {fileID: 8300000, guid: 9462990fff466198fae7256c597a5e86, type: 3}
-  - {fileID: 8300000, guid: eaf677153e8cc7b65a46e8e3e65b21b7, type: 3}
-  targetMissedLines:
-  - {fileID: 8300000, guid: dbfa2f190b6544c1196b6a15ec0c1ffb, type: 3}
-  - {fileID: 8300000, guid: acf1a7bb3cf25b58a9515c1ec5e4300d, type: 3}
-  outOfAmmoLines:
-  - {fileID: 8300000, guid: f9d6f9ff5fe151eaa87929b8b9dc9d59, type: 3}
-  - {fileID: 8300000, guid: a29be219c4ffac798b20df889a3b313d, type: 3}
-  - {fileID: 8300000, guid: 807a017393e00e7ffbe3c6790895ca9d, type: 3}
-  reloadingLines:
-  - {fileID: 8300000, guid: 8c462e64fc964ab66ae9af60649c3580, type: 3}
-  - {fileID: 8300000, guid: 0a822cd56c8d06512ab7db7ca2382315, type: 3}
-  takingDamageLines:
-  - {fileID: 8300000, guid: a5d863b63c7d05c90bf9b3a6e2ba0e1d, type: 3}
-  - {fileID: 8300000, guid: 510b36e05d0979418ab47e2a14d3a867, type: 3}
-  deathLines:
-  - {fileID: 8300000, guid: d98ca756fdde3cdc48743e55c4814a27, type: 3}
-  - {fileID: 8300000, guid: 5a80921ca48a653138216cc5f6702fe0, type: 3}
-  nearlyHitLines:
-  - {fileID: 8300000, guid: 322595047a3ce9a5b8e6c61ae761d9ff, type: 3}
-  - {fileID: 8300000, guid: 4eb8fd5730df0f9d08ac82b1d31011c0, type: 3}
-  - {fileID: 8300000, guid: 0fb281585b6ce5bd4996d768fc881e20, type: 3}
-  movingLines:
-  - {fileID: 8300000, guid: 2d08ac97c1f1d890fb6334c631bd7442, type: 3}
-  - {fileID: 8300000, guid: 95306a90e8882b869adb13d1f1264b70, type: 3}
-  - {fileID: 8300000, guid: b75113e3bcc1b32c09f25725b5b1576f, type: 3}
 --- !u!82 &2082065287
 AudioSource:
   m_ObjectHideFlags: 0

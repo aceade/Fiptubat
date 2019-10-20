@@ -22,11 +22,14 @@ public class ExtractionPoint : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider coll)
     {
-        currentUnits++;
-        if (currentUnits >= playerUnitManager.GetRemainingUnitCount()) {
-            playerUnitManager.AllUnitsExtracted();
+        if (!coll.isTrigger) {
+            Debug.LogFormat("{0} has reached the extraction point", coll);
+            currentUnits++;
+            if (currentUnits >= playerUnitManager.GetRemainingUnitCount()) {
+                playerUnitManager.AllUnitsExtracted();
+            }
         }
     }
 }

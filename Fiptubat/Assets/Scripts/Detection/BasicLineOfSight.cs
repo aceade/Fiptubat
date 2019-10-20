@@ -38,7 +38,6 @@ namespace Aceade.AI {
 		{
 			if (!coll.isTrigger) {
 				int layer = coll.transform.root.gameObject.layer;
-				Debug.LogFormat("{0} performing inital scan of {1} in layer {2}. {3}", this, coll, LayerMask.LayerToName(layer), 1 << layer);
 
 				if (detectionLayers.Contains(layer) && !currentColliders.Contains(coll)) {
 					Debug.LogFormat("{0} should consider {1}", this, coll);
