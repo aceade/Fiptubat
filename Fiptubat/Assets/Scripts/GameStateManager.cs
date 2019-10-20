@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameStateManager : MonoBehaviour {
 	
@@ -38,6 +39,14 @@ public class GameStateManager : MonoBehaviour {
 		isPaused = false;
 		Time.timeScale = 1f;
 	}
+
+	public void Quit() {
+		SceneManager.LoadScene(1);
+	}
+
+	public void Restart() {
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	}
 	
 	public void EndTurn(UnitManager manager) {
 		if (isPaused) {
@@ -74,10 +83,12 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	private void GameOver() {
-        throw new System.NotImplementedException("Defeat has not been considered yet!");
+		factions.ForEach(faction => faction.DisableAllUnits());
+		uiManager.ShowGameOverScreen(false);
 	}
 
 	private void Victory() {
-        throw new System.NotImplementedException("We won! Now what?");
+		factions.ForEach(faction => faction.DisableAllUnits());
+		uiManager.ShowGameOverScreen(true);
 	}
 }

@@ -16,6 +16,14 @@ public class UIManager : MonoBehaviour {
 
 	public Text turnEndedText;
 
+	public Image mainScreen;
+
+	public Image gameOverScreen;
+
+	void Start() {
+		gameOverScreen.gameObject.SetActive(false);
+	}
+
 	public void Pause() {
 		gameStateManager.Pause();
 	}
@@ -55,5 +63,24 @@ public class UIManager : MonoBehaviour {
 
 	public void SelectUnit(int unitIndex) {
 		unitManager.SelectUnit(unitIndex);
+	}
+
+	public void ShowGameOverScreen(bool victory) {
+
+		if (victory) {
+			// TODO: show different image
+		}
+
+		mainScreen.gameObject.SetActive(false);
+		gameOverScreen.gameObject.SetActive(true);
+		
+	}
+
+	public void Restart() {
+		gameStateManager.Restart();
+	}
+
+	public void Quit() {
+		gameStateManager.Quit();
 	}
 }

@@ -48,6 +48,10 @@ public class UnitManager : MonoBehaviour {
 		}
 	}
 
+	public void DisableAllUnits() {
+		units.ForEach(unit => unit.DeselectUnit());
+	}
+
 	public void AllUnitsExtracted() {
 		gameStateManager.FactionEscaped(this);
 	}
