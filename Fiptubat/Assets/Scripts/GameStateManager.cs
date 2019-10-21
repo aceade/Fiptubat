@@ -15,6 +15,10 @@ public class GameStateManager : MonoBehaviour {
 	
 	private int currentFactionIndex = 0;
 
+	public int maxTurns = 10;
+
+	private int turns = 0;
+
 	void Start() {
 		soundManager = GetComponent<SoundManager>();
 		factions.ForEach (faction => faction.SetGameManager(this));
@@ -58,13 +62,25 @@ public class GameStateManager : MonoBehaviour {
 			return;
 		}
 
-		
-		currentFactionIndex ++;
-		if (currentFactionIndex >= factions.Count) {
-			currentFactionIndex = 0;
+		bool isGameOver = false;
+		if (manager.isPlayer) {
+			turns++;
+			if (turns > maxTurns) {
+				isGameOver = true;
+
+			}
 		}
-		uiManager.AnnounceTurn(factions[currentFactionIndex].factionName);
-		factions[currentFactionIndex].StartTurn();
+
+		if (isGameOver) {
+			FactionDefeated(manager);
+		} else {
+			currentFactionIndex ++;
+			if (currentFactionIndex >= factions.Count) {
+				currentFactionIndex = 0;
+			}
+			uiManager.AnnounceTurn(factions[currentFactionIndex].factionName);
+			factions[currentFactionIndex].StartTurn();
+		}
 	}
 
 	public void FactionDefeated(UnitManager manager) {
