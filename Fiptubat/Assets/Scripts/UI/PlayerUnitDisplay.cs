@@ -25,6 +25,8 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private BaseUnit unit;
 
+    private WeaponBase weapon;
+
     private int maxHealth, maxPoints, maxArmour, maxAmmo;
 
     void Start() {
@@ -40,13 +42,14 @@ public class PlayerUnitDisplay: MonoBehaviour {
         ammoCounter = texts[3];
         nameField = texts[4];
         nameField.text = unit.unitName;
+        weapon = GetComponentInChildren<WeaponBase>();
     }
 
     void Update() {
         healthBar.text = string.Format("{0}/{1}", unit.health, maxHealth);
         actionPointsBar.text = string.Format("{0}/{1}", unit.GetCurrentActionPoints(), maxPoints);
         armourBar.text = string.Format("{0}/{1}", unit.armour, maxArmour);
-        ammoCounter.text = string.Format("{0}/{1}", 0, 0);
+        ammoCounter.text = weapon.GetAmmoCounter();
 
         if (unit.health < maxHealth) {
             SetImage(unit.health);

@@ -121,6 +121,14 @@ public class PlayerUnitControl : MonoBehaviour {
                 navMeshAgent.enabled = true;
                 RevertToStationary();
             }
+
+            if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady()) {
+                unit.Attack();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R)) {
+                unit.Reload();
+            }
             
             
         } else {

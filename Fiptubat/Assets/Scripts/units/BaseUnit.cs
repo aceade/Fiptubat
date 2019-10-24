@@ -39,6 +39,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected UnitVoiceSystem voiceSystem;
 
 	protected UnitTargetSelection targetSelection;
+
+	protected WeaponBase weapon;
 	
 	protected virtual void Start() {
 		currentActionPoints = actionPoints;
@@ -48,6 +50,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		myBody = GetComponent<Rigidbody>();
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		targetSelection = GetComponent<UnitTargetSelection>();
+		weapon = GetComponentInChildren<WeaponBase>();
+		isStillMoving = false;
 	}
 
 	private void LogPath() {
@@ -203,6 +207,37 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public void SetUnitManager(UnitManager manager) {
 		DeselectUnit();
 		this.unitManager = manager;
+	}
+
+	public void Attack() {
+		int attackCost = weapon.GetCurrentFireCost();
+		if (IsWeaponReady() && currentActionPoints > 0 && currentActionPoints >= attackCost) {
+			
+			if (!weapon.Fire()) {
+				if (weapon.GetRemainingAmmo() == 0) {
+					voiceSystem.OutOfAmmo();
+				} else {
+					voiceSystem.TargetMissed();
+				}
+			}
+			currentActionPoints -= attackCost;
+		}
+		
+	}
+
+	public void Reload() {
+		if (weapon.GetRemainingAmmo() < weapon.magSize) {
+			int reloadCost = weapon.reloadCost;
+			if (currentActionPoints > 0 && currentActionPoints >= reloadCost) {
+				voiceSystem.Reloading();
+				weapon.Reload();
+				currentActionPoints -= reloadCost;
+			}
+		}
+	}
+
+	public bool IsWeaponReady() {
+		return weapon.CanAttack();
 	}
 
 	protected virtual void Die() {
