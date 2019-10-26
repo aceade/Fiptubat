@@ -77,7 +77,7 @@ public class WeaponBase : MonoBehaviour
 
     protected Vector3 CalculateFireDirection() {
         Vector3 firDir = muzzle.forward;
-        float deviation = fireModes[currentFireMode].modifier;
+        float deviation = fireModes[currentFireMode].deviation;
         firDir.x += Random.Range(-deviation, deviation);
         firDir.y += Random.Range(-deviation, deviation);
         firDir.z += Random.Range(-deviation, deviation);
@@ -120,6 +120,6 @@ public class WeaponBase : MonoBehaviour
     }
 
     public int GetCurrentFireCost() {
-        return Mathf.RoundToInt(GetCurrentFireMode().modifier * baseCost);
+        return Mathf.RoundToInt(GetCurrentFireMode().costModifier * baseCost);
     }
 }

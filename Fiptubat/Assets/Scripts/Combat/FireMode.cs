@@ -14,5 +14,5 @@ public class FireMode : ScriptableObject
     public float deviation = 0.01f;
 
     [Tooltip("How much does this affect the shooting cost")]
-    public float modifier = 1f;
+    public float costModifier = 1f;
 }

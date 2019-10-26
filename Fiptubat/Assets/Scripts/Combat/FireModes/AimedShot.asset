@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: AimedShot
   m_EditorClassIdentifier: 
   description: A costlier but more accurate shot
-  deviation: 0.001
-  modifier: 3
+  deviation: 0.01
+  costModifier: 1

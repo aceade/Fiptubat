@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SnapShot
   m_EditorClassIdentifier: 
   description: Quick but inaccurate
-  deviation: 0.01
-  modifier: 1
+  deviation: 0.1
+  costModifier: 1
