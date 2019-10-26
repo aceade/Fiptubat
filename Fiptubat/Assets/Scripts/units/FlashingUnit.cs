@@ -32,7 +32,7 @@ public class FlashingUnit : BaseUnit
         if (!rotatingLight) {
             StartCoroutine(rotateLight());
         }
-        Invoke("FinishTurn", 3f);
+        Invoke("FinishTurn", 2f);
         
     }
 

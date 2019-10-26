@@ -85,6 +85,7 @@ public class UnitManager : MonoBehaviour {
 
 	public void UnitFinished(BaseUnit unit) {
 		activeUnits.Remove(unit);
+		Debug.LogFormat("{0} active units left for {1}", activeUnits.Count, this);
 		if(activeUnits.Count == 0) {
 			gameStateManager.EndTurn(this);
 		}

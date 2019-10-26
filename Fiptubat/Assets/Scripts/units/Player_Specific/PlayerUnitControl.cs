@@ -122,12 +122,16 @@ public class PlayerUnitControl : MonoBehaviour {
                 RevertToStationary();
             }
 
-            if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady()) {
+            if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
                 unit.Attack();
             }
 
             if (Input.GetKeyDown(KeyCode.R)) {
                 unit.Reload();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                unit.ChangeFireMode();
             }
             
             

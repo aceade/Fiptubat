@@ -14,6 +14,8 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private Text nameField;
 
+    private Text fireModeField;
+
     private Image statusImage;
 
     [Tooltip("The button that selects this unit")]
@@ -27,7 +29,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private WeaponBase weapon;
 
-    private int maxHealth, maxPoints, maxArmour, maxAmmo;
+    private int maxHealth, maxPoints, maxArmour;
 
     void Start() {
         unit = GetComponent<BaseUnit>();
@@ -41,6 +43,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
         armourBar = texts[2];
         ammoCounter = texts[3];
         nameField = texts[4];
+        fireModeField = texts[5];
         nameField.text = unit.unitName;
         weapon = GetComponentInChildren<WeaponBase>();
     }
@@ -50,6 +53,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
         actionPointsBar.text = string.Format("{0}/{1}", unit.GetCurrentActionPoints(), maxPoints);
         armourBar.text = string.Format("{0}/{1}", unit.armour, maxArmour);
         ammoCounter.text = weapon.GetAmmoCounter();
+        fireModeField.text = weapon.GetCurrentFireMode().name;
 
         if (unit.health < maxHealth) {
             SetImage(unit.health);

@@ -86,7 +86,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void StartTurn() {
 		currentActionPoints = actionPoints;
-		isStillMoving = true;
+		//isStillMoving = true;
 	}
 
 	protected virtual void FinishedTurn() {
@@ -223,6 +223,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			currentActionPoints -= attackCost;
 		}
 		
+	}
+
+	public void ChangeFireMode() {
+		weapon.CycleFireMode();
 	}
 
 	public void Reload() {

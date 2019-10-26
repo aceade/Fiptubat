@@ -46,13 +46,18 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
+        Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
+        Debug.DrawRay(muzzle.position, muzzle.forward, Color.cyan, 2f);
+        Debug.LogFormat("Gun aimed in direction {0} fired in direction {1}", muzzle.forward, fireDir);
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance)) {
-            Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
+            
+            
             var hitTransform = hit.transform;
             var damageScript = hitTransform.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;
             } else {
+                Debug.LogFormat("I shot {0}", damageScript);
                 damageScript.Damage(DamageType.REGULAR, damage);
                 return true;
             }
@@ -85,7 +90,7 @@ public class WeaponBase : MonoBehaviour
 
     public void Reload() {
         currentAmmo = magSize;
-        canAttack = false;
+        canAttack = true;
     }
 
     public int GetRemainingAmmo() {
