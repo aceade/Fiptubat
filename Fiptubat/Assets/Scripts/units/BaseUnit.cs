@@ -191,6 +191,14 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		}
 	}
 
+	public int GetRemainingHealth() {
+		return health;
+	}
+
+	public int GetPotentialDamage() {
+		return weapon.damage;
+	}
+
 	public Transform GetTransform() {
 		return transform;
 	}

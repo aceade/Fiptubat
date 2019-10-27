@@ -8,7 +8,7 @@ using System.Linq;
 /// </summary>
 public class UnitTargetSelection : MonoBehaviour {
 
-    private List<IDamage> knownTargets = new List<IDamage>();
+    protected List<IDamage> knownTargets = new List<IDamage>();
 
     private Transform myTransform;
 
