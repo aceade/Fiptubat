@@ -12,6 +12,8 @@ public class UnitTargetSelection : MonoBehaviour {
 
     private Transform myTransform;
 
+    public TargetPriority selectionAlgorithm = TargetPriority.CLOSEST;
+
     void Start() {
         myTransform = transform;
     }
