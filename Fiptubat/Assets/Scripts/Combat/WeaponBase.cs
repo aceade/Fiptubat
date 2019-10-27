@@ -8,7 +8,7 @@ public class WeaponBase : MonoBehaviour
 
     public int baseCost = 5;
 
-    public float maxDistance = 15f;
+    public float maxDistance = 30f;
 
     public List<FireMode> fireModes;
 
@@ -46,13 +46,13 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
-        Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
+        Debug.DrawRay(muzzle.position, fireDir * maxDistance, Color.red, 2f);
         Debug.DrawRay(muzzle.position, muzzle.forward, Color.cyan, 2f);
         Debug.LogFormat("Gun aimed in direction {0} fired in direction {1}", muzzle.forward, fireDir);
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance)) {
             
-            
             var hitTransform = hit.transform;
+            Debug.LogFormat("I hit {0}", hitTransform);
             var damageScript = hitTransform.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;

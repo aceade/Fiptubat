@@ -21,6 +21,12 @@ public class PlayerUnitDisplay: MonoBehaviour {
     [Tooltip("The button that selects this unit")]
     public Image parentImage;
 
+    public Image crosshairs;
+    private Vector2 crosshairsCoordinates;
+    private float crosshairsWidth;
+    private float crosshairsHeight;
+
+
     public Sprite healthyImage, damagedSprite, criticalSprite, deadSprite;
 
     public float criticalDamageThreshold = 0.3f;
@@ -30,6 +36,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
     private WeaponBase weapon;
 
     private int maxHealth, maxPoints, maxArmour;
+
 
     void Start() {
         unit = GetComponent<BaseUnit>();
@@ -46,6 +53,9 @@ public class PlayerUnitDisplay: MonoBehaviour {
         fireModeField = texts[5];
         nameField.text = unit.unitName;
         weapon = GetComponentInChildren<WeaponBase>();
+        crosshairsWidth = crosshairs.rectTransform.rect.width;
+        crosshairsHeight = crosshairs.rectTransform.rect.height;
+        Debug.LogFormat("Crosshairs height: {0} and width: {1}", crosshairsHeight, crosshairsWidth);
     }
 
     void Update() {
@@ -59,7 +69,12 @@ public class PlayerUnitDisplay: MonoBehaviour {
             SetImage(unit.health);
         }
 
-        ShowIfSelected(unit.IsSelected());
+        bool isSelected = unit.IsSelected();
+        ShowIfSelected(isSelected);
+        if (isSelected) {
+            ShowCrosshairs();
+        }
+        
     }
 
     private void ShowIfSelected(bool selected) {
@@ -83,5 +98,12 @@ public class PlayerUnitDisplay: MonoBehaviour {
         } else {
             statusImage.sprite = damagedSprite;
         }
+    }
+
+    private void ShowCrosshairs() {
+        float deviation = weapon.GetCurrentFireMode().deviation * 100;
+        // get the size
+        crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, crosshairsWidth + deviation);
+        crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, crosshairsHeight + deviation);
     }
 }
