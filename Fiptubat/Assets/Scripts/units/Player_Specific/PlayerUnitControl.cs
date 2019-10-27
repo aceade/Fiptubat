@@ -104,7 +104,7 @@ public class PlayerUnitControl : MonoBehaviour {
             canMove = false;
         }
 
-        if (!unit.IsStillMoving()) {
+        if (!unit.IsStillMoving() && canMove) {
             bool steppingLeft = Input.GetKey(KeyCode.A);
             bool steppingRight = Input.GetKey(KeyCode.D);
 
