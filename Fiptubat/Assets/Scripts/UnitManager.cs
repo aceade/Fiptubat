@@ -88,6 +88,11 @@ public class UnitManager : MonoBehaviour {
 		Debug.LogFormat("{0} active units left for {1}", activeUnits.Count, this);
 		if(activeUnits.Count == 0) {
 			gameStateManager.EndTurn(this);
+		} else {
+			if (!isPlayer) {
+				// use a round-robin approach
+				CycleUnit();
+			}
 		}
 	}
 
