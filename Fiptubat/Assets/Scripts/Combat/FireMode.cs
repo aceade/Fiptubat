@@ -15,4 +15,7 @@ public class FireMode : ScriptableObject
 
     [Tooltip("How much does this affect the shooting cost")]
     public float costModifier = 1f;
+
+    [Tooltip("Should only apply to burst fire")]
+    public int bulletsFired = 1;
 }
