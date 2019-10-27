@@ -24,6 +24,10 @@ public class UnitTargetSelection : MonoBehaviour {
         }
     }
 
+    public bool AlreadyHasTarget(IDamage target) {
+        return knownTargets.Contains(target);
+    }
+
     public void RemoveTarget(IDamage target) {
         knownTargets.Remove(target);
     }

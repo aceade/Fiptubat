@@ -169,8 +169,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public virtual void TargetSpotted(IDamage target) {
-		targetSelection.AddTarget(target);
-		voiceSystem.TargetSpotted();
+		if (!targetSelection.AlreadyHasTarget(target)) {
+			targetSelection.AddTarget(target);
+			voiceSystem.TargetSpotted();
+		}
+		
 	}
 
 	public virtual void TargetHeard(IDamage target) {

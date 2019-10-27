@@ -10,8 +10,12 @@ public class Turret : BaseUnit
 
     private bool targetSpotted;
 
+    private Transform myTransform, barrel;
+
     protected override void Start(){
         base.Start();
+        myTransform = transform;
+        barrel = myTransform.Find("Barrel");
     }
 
     public override void Crouch() {
@@ -24,11 +28,32 @@ public class Turret : BaseUnit
         } else {
             // track the current target
             IDamage target = targetSelection.SelectTarget();
+            TrackTarget(target);
         }
     }
 
     private void Scan() {
         // scan animation
+        myTransform.Rotate(Vector3.up * 10f * Time.deltaTime);
+    }
+
+    private void TrackTarget(IDamage target) {
+        Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
+        horizontalDir.y = 0;
+        myTransform.forward = horizontalDir;
+    }
+
+    public override void TargetSpotted(IDamage target) {
+        base.TargetSpotted(target);
+        targetSpotted = true;
+    }
+
+    public override void SelectUnit() {
+        base.SelectUnit();
+        if (targetSpotted) {
+            IDamage target = targetSelection.SelectTarget();
+            TrackTarget(target);
+        }
     }
 
 }

@@ -53,7 +53,7 @@ public class WeaponBase : MonoBehaviour
             
             var hitTransform = hit.transform;
             Debug.LogFormat("I hit {0}", hitTransform);
-            var damageScript = hitTransform.GetComponent<IDamage>();
+            var damageScript = hitTransform.root.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;
             } else {

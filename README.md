@@ -94,6 +94,9 @@ Music TBD
 ### Code
 * Unity NavMeshComponents
 
+### Sounds
+* Siren noises from http://www.freesound.org/people/guitarguy1985/packs/3355/
+
 ### Images
 * Smiley face: https://commons.wikimedia.org/wiki/File:Face-smile.svg (public domain)
 * Sad face: https://commons.wikimedia.org/wiki/File:Face-sad.svg (public domain)

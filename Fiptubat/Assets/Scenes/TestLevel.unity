@@ -2616,7 +2616,7 @@ GameObject:
   - component: {fileID: 539912868}
   - component: {fileID: 539912873}
   - component: {fileID: 539912872}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2722,15 +2722,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01cc5abc1e7c7343912ee358f175c4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSpottedLines: []
-  targetHeardLines: []
-  targetDestroyedLines: []
-  targetMissedLines: []
-  outOfAmmoLines: []
-  reloadingLines: []
-  takingDamageLines: []
-  deathLines: []
-  nearlyHitLines: []
+  targetSpottedLines:
+  - {fileID: 8300000, guid: c85776e020fad4c30ac514169373da49, type: 3}
+  targetHeardLines:
+  - {fileID: 8300000, guid: c85776e020fad4c30ac514169373da49, type: 3}
+  targetDestroyedLines:
+  - {fileID: 8300000, guid: ed915e1a2951b23418f2a723d0c11d14, type: 3}
+  targetMissedLines:
+  - {fileID: 8300000, guid: 7736d6801123af4c9a231d2ab300af41, type: 3}
+  outOfAmmoLines:
+  - {fileID: 8300000, guid: fe1f064a18bc4441e85d9f39f460b2da, type: 3}
+  reloadingLines:
+  - {fileID: 8300000, guid: ee8937d392bc6e0cc818338673c30bf3, type: 3}
+  takingDamageLines:
+  - {fileID: 8300000, guid: 6dc0d0bf6e3adb1d4bf8fefced65c1cb, type: 3}
+  deathLines:
+  - {fileID: 8300000, guid: e9767bab016a096f182137b74d968dae, type: 3}
+  nearlyHitLines:
+  - {fileID: 8300000, guid: ed915e1a2951b23418f2a723d0c11d14, type: 3}
   movingLines: []
 --- !u!82 &539912873
 AudioSource:
@@ -10422,7 +10431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c2607cef6c59a84b045768c9253a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: 
+  unitName: Turret_1
   health: 10
   armour: 0
   actionPoints: 50
