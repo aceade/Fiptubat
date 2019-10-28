@@ -30,6 +30,8 @@ public class WeaponBase : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public TracerPool tracerPool;
+
     protected void Start()
     {
         muzzle = transform;
@@ -52,6 +54,7 @@ public class WeaponBase : MonoBehaviour
         Debug.DrawRay(muzzle.position, fireDir * maxDistance, Color.red, 2f);
         Debug.DrawRay(muzzle.position, muzzle.forward, Color.cyan, 2f);
         Debug.LogFormat("Gun aimed in direction {0} fired in direction {1}", muzzle.forward, fireDir);
+        ShowTracers();
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance)) {
             
             var hitTransform = hit.transform;
@@ -126,6 +129,11 @@ public class WeaponBase : MonoBehaviour
         if (!audioSource.isPlaying) {
             audioSource.Play();
         }
+    }
+
+    protected void ShowTracers() {
+        TracerEffect tracer = tracerPool.GetTracer();
+        tracer.Launch(muzzle.position, muzzle.forward);
     }
 
     public int GetCurrentFireCost() {

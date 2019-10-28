@@ -22,6 +22,7 @@ public class TurretWeapon : WeaponBase
         }
         for (int i = 0; i < shotsToFire; i++) {
             currentAmmo--;
+            ShowTracers();
             if (!checkTargetHit()) {
                 missedShots++;
             }

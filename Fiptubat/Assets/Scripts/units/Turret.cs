@@ -14,10 +14,7 @@ public class Turret : BaseUnit
 
     public float rotationSpeed = 10f;
 
-    public int maxRotations = 3;
-
     public float maxScanAngle = 60f;
-    private int totalRotations;
     private Vector3 startDir;
 
     protected override void Start(){
@@ -108,7 +105,6 @@ public class Turret : BaseUnit
 
     public override void SelectUnit() {
         base.SelectUnit();
-        totalRotations = 0;
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);
