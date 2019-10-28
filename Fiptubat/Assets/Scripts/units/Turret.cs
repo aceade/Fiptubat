@@ -78,6 +78,9 @@ public class Turret : BaseUnit
                 weapon.Reload();
             }
         }
+        if (currentActionPoints < weapon.GetCurrentFireCost()) {
+            FinishedTurn();
+        }
     }
 
     private void Scan() {
