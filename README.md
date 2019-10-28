@@ -90,12 +90,17 @@ Music TBD
 2. Main level. This will involve a "corridor" through various buildings. The player's goal will be for at least one unit to reach the far end of the level (referred to henceforth as the "extraction point"). The AI player will attempt to stop them.
 
 ## Third-party components used
+These are **not** committed to the repo.
 
 ### Code
 * Unity NavMeshComponents
 
 ### Sounds
 * Siren noises from http://www.freesound.org/people/guitarguy1985/packs/3355/
+* Background music:
+    * Sirkoto51's background loops: https://freesound.org/people/Sirkoto51/packs/21233/
+    * "Theme for Sadistic.wav" by Grezgor: https://freesound.org/people/Gregzor/sounds/181827/
+    * "Orchestral Victory Fanfare" by Sheyvan: https://freesound.org/people/Sheyvan/sounds/470083/
 
 ### Images
 * Smiley face: https://commons.wikimedia.org/wiki/File:Face-smile.svg (public domain)

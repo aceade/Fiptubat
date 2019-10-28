@@ -30,6 +30,7 @@ public class GameStateManager : MonoBehaviour {
 	/// <summary>
 	private void StartTheFirstTurn() {
 		factions[0].StartTurn();
+		soundManager.StartTheMusic();
 	}
 
 	public void Pause() {
@@ -101,10 +102,12 @@ public class GameStateManager : MonoBehaviour {
 	private void GameOver() {
 		factions.ForEach(faction => faction.DisableAllUnits());
 		uiManager.ShowGameOverScreen(false);
+		soundManager.PlayDefeatMusic();
 	}
 
 	private void Victory() {
 		factions.ForEach(faction => faction.DisableAllUnits());
 		uiManager.ShowGameOverScreen(true);
+		soundManager.PlayVictoryMusic();
 	}
 }

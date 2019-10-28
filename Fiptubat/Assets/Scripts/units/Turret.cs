@@ -12,7 +12,7 @@ public class Turret : BaseUnit
 
     private Transform myTransform, barrel;
 
-    public float rotationSpeed = 3f;
+    public float rotationSpeed = 10f;
 
     public int maxRotations = 3;
 
@@ -49,6 +49,7 @@ public class Turret : BaseUnit
                     Attack();
                 } else {
                     targetSelection.RemoveTarget(target);
+                    voiceSystem.TargetDestroyed();
                     if (!targetSelection.HasTargetsLeft()) {
                         targetSpotted = false;
                         // reload after target defeated
@@ -86,12 +87,6 @@ public class Turret : BaseUnit
         if (angle > maxScanAngle) {
             
             rotationSpeed *= -1f;
-            if (isSelected) {
-                totalRotations++;
-                if (totalRotations >= maxRotations) {
-                    FinishedTurn();
-                }
-            }
         }
         
     }
@@ -114,6 +109,8 @@ public class Turret : BaseUnit
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);
+        } else {
+            Invoke("FinishedTurn", 2f);
         }
     }
 
