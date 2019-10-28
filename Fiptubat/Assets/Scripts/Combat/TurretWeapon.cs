@@ -22,7 +22,6 @@ public class TurretWeapon : WeaponBase
         }
         for (int i = 0; i < shotsToFire; i++) {
             currentAmmo--;
-            ShowTracers();
             if (!checkTargetHit()) {
                 missedShots++;
             }
@@ -38,9 +37,8 @@ public class TurretWeapon : WeaponBase
     private bool checkTargetHit() {
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
-        Debug.DrawRay(muzzle.position, fireDir * maxDistance, Color.red, 2f);
-        Debug.DrawRay(muzzle.position, muzzle.forward, Color.cyan, 2f);
-        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance)) {
+        ShowTracers(fireDir);
+        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask)) {
             
             var hitTransform = hit.transform;
             Debug.LogFormat("Turret hit {0}", hitTransform);

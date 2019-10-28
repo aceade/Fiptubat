@@ -32,12 +32,16 @@ public class WeaponBase : MonoBehaviour
 
     public TracerPool tracerPool;
 
+    protected int layerMask;
+
     protected void Start()
     {
         muzzle = transform;
         currentAmmo = magSize;
         fireCycle = new WaitForSeconds(fireRate);
         audioSource = GetComponent<AudioSource>();
+        layerMask = 1 << 1; // ignore transparent effects
+        layerMask = ~layerMask;
     }
 
     /// <summary>
@@ -51,11 +55,8 @@ public class WeaponBase : MonoBehaviour
 
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
-        Debug.DrawRay(muzzle.position, fireDir * maxDistance, Color.red, 2f);
-        Debug.DrawRay(muzzle.position, muzzle.forward, Color.cyan, 2f);
-        Debug.LogFormat("Gun aimed in direction {0} fired in direction {1}", muzzle.forward, fireDir);
-        ShowTracers();
-        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance)) {
+        ShowTracers(fireDir);
+        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask)) {
             
             var hitTransform = hit.transform;
             Debug.LogFormat("I hit {0}", hitTransform);
@@ -131,9 +132,9 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    protected void ShowTracers() {
+    protected void ShowTracers(Vector3 direction) {
         TracerEffect tracer = tracerPool.GetTracer();
-        tracer.Launch(muzzle.position, muzzle.forward);
+        tracer.Launch(muzzle.position + muzzle.forward, direction);
     }
 
     public int GetCurrentFireCost() {
