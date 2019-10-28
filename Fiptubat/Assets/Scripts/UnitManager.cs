@@ -42,7 +42,9 @@ public class UnitManager : MonoBehaviour {
 
     public void UnitDied(BaseUnit unit) {
 		units.Remove(unit);
-		activeUnits.Remove(unit);
+		if (activeUnits.Contains(unit)) {
+			activeUnits.Remove(unit);
+		}
 		if (units.Count == 0) {
 			gameStateManager.FactionDefeated(this);
 		}
@@ -84,6 +86,7 @@ public class UnitManager : MonoBehaviour {
 	}
 
 	public void UnitFinished(BaseUnit unit) {
+		unit.DeselectUnit();
 		activeUnits.Remove(unit);
 		Debug.LogFormat("{0} active units left for {1}", activeUnits.Count, this);
 		if(activeUnits.Count == 0) {

@@ -28,6 +28,10 @@ public class UnitTargetSelection : MonoBehaviour {
         return knownTargets.Contains(target);
     }
 
+    public bool HasTargetsLeft() {
+        return knownTargets.Count > 0;
+    }
+
     public void RemoveTarget(IDamage target) {
         knownTargets.Remove(target);
     }

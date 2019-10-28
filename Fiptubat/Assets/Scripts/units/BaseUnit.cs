@@ -16,7 +16,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public int armour = 0;
 	
 	public int actionPoints = 50;
-	private int currentActionPoints;
+	protected int currentActionPoints;
 	
 	public bool isCrouched = false;
 	
@@ -220,7 +220,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		this.unitManager = manager;
 	}
 
-	public void Attack() {
+	public virtual void Attack() {
 		int attackCost = weapon.GetCurrentFireCost();
 		if (IsWeaponReady() && currentActionPoints > 0 && currentActionPoints >= attackCost) {
 			

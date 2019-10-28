@@ -14,21 +14,21 @@ public class WeaponBase : MonoBehaviour
 
     public int magSize = 5;
 
-    private int currentAmmo;
+    protected int currentAmmo;
 
     public int reloadCost = 5;
 
     private int currentFireMode;
 
-    private Transform muzzle;
+    protected Transform muzzle;
 
     public float fireRate = 0.5f;
 
-    private WaitForSeconds fireCycle;
+    protected WaitForSeconds fireCycle;
 
-    private bool canAttack = true;
+    protected bool canAttack = true;
 
-    void Start()
+    protected void Start()
     {
         muzzle = transform;
         currentAmmo = magSize;
@@ -41,7 +41,7 @@ public class WeaponBase : MonoBehaviour
     /// <return>
     ///     Return true if it hit the target.
     /// </return>
-    public bool Fire() {
+    public virtual bool Fire() {
         StartCoroutine(performAttackCycle());
 
         RaycastHit hit;

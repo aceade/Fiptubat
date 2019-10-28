@@ -12,6 +12,8 @@ public class Turret : BaseUnit
 
     private Transform myTransform, barrel;
 
+    public float rotationSpeed = 3f;
+
     protected override void Start(){
         base.Start();
         myTransform = transform;
@@ -28,7 +30,43 @@ public class Turret : BaseUnit
         } else {
             // track the current target
             IDamage target = targetSelection.SelectTarget();
-            TrackTarget(target);
+            
+            if (target == null) {
+                FinishedTurn();
+            } else {
+                TrackTarget(target);
+            }
+
+            if (isSelected) {
+                if (target.GetRemainingHealth() > 0) {
+                    Attack();
+                } else {
+                    targetSelection.RemoveTarget(target);
+                    if (!targetSelection.HasTargetsLeft()) {
+                        targetSpotted = false;
+                        FinishedTurn();
+                    }
+                }
+                
+            }
+        }
+    }
+
+    public override void Attack() {
+        Debug.LogFormat("Turret {0} attacking", this);
+
+        // turrets don't care if they miss or run out of ammo
+        // the sounds are for diagnostic purposes :)
+        if (weapon.CanAttack()) {
+            if (!weapon.Fire()) {
+                currentActionPoints -= weapon.GetCurrentFireCost();
+                voiceSystem.TargetMissed();
+            }
+        } else {
+            if (weapon.GetRemainingAmmo() == 0 && currentActionPoints >= weapon.reloadCost) {
+                currentActionPoints -= weapon.reloadCost;
+                weapon.Reload();
+            }
         }
     }
 
@@ -40,7 +78,8 @@ public class Turret : BaseUnit
     private void TrackTarget(IDamage target) {
         Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
         horizontalDir.y = 0;
-        myTransform.forward = horizontalDir;
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, rotationSpeed * Time.deltaTime, 0f);
+        myTransform.rotation = Quaternion.LookRotation(desired);
     }
 
     public override void TargetSpotted(IDamage target) {
@@ -53,6 +92,8 @@ public class Turret : BaseUnit
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);
+        } else {
+            Invoke("FinishedTurn", 5f);
         }
     }
 
