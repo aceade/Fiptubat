@@ -14,9 +14,16 @@ public class Turret : BaseUnit
 
     public float rotationSpeed = 3f;
 
+    public int maxRotations = 3;
+
+    public float maxScanAngle = 60f;
+    private int totalRotations;
+    private Vector3 startDir;
+
     protected override void Start(){
         base.Start();
         myTransform = transform;
+        startDir = myTransform.forward;
         barrel = myTransform.Find("Barrel");
     }
 
@@ -74,7 +81,19 @@ public class Turret : BaseUnit
 
     private void Scan() {
         // scan animation
-        myTransform.Rotate(Vector3.up * 10f * Time.deltaTime);
+        myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        float angle = Vector3.Angle(myTransform.forward, startDir);
+        if (angle > maxScanAngle) {
+            
+            rotationSpeed *= -1f;
+            if (isSelected) {
+                totalRotations++;
+                if (totalRotations >= maxRotations) {
+                    FinishedTurn();
+                }
+            }
+        }
+        
     }
 
     private void TrackTarget(IDamage target) {
@@ -91,11 +110,10 @@ public class Turret : BaseUnit
 
     public override void SelectUnit() {
         base.SelectUnit();
+        totalRotations = 0;
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);
-        } else {
-            Invoke("FinishedTurn", 5f);
         }
     }
 
