@@ -44,6 +44,8 @@ public class Turret : BaseUnit
                     targetSelection.RemoveTarget(target);
                     if (!targetSelection.HasTargetsLeft()) {
                         targetSpotted = false;
+                        // reload after target defeated
+                        Reload();
                         FinishedTurn();
                     }
                 }

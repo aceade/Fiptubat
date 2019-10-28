@@ -37,7 +37,9 @@ public class UnitVoiceSystem : MonoBehaviour {
     }
 
     private void playClip(AudioClip clip) {
-        voice.PlayOneShot(clip);
+        if (!voice.isPlaying) {
+            voice.PlayOneShot(clip);
+        }
     }
 
     public void Moving() {

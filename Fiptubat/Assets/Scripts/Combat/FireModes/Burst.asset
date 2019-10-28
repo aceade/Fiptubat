@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Burst
   m_EditorClassIdentifier: 
   description: 3-round burst
-  deviation: 0.01
-  costModifier: 1
+  deviation: 0.05
+  costModifier: 2
   bulletsFired: 3

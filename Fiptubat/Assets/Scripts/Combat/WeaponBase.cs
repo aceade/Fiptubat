@@ -28,11 +28,14 @@ public class WeaponBase : MonoBehaviour
 
     protected bool canAttack = true;
 
+    private AudioSource audioSource;
+
     protected void Start()
     {
         muzzle = transform;
         currentAmmo = magSize;
         fireCycle = new WaitForSeconds(fireRate);
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -117,6 +120,12 @@ public class WeaponBase : MonoBehaviour
             fireMode = 0;
         }
         currentFireMode = fireMode;
+    }
+
+    protected void PlayNoise() {
+        if (!audioSource.isPlaying) {
+            audioSource.Play();
+        }
     }
 
     public int GetCurrentFireCost() {

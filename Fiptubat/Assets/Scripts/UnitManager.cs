@@ -42,7 +42,10 @@ public class UnitManager : MonoBehaviour {
 
     public void UnitDied(BaseUnit unit) {
 		units.Remove(unit);
-		if (activeUnits.Contains(unit)) {
+		unit.enabled = false;
+
+		// this might occur if the player destroys something on their first turn
+		if (activeUnits != null && activeUnits.Contains(unit)) {
 			activeUnits.Remove(unit);
 		}
 		if (units.Count == 0) {
