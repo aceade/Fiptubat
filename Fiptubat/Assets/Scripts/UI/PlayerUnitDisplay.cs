@@ -43,7 +43,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
         maxHealth = unit.health;
         maxPoints = unit.actionPoints;
         maxArmour = unit.armour;
-        statusImage = parentImage.GetComponentInChildren<Image>();
+        statusImage = parentImage.rectTransform.Find("DisplayImage").GetComponent<Image>();
         Text[] texts = parentImage.GetComponentsInChildren<Text>();
         healthBar = texts[0];
         actionPointsBar = texts[1];
