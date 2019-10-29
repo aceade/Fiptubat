@@ -18,7 +18,7 @@ The full controls will be displayed in the main menu. For the sake of convenienc
 * Cycle fire modes with Q
 
 ### Known issues
-The list of known issues is visible [here](https://github.com/aceade/Fiptubat/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+The list of known issues is visible [here](https://github.com/aceade/Fiptubat/issues?q=is%3Aissue+is%3Aopen)
 
 ## Required systems/components
 
