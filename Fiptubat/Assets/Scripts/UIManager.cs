@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour {
 
 	public Text gameStatusText;
 
+	public Text turnCounter;
+
 	void Start() {
 		gameOverScreen.gameObject.SetActive(false);
 	}
@@ -57,6 +59,10 @@ public class UIManager : MonoBehaviour {
 	public void AnnounceTurn(string playerName) {
 		turnEndedText.text = playerName + " Turn";
 		Invoke("ClearAnnounceText", 2f);
+	}
+
+	public void ShowTurnsRemaining(int turnsRemaining) {
+		turnCounter.text = string.Format("{0}", turnsRemaining);
 	}
 
 	private void ClearAnnounceText() {

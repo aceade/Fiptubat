@@ -29,6 +29,7 @@ public class GameStateManager : MonoBehaviour {
 	/// Gives the level time to set up
 	/// <summary>
 	private void StartTheFirstTurn() {
+		uiManager.ShowTurnsRemaining(maxTurns);
 		factions[0].StartTurn();
 		soundManager.StartTheMusic();
 	}
@@ -66,6 +67,7 @@ public class GameStateManager : MonoBehaviour {
 		bool isGameOver = false;
 		if (manager.isPlayer) {
 			turns++;
+			uiManager.ShowTurnsRemaining(maxTurns - turns);
 			if (turns > maxTurns) {
 				isGameOver = true;
 
