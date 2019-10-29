@@ -61,6 +61,11 @@ public class UIManager : MonoBehaviour {
 		Invoke("ClearAnnounceText", 2f);
 	}
 
+	public void AnnounceSectorClear() {
+		turnEndedText.text = "Sector clear, proceed to extraction point";
+		Invoke("ClearAnnounceText", 3f);
+	}
+
 	public void ShowTurnsRemaining(int turnsRemaining) {
 		turnCounter.text = string.Format("{0}", turnsRemaining);
 	}

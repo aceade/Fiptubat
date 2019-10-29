@@ -90,8 +90,8 @@ public class GameStateManager : MonoBehaviour {
 		if (manager.isPlayer) {
 			GameOver();
 		} else {
-			// assume one faction for now. Could just say "No enemies left"
-			Victory();
+			// assume one faction for now.
+			uiManager.AnnounceSectorClear();
 		}
 	}
 
