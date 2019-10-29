@@ -6,13 +6,19 @@ Turn-based tactics games such as XCOM, Silent Storm, Jagged Alliance, etc. are b
 ## Current Prototype Link
 You can find the WebGL prototype [here](https://aceade.github.io/Fiptubat/Fiptubat/Releases/ProtoType/index.html)
 
-Controls:
+The full controls will be displayed in the main menu. For the sake of convenience, they are posted here.
 * Use the mouse or arrow keys to rotate the current unit. This will be used to aim later.
 * Hold down right mouse to view possible positions; left click to set your destination.
 * Cycle units using Tab
 * End your turn using Backspace. If you have units moving, this will be rejected.
 * Crouch or stand up using C.
 * Sidestep by holding A/D.
+* Fire by clicking the left mouse button
+* Reload by pressing R
+* Cycle fire modes with Q
+
+### Known issues
+The list of known issues is visible [here](https://github.com/aceade/Fiptubat/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
 ## Required systems/components
 
@@ -20,13 +26,12 @@ Controls:
 The unit itself. Has the following attributes:
 * Health
 * Action points
-* Aim
+* Armour
 
 Has the following components:
-* Hearing
+* Hearing (TODO)
 * Eyesight
-* Weapons
-* Comm system
+* Weapon
 * Voice
 
 Player-controlled units will have a camera attached.
