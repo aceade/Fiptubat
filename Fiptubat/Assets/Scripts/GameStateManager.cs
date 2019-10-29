@@ -18,6 +18,7 @@ public class GameStateManager : MonoBehaviour {
 	public int maxTurns = 10;
 
 	private int turns = 0;
+	public int criticalTurnCount = 8;
 
 	void Start() {
 		soundManager = GetComponent<SoundManager>();
@@ -29,7 +30,7 @@ public class GameStateManager : MonoBehaviour {
 	/// Gives the level time to set up
 	/// <summary>
 	private void StartTheFirstTurn() {
-		uiManager.ShowTurnsRemaining(maxTurns);
+		uiManager.ShowTurnsRemaining(maxTurns, false);
 		factions[0].StartTurn();
 		soundManager.StartTheMusic();
 	}
@@ -67,7 +68,8 @@ public class GameStateManager : MonoBehaviour {
 		bool isGameOver = false;
 		if (manager.isPlayer) {
 			turns++;
-			uiManager.ShowTurnsRemaining(maxTurns - turns);
+			bool isCritical = turns >= criticalTurnCount;
+			uiManager.ShowTurnsRemaining(maxTurns - turns, isCritical);
 			if (turns > maxTurns) {
 				isGameOver = true;
 

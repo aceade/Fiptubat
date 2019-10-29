@@ -10503,6 +10503,7 @@ MonoBehaviour:
   - {fileID: 2039679855}
   - {fileID: 1434460400}
   maxTurns: 10
+  criticalTurnCount: 8
 --- !u!4 &1247843730
 Transform:
   m_ObjectHideFlags: 0

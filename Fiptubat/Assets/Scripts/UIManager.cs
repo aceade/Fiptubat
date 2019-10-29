@@ -66,8 +66,11 @@ public class UIManager : MonoBehaviour {
 		Invoke("ClearAnnounceText", 3f);
 	}
 
-	public void ShowTurnsRemaining(int turnsRemaining) {
+	public void ShowTurnsRemaining(int turnsRemaining, bool isCritical) {
 		turnCounter.text = string.Format("{0}", turnsRemaining);
+		if (isCritical) {
+			turnCounter.color = Color.blue;
+		}
 	}
 
 	private void ClearAnnounceText() {
