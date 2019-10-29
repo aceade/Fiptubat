@@ -93,6 +93,7 @@ public class GameStateManager : MonoBehaviour {
 			GameOver();
 		} else {
 			// assume one faction for now.
+			factions.Remove(manager);
 			uiManager.AnnounceSectorClear();
 		}
 	}
