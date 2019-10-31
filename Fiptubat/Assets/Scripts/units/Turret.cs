@@ -12,7 +12,8 @@ public class Turret : BaseUnit
 
     private Transform myTransform, barrel;
 
-    public float rotationSpeed = 10f;
+    public float scanRotationSpeed = 10f;
+    public float combatRotationSpeed = 10f;
 
     public float maxScanAngle = 60f;
     private Vector3 startDir;
@@ -82,11 +83,11 @@ public class Turret : BaseUnit
 
     private void Scan() {
         // scan animation
-        myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+        myTransform.Rotate(Vector3.up * scanRotationSpeed * Time.deltaTime);
         float angle = Vector3.Angle(myTransform.forward, startDir);
         if (angle > maxScanAngle) {
             
-            rotationSpeed *= -1f;
+            scanRotationSpeed *= -1f;
         }
         
     }
@@ -94,7 +95,7 @@ public class Turret : BaseUnit
     private void TrackTarget(IDamage target) {
         Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
         horizontalDir.y = 0;
-        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, rotationSpeed * Time.deltaTime, 0f);
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 0f);
         myTransform.rotation = Quaternion.LookRotation(desired);
     }
 
