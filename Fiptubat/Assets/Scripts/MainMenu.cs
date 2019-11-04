@@ -11,7 +11,19 @@ public class MainMenu : MonoBehaviour
 {
     public string sceneName;
 
+    public Image infoPanel, controlsPanel;
+
     public void StartTheGame() {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void ShowInfoPanel() {
+        controlsPanel.gameObject.SetActive(false);
+        infoPanel.gameObject.SetActive(true);
+    }
+
+    public void ShowControlsPanel() {
+        controlsPanel.gameObject.SetActive(true);
+        infoPanel.gameObject.SetActive(false);
     }
 }
