@@ -257,8 +257,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected virtual void Die() {
 		Debug.LogFormat("{0} is dead!", this.unitName);
+		lineOfSight.ClearColliders();
+		lineOfSight.StopAllCoroutines();
 		lineOfSight.enabled = false;
+		targetSelection.enabled = false;
 		unitManager.UnitDied(this);
+		this.enabled = false;
 	}
 
 	public int GetMoveCost(Vector3 start, Vector3 destination) {

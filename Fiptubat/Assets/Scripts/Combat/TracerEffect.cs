@@ -33,7 +33,6 @@ public class TracerEffect : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision coll) {
-        Debug.LogFormat("Tracer collided with {0}", coll.gameObject);
         toggleDisplay(false);
         // could be used for suppression later?
     }

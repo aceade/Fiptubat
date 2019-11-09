@@ -114,4 +114,10 @@ public class Turret : BaseUnit
         }
     }
 
+    protected override void Die() {
+        base.Die();
+        targetSpotted = false;
+        this.enabled = false;
+    }
+
 }

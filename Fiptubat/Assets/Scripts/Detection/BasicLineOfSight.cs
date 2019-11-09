@@ -21,10 +21,12 @@ namespace Aceade.AI {
 
 		protected BaseUnit brain;
 
+		private Collider coll;
+
 		// Use this for initialization
 		void Start () 
 		{
-			Collider coll = GetComponent<Collider>();
+			coll = GetComponent<Collider>();
 			coll.isTrigger = true;
 			delay = new WaitForSeconds (detectionInterval);
 		}
@@ -85,6 +87,15 @@ namespace Aceade.AI {
 		public virtual void ClearColliders() 
 		{
 			isProcessing = false;
+		}
+
+		void OnDisable() {
+			Debug.LogFormat("Line of sight {0} deactivated", this);
+			coll.enabled = false;
+		}
+
+		void OnEnable() {
+			Debug.LogFormat("Line of sight {0} online", this);
 		}
 	}
 }

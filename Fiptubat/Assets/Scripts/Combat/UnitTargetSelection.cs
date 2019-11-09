@@ -44,4 +44,8 @@ public class UnitTargetSelection : MonoBehaviour {
             Vector3.Distance(myTransform.position, firstTarget.GetTransform().position) < 
             Vector3.Distance(myTransform.position, secondTarget.GetTransform().position) ? firstTarget : secondTarget);
     }
+
+    void OnDisable() {
+        knownTargets.Clear();
+    }
 }
