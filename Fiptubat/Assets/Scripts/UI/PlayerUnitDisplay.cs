@@ -101,7 +101,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
     }
 
     private void ShowCrosshairs() {
-        float deviation = weapon.GetCurrentFireMode().deviation * 100;
+        float deviation = weapon.GetDeviation() * 100;
         // get the size
         crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, crosshairsWidth + deviation);
         crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, crosshairsHeight + deviation);

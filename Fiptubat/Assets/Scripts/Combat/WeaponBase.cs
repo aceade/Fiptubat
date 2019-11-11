@@ -34,6 +34,11 @@ public class WeaponBase : MonoBehaviour
 
     protected int layerMask;
 
+    protected bool isCrouched = false;
+
+    [Tooltip("Improves accuracy by this much (%)")]
+    public float crouchAccuracyModifier = 0.2f;
+
     protected void Start()
     {
         muzzle = transform;
@@ -58,6 +63,7 @@ public class WeaponBase : MonoBehaviour
         ShowTracers(fireDir);
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask)) {
             
+            Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
             var hitTransform = hit.transform;
             Debug.LogFormat("I hit {0}", hitTransform);
             var damageScript = hitTransform.root.GetComponent<IDamage>();
@@ -85,6 +91,10 @@ public class WeaponBase : MonoBehaviour
     protected Vector3 CalculateFireDirection() {
         Vector3 firDir = muzzle.forward;
         float deviation = fireModes[currentFireMode].deviation;
+        if (isCrouched) {
+            deviation *= (1 - crouchAccuracyModifier);
+            Debug.LogFormat("Gun's accuracy was {0}, is now {1}", fireModes[currentFireMode].deviation, deviation);
+        }
         firDir.x += Random.Range(-deviation, deviation);
         firDir.y += Random.Range(-deviation, deviation);
         firDir.z += Random.Range(-deviation, deviation);
@@ -119,6 +129,15 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
+    public float GetDeviation() {
+        float deviation = GetCurrentFireMode().deviation;
+        if (isCrouched) {
+            return (1 - crouchAccuracyModifier) * deviation;
+        } else {
+            return deviation;
+        }
+    }
+
     public void SelectFireMode (int fireMode) {
         if (fireMode >= fireModes.Count) {
             fireMode = 0;
@@ -139,5 +158,9 @@ public class WeaponBase : MonoBehaviour
 
     public int GetCurrentFireCost() {
         return Mathf.RoundToInt(GetCurrentFireMode().costModifier * baseCost);
+    }
+
+    public void ToggleCrouch(bool crouching) {
+        isCrouched = crouching;
     }
 }

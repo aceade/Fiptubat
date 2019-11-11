@@ -141,6 +141,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		isCrouched = !isCrouched;
 		currentActionPoints -= 4;
 		CrouchAnimation(isCrouched);
+		weapon.ToggleCrouch(isCrouched);
 	}
 
 	/// <summary>

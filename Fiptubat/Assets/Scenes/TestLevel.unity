@@ -1354,6 +1354,7 @@ MonoBehaviour:
   reloadCost: 5
   fireRate: 0.5
   tracerPool: {fileID: 1247843734}
+  crouchAccuracyModifier: 0.2
 --- !u!82 &182708360
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3406,6 +3407,7 @@ MonoBehaviour:
   reloadCost: 10
   fireRate: 0.2
   tracerPool: {fileID: 1247843734}
+  crouchAccuracyModifier: 0.2
 --- !u!1 &581479512
 GameObject:
   m_ObjectHideFlags: 0
@@ -5536,7 +5538,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
         type: 3}
       propertyPath: m_Name
-      value: Turret_Gun (1)
+      value: Turret_Gun 2
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
         type: 3}
@@ -5709,7 +5711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c2607cef6c59a84b045768c9253a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Turret_1
+  unitName: Turret_2
   health: 10
   armour: 0
   actionPoints: 50
@@ -7312,6 +7314,7 @@ MonoBehaviour:
   reloadCost: 10
   fireRate: 0.2
   tracerPool: {fileID: 1247843734}
+  crouchAccuracyModifier: 0.2
 --- !u!82 &1448535166
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9218,6 +9221,7 @@ MonoBehaviour:
   reloadCost: 5
   fireRate: 0.5
   tracerPool: {fileID: 1247843734}
+  crouchAccuracyModifier: 0.2
 --- !u!23 &1756647269
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10302,6 +10306,7 @@ MonoBehaviour:
   reloadCost: 5
   fireRate: 0.5
   tracerPool: {fileID: 1247843734}
+  crouchAccuracyModifier: 0.2
 --- !u!23 &1923580469
 MeshRenderer:
   m_ObjectHideFlags: 0
