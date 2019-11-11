@@ -286,6 +286,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		return currentActionPoints;
 	}
 
+	public virtual void ReachedPatrolPoint(PatrolPoint point) {
+		// no-op for most units
+	}
 	
 	void OnCollisionEnter(Collision coll) {
 		int layer = coll.gameObject.layer;
