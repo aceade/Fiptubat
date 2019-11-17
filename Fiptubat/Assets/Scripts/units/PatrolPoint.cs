@@ -21,6 +21,13 @@ public class PatrolPoint : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider coll) {
+        if (!coll.isTrigger) {
+            Debug.LogFormat("{0} entered a patrol point", coll);
+            var unitBase = coll.transform.root.GetComponent<BaseUnit>();
+            if (unitBase != null) {
+                unitBase.ReachedPatrolPoint(this);
+            }
+        }
         
     }
 }

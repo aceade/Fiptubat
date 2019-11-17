@@ -101,7 +101,8 @@ These are **not** committed to the repo.
 * Unity NavMeshComponents
 
 ### Sounds
-* Siren noises from http://www.freesound.org/people/guitarguy1985/packs/3355/
+* Siren noises from https://www.freesound.org/people/guitarguy1985/packs/3355/
+* Beeps from https://freesound.org/people/AlaskaRobotics/packs/14049/
 * Background music:
     * Sirkoto51's background loops: https://freesound.org/people/Sirkoto51/packs/21233/
     * "Theme for Sadistic.wav" by Grezgor: https://freesound.org/people/Gregzor/sounds/181827/

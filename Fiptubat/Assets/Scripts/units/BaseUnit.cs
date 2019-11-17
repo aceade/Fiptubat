@@ -40,9 +40,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected UnitTargetSelection targetSelection;
 
+	protected Transform myTransform;
+
 	protected WeaponBase weapon;
 	
 	protected virtual void Start() {
+		myTransform = transform;
 		currentActionPoints = actionPoints;
 		lineOfSight = GetComponentInChildren<BasicLineOfSight>();
 		lineOfSight.SetBrain(this);
@@ -267,7 +270,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public int GetMoveCost(Vector3 start, Vector3 destination) {
-		int baseCost = Mathf.RoundToInt((Vector3.Distance(start, destination) / 2));
+		return GetMoveCost(Vector3.Distance(start, destination));
+	}
+
+	public int GetMoveCost(float pathDistance) {
+		int baseCost = Mathf.RoundToInt(pathDistance) / 2;
 		if (isCrouched) {
 			return Mathf.RoundToInt(baseCost * 1.5f);
 		}
@@ -288,6 +295,29 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void ReachedPatrolPoint(PatrolPoint point) {
 		// no-op for most units
+	}
+
+
+	protected float GetPathLength() {
+		if (navMeshAgent.hasPath) {
+			NavMeshPath path = navMeshAgent.path;
+			if (path.corners.Length < 2) {
+				return 0f;
+			}
+			// stolen from https://docs.unity3d.com/540/Documentation/ScriptReference/NavMeshPath-corners.html
+			Vector3 previousCorner = path.corners[0];
+			float lengthSoFar = 0.0F;
+			int i = 1;
+			while (i < path.corners.Length) {
+				Vector3 currentCorner = path.corners[i];
+				lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
+				previousCorner = currentCorner;
+				i++;
+			}
+			return lengthSoFar;
+		} else {
+			return 0f;
+		}
 	}
 	
 	void OnCollisionEnter(Collision coll) {

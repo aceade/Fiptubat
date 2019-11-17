@@ -10,7 +10,7 @@ public class Turret : BaseUnit
 
     private bool targetSpotted;
 
-    private Transform myTransform, barrel;
+    private Transform barrel;
 
     public float scanRotationSpeed = 10f;
     public float combatRotationSpeed = 10f;
@@ -20,7 +20,6 @@ public class Turret : BaseUnit
 
     protected override void Start(){
         base.Start();
-        myTransform = transform;
         startDir = myTransform.forward;
         barrel = myTransform.Find("Barrel");
     }
