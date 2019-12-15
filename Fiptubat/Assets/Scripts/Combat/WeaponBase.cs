@@ -47,6 +47,9 @@ public class WeaponBase : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         layerMask = 1 << 1; // ignore transparent effects
         layerMask = ~layerMask;
+
+        float volume = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
+        audioSource.volume = volume;
     }
 
     /// <summary>

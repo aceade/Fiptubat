@@ -17,6 +17,8 @@ public class SoundManager : MonoBehaviour {
 
 	void Start () {
 		audioSource = GetComponent<AudioSource>();
+		float volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        audioSource.volume = volume;
 	}
 
 	public void StartTheMusic() {

@@ -29,6 +29,8 @@ public class UnitVoiceSystem : MonoBehaviour {
 
     void Start() {
         voice = GetComponent<AudioSource>();
+        float volume = PlayerPrefs.GetFloat("VoiceVolume", 0.5f);
+        voice.volume = volume;
     }
 
     private AudioClip GetRandomClip(List<AudioClip> possibleClips) {
