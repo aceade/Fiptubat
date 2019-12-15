@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Patrols along a path until out of points
+/// Patrols along a path until out of points and punches with a giant hammer.
 /// <summary>
 public class PatrolBot : BaseUnit
 {
@@ -41,7 +41,12 @@ public class PatrolBot : BaseUnit
 
     void PerformAttack(IDamage target) {
         if (target.GetRemainingHealth() > 0) {
-            Attack();
+            if (Vector3.Distance(myTransform.position, target.GetTransform().position) <= weapon.maxDistance) {
+                Attack();
+            } else {
+                SetDestination(target.GetTransform().position);
+            }
+            
         } else {
             targetSelection.RemoveTarget(target);
             voiceSystem.TargetDestroyed();

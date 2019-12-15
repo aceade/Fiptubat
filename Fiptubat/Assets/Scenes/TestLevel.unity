@@ -132,6 +132,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patrol_Bot
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9255d318979c9545bacd3c493e498294,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: -4640264742112328441, guid: 9255d318979c9545bacd3c493e498294,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133913965574556032, guid: 9255d318979c9545bacd3c493e498294,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9255d318979c9545bacd3c493e498294,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -290,7 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   baseCost: 10
-  maxDistance: 40
+  maxDistance: 10
   fireModes:
   - {fileID: 11400000, guid: 087aba00c855bc0adbac8f39be9bf033, type: 2}
   magSize: 30
