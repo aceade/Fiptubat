@@ -11,7 +11,8 @@ public class MainMenu : MonoBehaviour
 {
     public string sceneName;
 
-    public Image infoPanel, controlsPanel;
+    public Image infoPanel, controlsPanel, optionsPanel;
+    public Slider musicVolumeControl, speechVolumeControl, effectsVolumeControl, cameraSpeedControl;
 
     public void StartTheGame() {
         SceneManager.LoadScene(sceneName);
@@ -20,10 +21,25 @@ public class MainMenu : MonoBehaviour
     public void ShowInfoPanel() {
         controlsPanel.gameObject.SetActive(false);
         infoPanel.gameObject.SetActive(true);
+        optionsPanel.gameObject.SetActive(false);
     }
 
     public void ShowControlsPanel() {
         controlsPanel.gameObject.SetActive(true);
         infoPanel.gameObject.SetActive(false);
+        optionsPanel.gameObject.SetActive(false);
+    }
+
+    public void ShowOptionsPanel() {
+        controlsPanel.gameObject.SetActive(false);
+        infoPanel.gameObject.SetActive(false);
+        optionsPanel.gameObject.SetActive(true);
+    }
+
+    public void SavePreferences() {
+        PlayerPrefs.SetFloat("MusicVolume", musicVolumeControl.value);
+        PlayerPrefs.SetFloat("EffectsVolume", effectsVolumeControl.value);
+        PlayerPrefs.SetFloat("VoiceVolume", speechVolumeControl.value);
+        PlayerPrefs.SetFloat("CameraSpeed", cameraSpeedControl.value);
     }
 }

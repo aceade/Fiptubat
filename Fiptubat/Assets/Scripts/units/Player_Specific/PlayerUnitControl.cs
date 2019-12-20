@@ -24,7 +24,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public float maxDistance = 20f;
 
-    public float rotationSpeed = 20f;
+    private float rotationSpeed;
 
     private Vector3 lastStationaryPosition, destination;
 
@@ -36,6 +36,7 @@ public class PlayerUnitControl : MonoBehaviour {
         myCamera = GetComponentInChildren<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         lastStationaryPosition = myTransform.position;
+        rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
     }
 
     void OnEnable() {
