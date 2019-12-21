@@ -30,6 +30,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private bool canMove = true;
 
+    private bool usingUI = false;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
@@ -69,79 +71,85 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void Update() {
 
-        myPosition = myTransform.position;
-        myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
-        myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
-
-        // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
-        // TODO: move ALL keycodes into InputManager
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            myTransform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            myCamera.transform.Rotate(-rotationSpeed * Time.deltaTime, 0f, 0f);
-        }
-        if (Input.GetKey(KeyCode.DownArrow)) {
-            myCamera.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+        if (Input.GetButton("ToggleUi")) {
+            usingUI = !usingUI;
         }
 
-        // hold down the right mouse button to get paths/positions
-        bool selectingPath = Input.GetButton("Fire2") && canMove;
-        HandlePath(selectingPath);
-        
-        if(Input.GetKeyDown(KeyCode.C)) {
-            unit.Crouch();
-        }
+        if (!usingUI) {
+            myPosition = myTransform.position;
+            myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
+            myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
 
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-            uiManager.CycleUnit();
-            canMove = false;
-        }
-        if (Input.GetKeyDown(KeyCode.Backspace)) {
-            uiManager.EndTurn();
-            canMove = false;
-        }
-
-        if (!unit.IsStillMoving() && canMove) {
-            bool steppingLeft = Input.GetKey(KeyCode.A);
-            bool steppingRight = Input.GetKey(KeyCode.D);
-
-            // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
-            // navigation appears to interfere with this
-            if (steppingLeft) {
-                unit.SideStep(lastStationaryPosition, Vector3.left);
-                navMeshAgent.enabled = false;
+            // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
+            // TODO: move ALL keycodes into InputManager
+            if (Input.GetKey(KeyCode.LeftArrow)) {
+                myTransform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
             }
-            else if (steppingRight) {
-                unit.SideStep(lastStationaryPosition, Vector3.right);
-                navMeshAgent.enabled = false;
+            if (Input.GetKey(KeyCode.RightArrow)) {
+                myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.UpArrow)) {
+                myCamera.transform.Rotate(-rotationSpeed * Time.deltaTime, 0f, 0f);
+            }
+            if (Input.GetKey(KeyCode.DownArrow)) {
+                myCamera.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+            }
+
+            // hold down the right mouse button to get paths/positions
+            bool selectingPath = Input.GetButton("Fire2") && canMove;
+            HandlePath(selectingPath);
+            
+            if(Input.GetKeyDown(KeyCode.C)) {
+                unit.Crouch();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Tab)) {
+                uiManager.CycleUnit();
+                canMove = false;
+            }
+            if (Input.GetKeyDown(KeyCode.Backspace)) {
+                uiManager.EndTurn();
+                canMove = false;
+            }
+
+            if (!unit.IsStillMoving() && canMove) {
+                bool steppingLeft = Input.GetKey(KeyCode.A);
+                bool steppingRight = Input.GetKey(KeyCode.D);
+
+                // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
+                // navigation appears to interfere with this
+                if (steppingLeft) {
+                    unit.SideStep(lastStationaryPosition, Vector3.left);
+                    navMeshAgent.enabled = false;
+                }
+                else if (steppingRight) {
+                    unit.SideStep(lastStationaryPosition, Vector3.right);
+                    navMeshAgent.enabled = false;
+                } else {
+                    navMeshAgent.enabled = true;
+                    RevertToStationary();
+                }
+
+                if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
+                    unit.Attack();
+                }
+
+                if (Input.GetKeyDown(KeyCode.R)) {
+                    unit.Reload();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Q)) {
+                    unit.ChangeFireMode();
+                }
+                
+                
             } else {
-                navMeshAgent.enabled = true;
-                RevertToStationary();
-            }
-
-            if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
-                unit.Attack();
-            }
-
-            if (Input.GetKeyDown(KeyCode.R)) {
-                unit.Reload();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Q)) {
-                unit.ChangeFireMode();
-            }
-            
-            
-        } else {
-            // if close to their destination, mark this as their last stationary position
-            Vector3 displacement = destination-myPosition;
-            displacement.y = 0;
-            if (displacement.magnitude <= 1f) {
-                lastStationaryPosition = myPosition;
+                // if close to their destination, mark this as their last stationary position
+                Vector3 displacement = destination-myPosition;
+                displacement.y = 0;
+                if (displacement.magnitude <= 1f) {
+                    lastStationaryPosition = myPosition;
+                }
             }
         }
         
