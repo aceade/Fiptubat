@@ -18,6 +18,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private PlayerUnit unit;
 
+    private PlayerUnitDisplay unitDisplay;
+
     public UIManager uiManager;
 
     public PlayerMoveMarker moveMarker;
@@ -35,6 +37,7 @@ public class PlayerUnitControl : MonoBehaviour {
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
+        unitDisplay = GetComponent<PlayerUnitDisplay>();
         myCamera = GetComponentInChildren<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         lastStationaryPosition = myTransform.position;
@@ -71,9 +74,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void Update() {
 
-        if (Input.GetButton("ToggleUi")) {
-            usingUI = !usingUI;
-        }
+        usingUI = Input.GetButton("ToggleUi");
+        unitDisplay.ToggleUsingUi(usingUI);
 
         if (!usingUI) {
             myPosition = myTransform.position;
@@ -198,5 +200,12 @@ public class PlayerUnitControl : MonoBehaviour {
         if (distance > 0.1f) {
             myTransform.Translate(displacement * Time.deltaTime);
         }
+    }
+
+    /// <summary>
+    /// Check if the player unit is using the UI
+    /// <summar>
+    public bool isUsingUi() {
+        return usingUI;
     }
 }

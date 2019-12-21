@@ -111,3 +111,4 @@ These are **not** committed to the repo.
 ### Images
 * Smiley face: https://commons.wikimedia.org/wiki/File:Face-smile.svg (public domain)
 * Sad face: https://commons.wikimedia.org/wiki/File:Face-sad.svg (public domain)
+* Cursor: https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg (CC BY-SA 2.5)

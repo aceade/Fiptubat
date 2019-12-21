@@ -18,6 +18,8 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private Image statusImage;
 
+    private Image uiStatusImage;
+
     [Tooltip("The button that selects this unit")]
     public Image parentImage;
 
@@ -37,6 +39,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private int maxHealth, maxPoints, maxArmour;
 
+    private bool usingUi = false;
 
     void Start() {
         unit = GetComponent<BaseUnit>();
@@ -44,6 +47,7 @@ public class PlayerUnitDisplay: MonoBehaviour {
         maxPoints = unit.actionPoints;
         maxArmour = unit.armour;
         statusImage = parentImage.rectTransform.Find("DisplayImage").GetComponent<Image>();
+        uiStatusImage = parentImage.rectTransform.Find("UiStatusImage").GetComponent<Image>();
         Text[] texts = parentImage.GetComponentsInChildren<Text>();
         healthBar = texts[0];
         actionPointsBar = texts[1];
@@ -74,6 +78,8 @@ public class PlayerUnitDisplay: MonoBehaviour {
         if (isSelected) {
             ShowCrosshairs();
         }
+
+        ShowUiStatus();
         
     }
 
@@ -87,6 +93,11 @@ public class PlayerUnitDisplay: MonoBehaviour {
             nameField.color = Color.white;
             nameField.fontStyle = FontStyle.Normal;
         }
+    }
+
+    private void ShowUiStatus() {
+        float alpha = usingUi? 1f : 0f;
+        uiStatusImage.CrossFadeAlpha(alpha, 0.1f, true);
     }
 
     private void SetImage(int health) {
@@ -105,5 +116,9 @@ public class PlayerUnitDisplay: MonoBehaviour {
         // get the size
         crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, crosshairsWidth + deviation);
         crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, crosshairsHeight + deviation);
+    }
+
+    public void ToggleUsingUi(bool isUsingUi) {
+        usingUi = isUsingUi;
     }
 }

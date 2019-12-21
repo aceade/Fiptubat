@@ -2316,8 +2316,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 718885197}
   m_HandleRect: {fileID: 718885196}
   m_Direction: 2
-  m_Value: 1.000025
-  m_Size: 0.8983512
+  m_Value: 1
+  m_Size: 0.89831275
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3192,7 +3192,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 1}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -18.61524, y: 269.2671}
+  m_AnchoredPosition: {x: -18.61524, y: 269.26785}
   m_SizeDelta: {x: -6.1201715, y: 569}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1051574019
@@ -5097,7 +5097,8 @@ MonoBehaviour:
   m_Text: "\n<b>Current Controls:</b>\n\n * Select position: right mouse\n * Confirm
     destination: left mouse\n * Rotate: arrow keys/mouse\n * Toggle crouch: C\n *
     End turn: Backspace\n * Cycle units: Tab\n * Sidestep: A/D\n * Fire: Left mouse
-    button\n * Reload: R\n * Cycle fire modes (if possible): Q"
+    button\n * Reload: R\n * Cycle fire modes (if possible): Q\n * Toggle UI Interactions:
+    Left Ctrl"
 --- !u!222 &2038600240
 CanvasRenderer:
   m_ObjectHideFlags: 0
