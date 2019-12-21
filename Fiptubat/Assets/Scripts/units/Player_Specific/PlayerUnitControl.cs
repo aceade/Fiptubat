@@ -83,40 +83,29 @@ public class PlayerUnitControl : MonoBehaviour {
             myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
 
             // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
-            // TODO: move ALL keycodes into InputManager
-            if (Input.GetKey(KeyCode.LeftArrow)) {
-                myTransform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.RightArrow)) {
-                myTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.UpArrow)) {
-                myCamera.transform.Rotate(-rotationSpeed * Time.deltaTime, 0f, 0f);
-            }
-            if (Input.GetKey(KeyCode.DownArrow)) {
-                myCamera.transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
-            }
+            myTransform.Rotate(-Vector3.up * rotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime);
+            myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Vertical") * Time.deltaTime, 0f, 0f);
 
             // hold down the right mouse button to get paths/positions
             bool selectingPath = Input.GetButton("Fire2") && canMove;
             HandlePath(selectingPath);
             
-            if(Input.GetKeyDown(KeyCode.C)) {
+            if(Input.GetButtonDown("Crouch")) {
                 unit.Crouch();
             }
 
-            if (Input.GetKeyDown(KeyCode.Tab)) {
+            if (Input.GetButtonDown("CycleUnit")) {
                 uiManager.CycleUnit();
                 canMove = false;
             }
-            if (Input.GetKeyDown(KeyCode.Backspace)) {
+            if (Input.GetButtonDown("EndTurn")) {
                 uiManager.EndTurn();
                 canMove = false;
             }
 
             if (!unit.IsStillMoving() && canMove) {
-                bool steppingLeft = Input.GetKey(KeyCode.A);
-                bool steppingRight = Input.GetKey(KeyCode.D);
+                bool steppingLeft = Input.GetButton("StepLeft");
+                bool steppingRight = Input.GetButton("StepRight");
 
                 // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
                 // navigation appears to interfere with this
@@ -136,11 +125,11 @@ public class PlayerUnitControl : MonoBehaviour {
                     unit.Attack();
                 }
 
-                if (Input.GetKeyDown(KeyCode.R)) {
+                if (Input.GetButtonDown("Reload")) {
                     unit.Reload();
                 }
 
-                if (Input.GetKeyDown(KeyCode.Q)) {
+                if (Input.GetButtonDown("CycleFireMode")) {
                     unit.ChangeFireMode();
                 }
                 
