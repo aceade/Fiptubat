@@ -64,7 +64,7 @@ public class WeaponBase : MonoBehaviour
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
         ShowTracers(fireDir);
-        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask)) {
+        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
             Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
             var hitTransform = hit.transform;
