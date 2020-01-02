@@ -12,6 +12,10 @@ Assets/AssetStoreTools*
 Fiptubat/Assets/NavMeshComponents/**
 Fiptubat/Assets/Sounds/
 
+## Blender files
+**/**/*.blend1
+**/**/*.blend2
+
 # Visual Studio cache directory
 .vs/
 
