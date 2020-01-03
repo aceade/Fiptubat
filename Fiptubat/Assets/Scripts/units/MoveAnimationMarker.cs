@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+
+/// <summary>
+/// Marks a point where a unit should use a particular animation for navigation purposes (e.g. crouching, vaulting, etc)
+/// Note to self: ladders should NOT be static for navigation - otherwise they don't work!
+/// </summary>
 [RequireComponent(typeof(Collider))]
 public class MoveAnimationMarker : MonoBehaviour {
 
