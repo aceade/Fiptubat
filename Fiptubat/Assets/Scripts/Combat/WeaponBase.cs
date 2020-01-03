@@ -39,6 +39,8 @@ public class WeaponBase : MonoBehaviour
     [Tooltip("Improves accuracy by this much (%)")]
     public float crouchAccuracyModifier = 0.2f;
 
+    public AudioClip firingNoise, reloadNoise;
+
     protected void Start()
     {
         muzzle = transform;
@@ -60,6 +62,8 @@ public class WeaponBase : MonoBehaviour
     /// </return>
     public virtual bool Fire() {
         StartCoroutine(performAttackCycle());
+
+        audioSource.PlayOneShot(firingNoise);
 
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
@@ -110,6 +114,7 @@ public class WeaponBase : MonoBehaviour
 
     public void Reload() {
         currentAmmo = magSize;
+        audioSource.PlayOneShot(reloadNoise);
         canAttack = true;
     }
 

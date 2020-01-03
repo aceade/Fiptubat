@@ -107,6 +107,8 @@ These are **not** committed to the repo.
     * Sirkoto51's background loops: https://freesound.org/people/Sirkoto51/packs/21233/
     * "Theme for Sadistic.wav" by Grezgor: https://freesound.org/people/Gregzor/sounds/181827/
     * "Orchestral Victory Fanfare" by Sheyvan: https://freesound.org/people/Sheyvan/sounds/470083/
+* Laser guns from https://freesound.org/people/Terry93D/packs/18390/
+* Scifi gun noise pack from AniCator: https://freesound.org/people/AniCator/packs/2524/
 
 ### Images
 * Smiley face: https://commons.wikimedia.org/wiki/File:Face-smile.svg (public domain)

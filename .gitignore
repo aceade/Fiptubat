@@ -14,7 +14,9 @@ Fiptubat/Assets/Sounds/
 
 ## Blender files
 **/**/*.blend1
+**/**/*.blend1.meta
 **/**/*.blend2
+**/**/*.blend2.meta
 
 # Visual Studio cache directory
 .vs/
