@@ -38,7 +38,7 @@ public class TurretWeapon : WeaponBase
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
         ShowTracers(fireDir);
-        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask)) {
+        if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
             var hitTransform = hit.transform;
             Debug.LogFormat("Turret hit {0}", hitTransform);
