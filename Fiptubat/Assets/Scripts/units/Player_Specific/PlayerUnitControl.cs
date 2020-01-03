@@ -152,7 +152,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
             Vector3 possibleDestination;
             
-            if (Physics.Raycast(myPosition + Vector3.up, myCamera.transform.forward, out raycastHit, maxDistance)) {
+            if (Physics.Raycast(myPosition + Vector3.up, myCamera.transform.forward, out raycastHit, maxDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
                 possibleDestination = raycastHit.point;
    
             } else {

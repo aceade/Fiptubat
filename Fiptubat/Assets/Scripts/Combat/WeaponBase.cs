@@ -63,7 +63,9 @@ public class WeaponBase : MonoBehaviour
     public virtual bool Fire() {
         StartCoroutine(performAttackCycle());
 
-        audioSource.PlayOneShot(firingNoise);
+        if (!audioSource.isPlaying) {
+            audioSource.PlayOneShot(firingNoise);
+        }
 
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();

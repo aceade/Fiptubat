@@ -23,6 +23,8 @@ namespace Aceade.AI {
 
 		private Collider coll;
 
+		public float maxDetectionRange = 30f;
+
 		// Use this for initialization
 		void Start () 
 		{
@@ -75,7 +77,7 @@ namespace Aceade.AI {
 		private void AnalyseTarget(Collider coll) {
 			RaycastHit hit;
 			Debug.LogFormat("{0} analysing LOS for {1}", brain.unitName, coll);
-			if (Physics.Raycast(transform.position, coll.transform.position - transform.position, out hit, 20f)) {
+			if (Physics.Raycast(transform.position, coll.transform.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
 				Debug.LogFormat("{0} can see {1}. Is this the target? {2}", brain.unitName, hit.transform, hit.transform == coll.transform);
 				if (hit.transform == coll.transform) {
 					var damageScript = coll.GetComponent<IDamage>();
