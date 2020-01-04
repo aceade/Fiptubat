@@ -27,6 +27,7 @@ public class UnitManager : MonoBehaviour {
 			factionName = transform.name;
 		}
 		units.ForEach(unit => unit.SetUnitManager(this));
+		activeUnits = units;
 		selectedUnit = units[currentUnit];
 	}
 
@@ -41,13 +42,17 @@ public class UnitManager : MonoBehaviour {
     }
 
     public void UnitDied(BaseUnit unit) {
-		units.Remove(unit);
-		unit.enabled = false;
+		Debug.LogFormat("Unit {0} in faction {1} has died. At the start of this method, there are {2} still alive", unit, factionName,
+			units.Count);
 
 		// this might occur if the player destroys something on their first turn
 		if (activeUnits != null && activeUnits.Contains(unit)) {
 			activeUnits.Remove(unit);
 		}
+
+		units.Remove(unit);
+		unit.enabled = false;
+
 		if (units.Count == 0) {
 			gameStateManager.FactionDefeated(this);
 		}

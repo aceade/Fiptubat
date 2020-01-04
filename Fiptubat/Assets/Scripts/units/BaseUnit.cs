@@ -117,8 +117,6 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void SideStep(Vector3 startPosition, Vector3 direction) {
 		direction.y = 0f;
-		Debug.LogFormat("{0} at {1} sidestepping in local direction {2} towards {1}", 
-			unitName, transform.position, direction, startPosition + direction);
 		transform.Translate(direction * Time.deltaTime);
 		float distance = Vector3.Distance(transform.position, startPosition);
 		if (distance >= 1f) {

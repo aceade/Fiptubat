@@ -25,19 +25,16 @@ public class AdvancedTargetSelection : UnitTargetSelection
     
     private IDamage getLowestHealthEnemy() {
         List<IDamage> sortedTargets = knownTargets.OrderBy(target => target.GetRemainingHealth()).ToList();
-        Debug.LogFormat("Lowest health enemy is {0}", sortedTargets[0]);
         return sortedTargets[0];
     }
 
     private IDamage getHighestDamageOutputEnemy() {
         List<IDamage> sortedTargets = knownTargets.OrderBy(target => target.GetPotentialDamage()).ToList();
-        Debug.LogFormat("Enemy with the highest potential damage is {0}", sortedTargets[0]);
         return sortedTargets[0];
     }
 
     private IDamage getHealthiestEnemy() {
         List<IDamage> sortedTargets = knownTargets.OrderByDescending(target => target.GetRemainingHealth()).ToList();
-        Debug.LogFormat("Healthiest enemy is {0}", sortedTargets[0]);
         return sortedTargets[0];
     }
 }
