@@ -95,6 +95,7 @@ public class GameStateManager : MonoBehaviour {
 			// assume one faction for now.
 			factions.Remove(manager);
 			uiManager.AnnounceSectorClear();
+			EndTurn(manager);
 		}
 	}
 
