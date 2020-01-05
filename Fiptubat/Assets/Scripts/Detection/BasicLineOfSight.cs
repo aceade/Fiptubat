@@ -92,12 +92,7 @@ namespace Aceade.AI {
 		}
 
 		void OnDisable() {
-			Debug.LogFormat("Line of sight {0} deactivated", this);
 			coll.enabled = false;
-		}
-
-		void OnEnable() {
-			Debug.LogFormat("Line of sight {0} online", this);
 		}
 	}
 }

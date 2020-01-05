@@ -118,7 +118,6 @@ public class PlayerUnitControl : MonoBehaviour {
                     navMeshAgent.enabled = false;
                 } else {
                     navMeshAgent.enabled = true;
-                    RevertToStationary();
                 }
 
                 if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
@@ -177,17 +176,6 @@ public class PlayerUnitControl : MonoBehaviour {
         } else {
             uiManager.ClearDistanceText();
             moveMarker.Hide();
-        }
-    }
-
-    /// <summary>
-    /// Undo sidestep. Note to self: do NOT use a while loop here!
-    /// <summary>
-    private void RevertToStationary() {
-        Vector3 displacement = lastStationaryPosition - myPosition;
-        float distance = displacement.magnitude;
-        if (distance > 0.1f) {
-            myTransform.Translate(displacement * Time.deltaTime);
         }
     }
 
