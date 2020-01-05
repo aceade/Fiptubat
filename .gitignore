@@ -8,9 +8,12 @@ Assets/AssetStoreTools*
 ## Allow the ProtoType build files
 !Fiptubat/Releases/ProtoType/Build/
 
+Fiptubat/Profiler_Results/
+
 ## Third-party components
 Fiptubat/Assets/NavMeshComponents/**
 Fiptubat/Assets/Sounds/
+Fiptubat/Assets/Textures
 
 ## Blender files
 **/**/*.blend1

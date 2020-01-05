@@ -10,7 +10,7 @@ using UnityEngine;
 public class UnitManager : MonoBehaviour {
 
 	public List<BaseUnit> units;
-	private List<BaseUnit> activeUnits;
+	private List<BaseUnit> activeUnits = new List<BaseUnit>();
 
 	private int currentUnit = 0;
 	private BaseUnit selectedUnit;
@@ -27,8 +27,8 @@ public class UnitManager : MonoBehaviour {
 			factionName = transform.name;
 		}
 		units.ForEach(unit => unit.SetUnitManager(this));
-		activeUnits = units;
-		selectedUnit = units[currentUnit];
+		activeUnits.AddRange(units);
+		selectedUnit = activeUnits[currentUnit];
 	}
 
     public void EndTurn() {
@@ -67,7 +67,8 @@ public class UnitManager : MonoBehaviour {
 	}
 
 	public void StartTurn() {
-		activeUnits = units;
+		activeUnits.Clear();
+		activeUnits.AddRange(units);
 		activeUnits.ForEach(unit => unit.StartTurn());
 		selectedUnit.SelectUnit();
 	}
@@ -98,7 +99,7 @@ public class UnitManager : MonoBehaviour {
 		activeUnits.Remove(unit);
 		Debug.LogFormat("{0} active units left for {1}", activeUnits.Count, this);
 		if(activeUnits.Count == 0) {
-			gameStateManager.EndTurn(this);
+			EndTurn();
 		} else {
 			if (!isPlayer) {
 				// use a round-robin approach
