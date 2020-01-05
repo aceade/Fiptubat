@@ -1,7 +1,7 @@
 {
-"companyName": "DefaultCompany",
+"companyName": "Aceade",
 "productName": "Fiptubat",
-"productVersion": "0.1",
+"productVersion": "0.3a",
 "dataUrl": "ProtoType.data.unityweb",
 "wasmCodeUrl": "ProtoType.wasm.code.unityweb",
 "wasmFrameworkUrl": "ProtoType.wasm.framework.unityweb",
