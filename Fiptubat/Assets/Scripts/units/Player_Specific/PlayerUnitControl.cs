@@ -20,6 +20,10 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private PlayerUnitDisplay unitDisplay;
 
+    public PlayerDestination destinationTrigger;
+
+    private bool hasReachedDestination = true;
+
     public UIManager uiManager;
 
     public PlayerMoveMarker moveMarker;
@@ -40,6 +44,7 @@ public class PlayerUnitControl : MonoBehaviour {
         unitDisplay = GetComponent<PlayerUnitDisplay>();
         myCamera = GetComponentInChildren<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+        destinationTrigger.SetUnit(this);
         lastStationaryPosition = myTransform.position;
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
     }
@@ -103,7 +108,7 @@ public class PlayerUnitControl : MonoBehaviour {
                 canMove = false;
             }
 
-            if (!unit.IsStillMoving() && canMove) {
+            if (hasReachedDestination) {
                 bool steppingLeft = Input.GetButton("StepLeft");
                 bool steppingRight = Input.GetButton("StepRight");
 
@@ -133,14 +138,7 @@ public class PlayerUnitControl : MonoBehaviour {
                 }
                 
                 
-            } else {
-                // if close to their destination, mark this as their last stationary position
-                Vector3 displacement = destination-myPosition;
-                displacement.y = 0;
-                if (displacement.magnitude <= 1f) {
-                    lastStationaryPosition = myPosition;
-                }
-            }
+            } 
         }
         
     }
@@ -171,6 +169,10 @@ public class PlayerUnitControl : MonoBehaviour {
                 destination = possibleDestination;
                 bool canReachDestination = unit.SetDestination(possibleDestination);
                 moveMarker.SetPosition(possibleDestination, canReachDestination);
+                if (canReachDestination) {
+                    ReachedDestination(false);
+                    destinationTrigger.SetPosition(destination);
+                }
             }
             
         } else {
@@ -185,4 +187,12 @@ public class PlayerUnitControl : MonoBehaviour {
     public bool isUsingUi() {
         return usingUI;
     }
+
+    public void ReachedDestination(bool reached) {
+        hasReachedDestination = reached;
+        if (reached) {
+            lastStationaryPosition = myTransform.position;
+        }
+    }
+
 }

@@ -30,7 +30,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected bool isSelected;
 
-	private Rigidbody myBody;
+	protected Rigidbody myBody;
 
 	protected BasicLineOfSight lineOfSight;
 
@@ -117,10 +117,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void SideStep(Vector3 startPosition, Vector3 direction) {
 		direction.y = 0f;
-		transform.Translate(direction * Time.deltaTime);
-		float distance = Vector3.Distance(transform.position, startPosition);
-		if (distance >= 1f) {
-			transform.Translate(direction * -0.02f);
+		myTransform.Translate(direction * Time.deltaTime);
+		float distance = Vector3.Distance(myTransform.position, startPosition);
+		if (distance >= 1.5f) {
+			myTransform.Translate(direction * -0.02f);
 		}
 	}
 
