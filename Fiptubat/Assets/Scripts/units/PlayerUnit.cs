@@ -18,10 +18,12 @@ public class PlayerUnit : BaseUnit {
     /// <summary>
     /// Select the unit and activate their camera.
     /// </summary>
-    public override void SelectUnit() {
+    public override void SelectUnit(bool isMyTurn) {
         unitControl.enabled = true;
-        base.SelectUnit();
-        unitControl.AllowMovement();    // work around a timing issue of some kind
+        base.SelectUnit(isMyTurn);
+        if (isMyTurn) {
+            unitControl.AllowMovement();    // work around a timing issue of some kind
+        }
     }
 
     /// <summary>

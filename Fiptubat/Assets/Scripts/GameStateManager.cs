@@ -43,8 +43,13 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	public void Resume() {
-		isPaused = false;
 		Time.timeScale = 1f;
+		// avoid negligent discharges
+		Invoke("ContinueGame", 0.1f);
+	}
+
+	private void ContinueGame() {
+		isPaused = false;
 	}
 
 	public void Quit() {
@@ -88,6 +93,10 @@ public class GameStateManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Let the game know that the specified faction has no more units left.
+	/// </summary>
+	/// <param name="manager"></param>
 	public void FactionDefeated(UnitManager manager) {
 		if (manager.isPlayer) {
 			GameOver();
@@ -99,6 +108,11 @@ public class GameStateManager : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Let the game know that the specified faction has escaped the battlefield.
+	/// Intention is to let the player escape.
+	/// </summary>
+	/// <param name="manager"></param>
 	public void FactionEscaped(UnitManager manager) {
 		if (manager.isPlayer) {
 			Victory();
@@ -116,4 +130,23 @@ public class GameStateManager : MonoBehaviour {
 		uiManager.ShowGameOverScreen(true);
 		soundManager.PlayVictoryMusic();
 	}
+
+	/// <summary>
+	/// Check if the specified faction should be playing
+	/// </summary>
+	/// <param name="manager">The UnitManager that wants to know</param>
+	/// <returns>true if the unit should be playing, false otherwise</returns>
+	public bool IsItMyTurn(UnitManager manager) {
+		if (!factions.Contains(manager)) {
+			return false;
+		} else {
+			return factions.IndexOf(manager) == currentFactionIndex;
+		}
+		
+	}
+
+	public bool IsCurrentlyPaused() {
+		return isPaused;
+	}
+
 }

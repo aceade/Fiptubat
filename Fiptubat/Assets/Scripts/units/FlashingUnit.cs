@@ -23,7 +23,7 @@ public class FlashingUnit : BaseUnit
         base.Start();
     }
 
-    public override void SelectUnit() {
+    public override void SelectUnit(bool isMyTurn) {
         voiceSystem.Moving();
         if (flashLight == null) {
             flashLight = GetComponentInChildren<Light>();

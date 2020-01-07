@@ -18,8 +18,8 @@ public class PatrolBot : BaseUnit
         base.Start();
     }
 
-    public override void SelectUnit() {
-        base.SelectUnit();
+    public override void SelectUnit(bool isMyTurn) {
+        base.SelectUnit(isMyTurn);
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);

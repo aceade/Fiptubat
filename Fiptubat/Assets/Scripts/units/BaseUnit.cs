@@ -105,7 +105,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		return isSelected;
 	}
 
-	public virtual void SelectUnit() {
+	/// <summary>
+	/// Select the current unit.
+	/// </summary>
+	/// <param name="isMyTurn">Only used in player units. If <code>false</code>, they can't do anything but look around</param>
+	public virtual void SelectUnit(bool isMyTurn) {
 		isSelected = true;
         // no-op
     }
@@ -115,6 +119,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
         // no-op
     }
 
+	/// <summary>
+	/// Sidestep in a particular direction to step into/out of cover.
+	/// </summary>
+	/// <param name="startPosition">Where they start</param>
+	/// <param name="direction">The direction in which to step</param>
 	public void SideStep(Vector3 startPosition, Vector3 direction) {
 		direction.y = 0f;
 		myTransform.Translate(direction * Time.deltaTime);
@@ -148,6 +157,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// <summary>
 	/// Separate animations from code
 	/// </summary>
+	/// 
 	public virtual void CrouchAnimation(bool crouched) {
 		if (crouched) {
 			// TODO: cache the collider and add animation class.

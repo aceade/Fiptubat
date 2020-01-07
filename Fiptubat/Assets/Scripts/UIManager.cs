@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour {
 
 	public Image mainScreen;
 
-	public Image gameOverScreen;
+	public Image gameOverScreen, pauseScreen;
 
 	public Text gameStatusText;
 
@@ -26,14 +26,17 @@ public class UIManager : MonoBehaviour {
 
 	void Start() {
 		gameOverScreen.gameObject.SetActive(false);
+		pauseScreen.gameObject.SetActive(false);
 	}
 
 	public void Pause() {
+		pauseScreen.gameObject.SetActive(true);
 		gameStateManager.Pause();
 	}
 
 	public void Resume() {
 		gameStateManager.Resume();
+		pauseScreen.gameObject.SetActive(false);
 	}
 
 	public void EndTurn() {
@@ -101,5 +104,9 @@ public class UIManager : MonoBehaviour {
 
 	public void Quit() {
 		gameStateManager.Quit();
+	}
+
+	public bool isPaused() {
+		return gameStateManager.IsCurrentlyPaused();
 	}
 }

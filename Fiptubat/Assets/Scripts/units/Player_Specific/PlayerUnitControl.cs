@@ -54,12 +54,12 @@ public class PlayerUnitControl : MonoBehaviour {
             myCamera = GetComponentInChildren<Camera>();
         }
         myCamera.enabled = true;
-        canMove = true;
+        //canMove = true;
     }
 
     void OnDisable() {
         myCamera.enabled = false;
-        canMove = false;
+        //canMove = false;
     }
 
     public void MoveCamera(float yOffset) {
@@ -82,7 +82,12 @@ public class PlayerUnitControl : MonoBehaviour {
         usingUI = Input.GetButton("ToggleUi");
         unitDisplay.ToggleUsingUi(usingUI);
 
-        if (!usingUI) {
+        // default keymapping for Escape
+        if (Input.GetButtonDown("Cancel")) {
+            uiManager.Pause();
+        }
+
+        if (!usingUI && !uiManager.isPaused()) {
             myPosition = myTransform.position;
             myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
             myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
@@ -95,7 +100,7 @@ public class PlayerUnitControl : MonoBehaviour {
             bool selectingPath = Input.GetButton("Fire2") && canMove;
             HandlePath(selectingPath);
             
-            if(Input.GetButtonDown("Crouch")) {
+            if(Input.GetButtonDown("Crouch") && canMove) {
                 unit.Crouch();
             }
 
@@ -125,20 +130,20 @@ public class PlayerUnitControl : MonoBehaviour {
                     navMeshAgent.enabled = true;
                 }
 
-                if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
-                    unit.Attack();
-                }
+                if (canMove) {
+                    if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
+                        unit.Attack();
+                    }
 
-                if (Input.GetButtonDown("Reload")) {
-                    unit.Reload();
-                }
+                    if (Input.GetButtonDown("Reload")) {
+                        unit.Reload();
+                    }
 
-                if (Input.GetButtonDown("CycleFireMode")) {
-                    unit.ChangeFireMode();
+                    if (Input.GetButtonDown("CycleFireMode")) {
+                        unit.ChangeFireMode();
+                    }
                 }
-                
-                
-            } 
+            }
         }
         
     }
@@ -183,7 +188,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     /// <summary>
     /// Check if the player unit is using the UI
-    /// <summar>
+    /// <summary>
     public bool isUsingUi() {
         return usingUI;
     }

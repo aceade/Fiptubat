@@ -103,8 +103,8 @@ public class Turret : BaseUnit
         targetSpotted = true;
     }
 
-    public override void SelectUnit() {
-        base.SelectUnit();
+    public override void SelectUnit(bool isMyTurn) {
+        base.SelectUnit(isMyTurn);
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);

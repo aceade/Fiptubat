@@ -70,7 +70,7 @@ public class UnitManager : MonoBehaviour {
 		activeUnits.Clear();
 		activeUnits.AddRange(units);
 		activeUnits.ForEach(unit => unit.StartTurn());
-		selectedUnit.SelectUnit();
+		selectedUnit.SelectUnit(true);
 	}
 
 	public void CycleUnit() {
@@ -81,7 +81,7 @@ public class UnitManager : MonoBehaviour {
 		}
 		
 		selectedUnit = activeUnits[currentUnit];
-		selectedUnit.SelectUnit();
+		selectedUnit.SelectUnit(gameStateManager.IsItMyTurn(this));
 	}
 
 	public void SelectUnit(int unitIndex) {
@@ -91,7 +91,7 @@ public class UnitManager : MonoBehaviour {
 		selectedUnit.DeselectUnit();
 		currentUnit = unitIndex;
 		selectedUnit = activeUnits[currentUnit];
-		selectedUnit.SelectUnit();
+		selectedUnit.SelectUnit(gameStateManager.IsItMyTurn(this));
 	}
 
 	public void UnitFinished(BaseUnit unit) {
