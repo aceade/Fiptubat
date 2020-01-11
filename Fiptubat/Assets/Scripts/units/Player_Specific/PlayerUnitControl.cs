@@ -54,12 +54,10 @@ public class PlayerUnitControl : MonoBehaviour {
             myCamera = GetComponentInChildren<Camera>();
         }
         myCamera.enabled = true;
-        //canMove = true;
     }
 
     void OnDisable() {
         myCamera.enabled = false;
-        //canMove = false;
     }
 
     public void MoveCamera(float yOffset) {
@@ -114,6 +112,7 @@ public class PlayerUnitControl : MonoBehaviour {
             }
 
             if (hasReachedDestination) {
+                
                 bool steppingLeft = Input.GetButton("StepLeft");
                 bool steppingRight = Input.GetButton("StepRight");
 
@@ -150,7 +149,6 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private void HandlePath(bool selectingPath) {
         if (selectingPath) {
-            Debug.DrawLine(myPosition, myPosition + (myCamera.transform.forward * maxDistance), Color.red);
 
             Vector3 possibleDestination;
             
@@ -196,7 +194,9 @@ public class PlayerUnitControl : MonoBehaviour {
     public void ReachedDestination(bool reached) {
         hasReachedDestination = reached;
         if (reached) {
+            Debug.LogFormat("{0} has reached their destination", this);
             lastStationaryPosition = myTransform.position;
+            //canMove = true;
         }
     }
 

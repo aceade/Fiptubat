@@ -17,14 +17,11 @@ public class PlayerDestination : MonoBehaviour
     void Start()
     {
         myTransform = transform;
-        parent = myTransform.parent;
     }
 
     void OnTriggerEnter(Collider coll)
     {
-        Debug.LogFormat("Destination entered by {0}", coll);
         if (coll.transform == parent) {
-            
             myUnit.ReachedDestination(true);
         }
     }
