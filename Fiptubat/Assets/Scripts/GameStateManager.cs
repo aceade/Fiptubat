@@ -21,6 +21,8 @@ public class GameStateManager : MonoBehaviour {
 	public int criticalTurnCount = 8;
 
 	void Start() {
+		Debug.LogFormat("GameStatemanager online. Faction count: [{0}]", factions.Count);
+		Time.timeScale = 1f;
 		soundManager = GetComponent<SoundManager>();
 		factions.ForEach (faction => faction.SetGameManager(this));
 		Invoke("StartTheFirstTurn", 0.1f);
@@ -53,10 +55,12 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	public void Quit() {
-		SceneManager.LoadScene(1);
+		Debug.Log("Returning to main menu");
+		SceneManager.LoadScene("MainMenu");
 	}
 
 	public void Restart() {
+		Debug.Log("Restarting current level");
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 	
