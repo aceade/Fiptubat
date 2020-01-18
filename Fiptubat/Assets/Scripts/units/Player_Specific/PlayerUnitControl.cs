@@ -193,10 +193,11 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public void ReachedDestination(bool reached) {
         hasReachedDestination = reached;
+        navMeshAgent.updateRotation = !reached;
         if (reached) {
             Debug.LogFormat("{0} has reached their destination", this);
             lastStationaryPosition = myTransform.position;
-            //canMove = true;
+            
         }
     }
 
