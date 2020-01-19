@@ -36,7 +36,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private bool canMove = true;
 
-    private bool usingUI = false;
+    private bool usingUI = true;
 
     public LineRenderer pathDisplay;
 
@@ -49,6 +49,7 @@ public class PlayerUnitControl : MonoBehaviour {
         destinationTrigger.SetUnit(this);
         lastStationaryPosition = myTransform.position;
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
+        unitDisplay.ToggleUsingUi(usingUI);
     }
 
     void OnEnable() {
@@ -75,6 +76,7 @@ public class PlayerUnitControl : MonoBehaviour {
     public void ForbidMovement() {
         canMove = false;
         Debug.LogFormat("{0} should NOT be able to move now", unit.unitName);
+        usingUI = true;
     }
 
     void Update() {
