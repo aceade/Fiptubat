@@ -79,8 +79,10 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void Update() {
 
-        usingUI = Input.GetButton("ToggleUi");
-        unitDisplay.ToggleUsingUi(usingUI);
+        if (Input.GetButtonDown("ToggleUi")) {
+            usingUI = !usingUI;
+            unitDisplay.ToggleUsingUi(usingUI);
+        }
 
         // default keymapping for Escape
         if (Input.GetButtonDown("Cancel")) {
