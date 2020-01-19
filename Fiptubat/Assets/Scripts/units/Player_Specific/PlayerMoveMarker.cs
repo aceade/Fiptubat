@@ -20,7 +20,7 @@ public class PlayerMoveMarker : MonoBehaviour {
     }
 
     public void SetPosition(Vector3 position, bool isClear) {
-        myTransform.position = position;
+        myTransform.position = position + Vector3.up;
         myRenderer.enabled = true;
         if (!isClear) {
             myRenderer.material = blockedMaterial;

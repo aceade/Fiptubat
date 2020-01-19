@@ -38,6 +38,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private bool usingUI = false;
 
+    public LineRenderer pathDisplay;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
@@ -153,28 +155,36 @@ public class PlayerUnitControl : MonoBehaviour {
             Vector3 possibleDestination;
             
             if (Physics.Raycast(myPosition + Vector3.up, myCamera.transform.forward, out raycastHit, maxDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-                possibleDestination = raycastHit.point;
+                possibleDestination = (raycastHit.point - Vector3.up);
    
             } else {
-                possibleDestination = myPosition + (myCamera.transform.forward * maxDistance);
+                possibleDestination = myPosition + (myCamera.transform.forward * maxDistance) - Vector3.up;
             }
-            moveMarker.SetPosition(possibleDestination, true);
 
-            // show the player how much it costs
-            int moveCost = unit.GetMoveCost(myPosition, raycastHit.point);
-            int remainingPoints = unit.GetRemainingActionPoints();
-            float distance = Vector3.Distance(myPosition, raycastHit.point);
-            uiManager.ShowDistanceCost(distance, moveCost, remainingPoints);
+            NavMeshPath tempPath = new NavMeshPath();
+            bool canFindPath = navMeshAgent.CalculatePath(possibleDestination, tempPath);
+            moveMarker.SetPosition(possibleDestination, false);
+            if (canFindPath) {
+                moveMarker.SetPosition(possibleDestination, true);
+                // show the player how much it costs
+                DisplayPath(tempPath);
+                float pathLength = unit.GetPathLength(tempPath);
+                int moveCost = unit.GetMoveCost(pathLength);
+                int remainingPoints = unit.GetRemainingActionPoints();
+                float distance = Vector3.Distance(myPosition, raycastHit.point);
+                uiManager.ShowDistanceCost(distance, moveCost, remainingPoints);
 
-            // left click to select it
-            if (Input.GetButtonDown("Fire1")) {
-                lastStationaryPosition = myPosition;
-                destination = possibleDestination;
-                bool canReachDestination = unit.SetDestination(possibleDestination);
-                moveMarker.SetPosition(possibleDestination, canReachDestination);
-                if (canReachDestination) {
-                    ReachedDestination(false);
-                    destinationTrigger.SetPosition(destination);
+                // left click to select it
+                if (Input.GetButtonDown("Fire1")) {
+                    lastStationaryPosition = myPosition;
+                    destination = possibleDestination;
+                    bool canReachDestination = unit.SetDestination(possibleDestination);
+                    moveMarker.SetPosition(possibleDestination, canReachDestination);
+                    if (canReachDestination) {
+                        pathDisplay.enabled = false;
+                        ReachedDestination(false);
+                        destinationTrigger.SetPosition(destination);
+                    }
                 }
             }
             
@@ -182,6 +192,12 @@ public class PlayerUnitControl : MonoBehaviour {
             uiManager.ClearDistanceText();
             moveMarker.Hide();
         }
+    }
+
+    void DisplayPath(NavMeshPath path) {
+        pathDisplay.enabled = true;
+        pathDisplay.positionCount = path.corners.Length;
+        pathDisplay.SetPositions(path.corners);
     }
 
     /// <summary>

@@ -19,6 +19,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected int currentActionPoints;
 	
 	public bool isCrouched = false;
+
+	public float pathCostFactor = 2f;
 	
 	protected NavMeshAgent navMeshAgent;
 
@@ -71,11 +73,13 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// <param name="newDestination">Coordinates of the endpoint</param>
 	/// <returns>True if able to set the destination, false otherwise</returns>
 	public bool SetDestination(Vector3 newDestination) {
-		int potentialCost = GetMoveCost(transform.position, newDestination);
+		NavMeshPath path = new NavMeshPath();
+		navMeshAgent.CalculatePath(newDestination, path);
+		int potentialCost = GetMoveCost(GetPathLength(path));
 		if (potentialCost <= GetRemainingActionPoints()) {
 			targetLocation = newDestination;
 			isStillMoving = true;
-			navMeshAgent.SetDestination(newDestination);
+			navMeshAgent.path = path;
 			voiceSystem.Moving();
 			currentActionPoints -= potentialCost;
 			LogPath();
@@ -305,10 +309,15 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		// no-op for most units
 	}
 
-
-	protected float GetPathLength() {
+	public float GetPathLength() {
 		if (navMeshAgent.hasPath) {
-			NavMeshPath path = navMeshAgent.path;
+			return GetPathLength(navMeshAgent.path);
+		} else {
+			return 0f;
+		}
+	}
+
+	public float GetPathLength(NavMeshPath path) {
 			if (path.corners.Length < 2) {
 				return 0f;
 			}
@@ -322,10 +331,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 				previousCorner = currentCorner;
 				i++;
 			}
-			return lengthSoFar;
-		} else {
-			return 0f;
-		}
+			return lengthSoFar * pathCostFactor;
 	}
 	
 	void OnCollisionEnter(Collision coll) {
