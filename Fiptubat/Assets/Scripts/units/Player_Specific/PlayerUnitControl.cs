@@ -159,10 +159,10 @@ public class PlayerUnitControl : MonoBehaviour {
             Vector3 possibleDestination;
             
             if (Physics.Raycast(myPosition + Vector3.up, myCamera.transform.forward, out raycastHit, maxDistance, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-                possibleDestination = (raycastHit.point - Vector3.up);
+                possibleDestination = (raycastHit.point);
    
             } else {
-                possibleDestination = myPosition + (myCamera.transform.forward * maxDistance) - Vector3.up;
+                possibleDestination = myPosition + (myCamera.transform.forward * maxDistance);
             }
 
             NavMeshPath tempPath = new NavMeshPath();
