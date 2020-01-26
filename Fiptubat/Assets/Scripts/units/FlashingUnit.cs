@@ -54,24 +54,28 @@ public class FlashingUnit : BaseUnit
 
     private IEnumerator trackTarget() {
         while (trackingTarget) {
-            // find the nearest target only
-            IDamage nearestTarget = targetSelection.SelectTarget();
-            rotateTowardsTarget(nearestTarget.GetTransform());
+            IDamage target = targetSelection.SelectTarget();
+            Debug.LogFormat("Target for flashing light is {0}", target.GetTransform());
+            rotateTowardsTarget(target.GetTransform());
             yield return flashlightRotationCycle;
         }
         
     }
 
     private void rotateTowardsTarget(Transform target) {
-        Vector3 direction = target.position - transform.position;
-        direction.y = 0;
-        transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+        Vector3 horizontalDir = target.position - myTransform.position;
+        horizontalDir.y = 0;
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, 2f * Time.deltaTime, 0f);
+        myTransform.rotation = Quaternion.LookRotation(desired);
     }
 
     public override void TargetSpotted(IDamage target) {
         flashLight.color = seenEnemyColour;
+        if (target != null && !targetSelection.AlreadyHasTarget(target)) {
+            targetSelection.AddTarget(target);
+        }
+
         if (!rotatingLight) {
-            base.TargetSpotted(target);
             StartCoroutine(rotateLight());
         }
 

@@ -18,6 +18,8 @@ public class AdvancedTargetSelection : UnitTargetSelection
                 return getHighestDamageOutputEnemy();
             case TargetPriority.HIGHEST_REMAINING_HEALTH:
                 return getHealthiestEnemy();
+            case TargetPriority.MOST_EXPOSED:
+                return getMostExposedEnemy();
             default:
                 return base.SelectTarget();
         }
@@ -36,5 +38,56 @@ public class AdvancedTargetSelection : UnitTargetSelection
     private IDamage getHealthiestEnemy() {
         List<IDamage> sortedTargets = knownTargets.OrderByDescending(target => target.GetRemainingHealth()).ToList();
         return sortedTargets[0];
+    }
+
+    private IDamage getMostExposedEnemy() {
+        Dictionary<IDamage, int> targetsByExposure = new Dictionary<IDamage, int>();
+        Debug.LogFormat("Calculating exposure of {0} enemies", knownTargets.Count);
+        knownTargets.ForEach(target => targetsByExposure.Add(target, calculateExposure(target)));
+        var sortedTargets = targetsByExposure.OrderByDescending(x => x.Value).ToList();
+        return sortedTargets[0].Key;
+    }
+
+    private int calculateExposure(IDamage target) {
+        Transform targetTransform = target.GetTransform();
+        Bounds targetBounds = new Bounds(targetTransform.position, Vector3.zero);
+        Collider[] colls = targetTransform.GetComponentsInChildren<Collider>();
+        for (int i = 0; i < colls.Length; i++) {
+            // ignore triggers
+            if (colls[i].isTrigger) {
+                continue;
+            }
+            var collBounds = colls[i].bounds;
+            targetBounds.Encapsulate(collBounds);
+        }
+        float height = targetBounds.extents.y;
+        Vector3 centre = targetBounds.center;
+        Vector3 minPosition = targetBounds.min + (targetTransform.right * 0.2f);
+        minPosition.y = centre.y;
+        Vector3 maxPosition = targetBounds.max - (targetTransform.right * 0.2f);
+        maxPosition.y = centre.y;
+        // not hitting
+        int hitCount = castExposureRay(minPosition, targetTransform);
+        // not hitting
+        hitCount += castExposureRay(maxPosition, targetTransform);
+        hitCount += castExposureRay(centre + (Vector3.up * height), targetTransform);
+        hitCount += castExposureRay(centre - (Vector3.up * height), targetTransform);
+
+        return hitCount;
+    }
+
+    /// <summary>
+    /// Cast a ray towards the target position.
+    /// </summary>
+    /// <param name="targetPosition"></param>
+    /// <param name="intendedTarget"></param>
+    /// <returns>1 if it hits the intended target, 0 otherwise</returns>
+    private int castExposureRay(Vector3 targetPosition, Transform intendedTarget) {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit, 30f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+            Debug.DrawRay(transform.position, hit.point - transform.position, Color.red);
+            return hit.transform == intendedTarget ? 1 : 0;
+        }
+        return 0;
     }
 }

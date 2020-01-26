@@ -20,6 +20,7 @@ public class UnitTargetSelection : MonoBehaviour {
 
     public void AddTarget(IDamage target) {
         if (!knownTargets.Contains(target)) {
+            Debug.LogFormat("{0} adding {1} as possible target", this, target.GetTransform());
             knownTargets.Add(target);
         }
     }
