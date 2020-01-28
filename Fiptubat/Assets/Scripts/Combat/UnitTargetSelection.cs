@@ -14,11 +14,11 @@ public class UnitTargetSelection : MonoBehaviour {
 
     public TargetPriority selectionAlgorithm = TargetPriority.CLOSEST;
 
-    void Start() {
+    protected virtual void Start() {
         myTransform = transform;
     }
 
-    public void AddTarget(IDamage target) {
+    public virtual void AddTarget(IDamage target) {
         if (!knownTargets.Contains(target)) {
             Debug.LogFormat("{0} adding {1} as possible target", this, target.GetTransform());
             knownTargets.Add(target);
@@ -33,7 +33,7 @@ public class UnitTargetSelection : MonoBehaviour {
         return knownTargets.Count > 0;
     }
 
-    public void RemoveTarget(IDamage target) {
+    public virtual void RemoveTarget(IDamage target) {
         knownTargets.Remove(target);
     }
 

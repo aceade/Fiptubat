@@ -8,6 +8,46 @@ using System.Linq;
 /// <summary>
 public class AdvancedTargetSelection : UnitTargetSelection
 {
+    public float calculationInterval = 0.5f;
+
+    private WaitForSeconds calculationCycle;
+
+    private bool calculatingExposure = false;
+
+    private Dictionary<IDamage, int> targetsByExposure;
+
+    protected override void Start() {
+        base.Start();
+        if (selectionAlgorithm == TargetPriority.MOST_EXPOSED) {
+            calculationCycle = new WaitForSeconds(calculationInterval);
+            targetsByExposure = new Dictionary<IDamage, int>();
+        }
+    }
+
+    public override void AddTarget(IDamage target) {
+        base.AddTarget(target);
+        if (selectionAlgorithm == TargetPriority.MOST_EXPOSED) {
+            if (!targetsByExposure.ContainsKey(target)) {
+                targetsByExposure.Add(target, 0);
+            }
+            if (!calculatingExposure) {
+                calculatingExposure = true;
+                StartCoroutine(performExposureCalculations());
+            }
+        }
+    }
+
+    /// <summary>
+    /// Remove a target. If we're calculating exposure and there are no enemies left, stop.
+    /// </summary>
+    /// <param name="target"></param>
+    public override void RemoveTarget(IDamage target) {
+        base.RemoveTarget(target);
+        if (!HasTargetsLeft()) {
+            calculatingExposure = false;
+        }
+    }
+
     public override IDamage SelectTarget() {
         switch (selectionAlgorithm) {
             case TargetPriority.CLOSEST:
@@ -41,11 +81,17 @@ public class AdvancedTargetSelection : UnitTargetSelection
     }
 
     private IDamage getMostExposedEnemy() {
-        Dictionary<IDamage, int> targetsByExposure = new Dictionary<IDamage, int>();
-        Debug.LogFormat("Calculating exposure of {0} enemies", knownTargets.Count);
-        knownTargets.ForEach(target => targetsByExposure.Add(target, calculateExposure(target)));
         var sortedTargets = targetsByExposure.OrderByDescending(x => x.Value).ToList();
         return sortedTargets[0].Key;
+    }
+
+    private IEnumerator performExposureCalculations() {
+        while (calculatingExposure) {
+            Debug.LogFormat("Calculating exposure of {0} enemies", knownTargets.Count);
+            knownTargets.ForEach(target => targetsByExposure.Add(target, calculateExposure(target)));
+            yield return calculationCycle;
+        }
+        
     }
 
     private int calculateExposure(IDamage target) {
@@ -66,9 +112,7 @@ public class AdvancedTargetSelection : UnitTargetSelection
         minPosition.y = centre.y;
         Vector3 maxPosition = targetBounds.max - (targetTransform.right * 0.2f);
         maxPosition.y = centre.y;
-        // not hitting
         int hitCount = castExposureRay(minPosition, targetTransform);
-        // not hitting
         hitCount += castExposureRay(maxPosition, targetTransform);
         hitCount += castExposureRay(centre + (Vector3.up * height), targetTransform);
         hitCount += castExposureRay(centre - (Vector3.up * height), targetTransform);
