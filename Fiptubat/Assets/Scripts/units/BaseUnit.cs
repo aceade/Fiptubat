@@ -129,12 +129,19 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// <param name="startPosition">Where they start</param>
 	/// <param name="direction">The direction in which to step</param>
 	public void SideStep(Vector3 startPosition, Vector3 direction) {
-		direction.y = 0f;
-		myTransform.Translate(direction * Time.deltaTime);
-		float distance = Vector3.Distance(myTransform.position, startPosition);
-		if (distance >= 1.5f) {
-			myTransform.Translate(direction * -0.02f);
+
+		if (currentActionPoints >= 2 ) {
+			direction.y = 0f;
+			//navMeshAgent.updateRotation = false;
+			//navMeshAgent.SetDestination(startPosition + direction);
+			myTransform.Translate(direction * Time.deltaTime);
+			float distance = Vector3.Distance(myTransform.position, startPosition);
+			if (distance % 1f >= 0.99f) {
+				Debug.LogFormat("{0} sidestepped far enough to reduce their action points", this);
+				currentActionPoints -= 2;
+			}
 		}
+		
 	}
 
 	public virtual void FindCover(Vector3 position, Vector3 direction) {

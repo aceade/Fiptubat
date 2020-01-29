@@ -406,10 +406,10 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: StepLeft
+    m_Name: Sidestep
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: d
     positiveButton: a
     altNegativeButton: 
     altPositiveButton: 
@@ -422,11 +422,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: StepRight
+    m_Name: Step
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: d
+    negativeButton: s
+    positiveButton: w
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

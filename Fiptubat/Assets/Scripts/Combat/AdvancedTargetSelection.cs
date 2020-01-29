@@ -88,7 +88,7 @@ public class AdvancedTargetSelection : UnitTargetSelection
     private IEnumerator performExposureCalculations() {
         while (calculatingExposure) {
             Debug.LogFormat("Calculating exposure of {0} enemies", knownTargets.Count);
-            knownTargets.ForEach(target => targetsByExposure.Add(target, calculateExposure(target)));
+            knownTargets.ForEach(target => calculateExposure(target));
             yield return calculationCycle;
         }
         
