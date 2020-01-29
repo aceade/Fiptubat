@@ -132,12 +132,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 		if (currentActionPoints >= 2 ) {
 			direction.y = 0f;
-			//navMeshAgent.updateRotation = false;
-			//navMeshAgent.SetDestination(startPosition + direction);
 			myTransform.Translate(direction * Time.deltaTime);
 			float distance = Vector3.Distance(myTransform.position, startPosition);
 			if (distance % 1f >= 0.99f) {
-				Debug.LogFormat("{0} sidestepped far enough to reduce their action points", this);
 				currentActionPoints -= 2;
 			}
 		}

@@ -119,30 +119,17 @@ public class PlayerUnitControl : MonoBehaviour {
 
             if (hasReachedDestination) {
                 
-                bool steppingLeft = Input.GetButton("Sidestep");
-                bool steppingRight = Input.GetButton("Step");
+                float sidestepSpeed = Input.GetAxis("Sidestep");
+                float frontstepSpeed = Input.GetAxis("Step");
+                unit.SideStep(lastStationaryPosition, Vector3.left * sidestepSpeed);
+                unit.SideStep(lastStationaryPosition, Vector3.forward * frontstepSpeed);
 
-                unit.SideStep(lastStationaryPosition, Vector3.left * Input.GetAxis("Sidestep"));
-                unit.SideStep(lastStationaryPosition, Vector3.forward * Input.GetAxis("Step"));
-
-                // side-step. For some reason, this has to be "Vector3.left" or Vector3.right!
-                // navigation appears to interfere with this
-                /*
-                if (steppingLeft) {
-                    unit.SideStep(lastStationaryPosition, Vector3.left);
-                    navMeshAgent.enabled = false;
-                }
-                else if (steppingRight) {
-                    unit.SideStep(lastStationaryPosition, Vector3.right);
+                // navigation interferes with sidestepping
+                if (Mathf.Abs(sidestepSpeed) > 0 || Mathf.Abs(frontstepSpeed) > 0) {
                     navMeshAgent.enabled = false;
                 } else {
                     navMeshAgent.enabled = true;
-                }
-                */
-                if (steppingLeft || steppingRight) {
-                    navMeshAgent.enabled = false;
-                } else {
-                    navMeshAgent.enabled = true;
+                    lastStationaryPosition = myTransform.position;
                 }
 
                 if (canMove) {
