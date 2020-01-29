@@ -134,6 +134,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			direction.y = 0f;
 			myTransform.Translate(direction * Time.deltaTime);
 			float distance = Vector3.Distance(myTransform.position, startPosition);
+			// this seems to fire twice, so the cost is actually 4 points.
+			// leave for now
 			if (distance % 1f >= 0.99f) {
 				currentActionPoints -= 2;
 			}
