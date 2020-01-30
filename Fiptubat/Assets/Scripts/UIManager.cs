@@ -48,11 +48,12 @@ public class UIManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Show the user the distance to their possible target.
+	/// Show the user how much it would cost to move to a particular point
 	/// </summary>
-	public void ShowDistanceCost(float distance, int cost, int remainingPoints) {
-		int roundedDistance = (Mathf.RoundToInt(distance * 10)/ 10);
-		playerDistanceText.text = string.Format("Cost: {0}/{1}\nDistance: {2}", cost, remainingPoints, roundedDistance);
+	/// <param name="cost">How much it would cost</param>
+	/// <param name="remainingPoints">How many action points they have left</param>
+	public void ShowMoveCost(int cost, int remainingPoints) {
+		playerDistanceText.text = string.Format("Cost: {0}/{1}", cost, remainingPoints);
 	}
 
 	public void ClearDistanceText() {

@@ -172,8 +172,7 @@ public class PlayerUnitControl : MonoBehaviour {
                 float pathLength = unit.GetPathLength(tempPath);
                 int moveCost = unit.GetMoveCost(pathLength);
                 int remainingPoints = unit.GetRemainingActionPoints();
-                float distance = Vector3.Distance(myPosition, raycastHit.point);
-                uiManager.ShowDistanceCost(distance, moveCost, remainingPoints);
+                uiManager.ShowMoveCost(moveCost, remainingPoints);
 
                 // left click to select it
                 if (Input.GetButtonDown("Fire1")) {
