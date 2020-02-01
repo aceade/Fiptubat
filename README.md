@@ -12,7 +12,8 @@ The full controls will be displayed in the main menu. For the sake of convenienc
 * Cycle units using Tab
 * End your turn using Backspace. If you have units moving, this will be rejected.
 * Crouch or stand up using C.
-* Sidestep by holding A/D.
+* Strafe by holding WASD
+* Freeze or enable rotation by clicking left Ctrl.
 * Fire by clicking the left mouse button
 * Reload by pressing R
 * Cycle fire modes with Q
@@ -21,6 +22,7 @@ The full controls will be displayed in the main menu. For the sake of convenienc
 The list of known issues is visible [here](https://github.com/aceade/Fiptubat/issues?q=is%3Aissue+is%3Aopen)
 
 ## Required systems/components
+These are initial thoughts and may not be up-to-date.
 
 ### Unit
 The unit itself. Has the following attributes:
