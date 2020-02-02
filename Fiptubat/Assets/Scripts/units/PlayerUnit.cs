@@ -36,7 +36,7 @@ public class PlayerUnit : BaseUnit {
 
     public override void TargetSpotted(IDamage target) {
         Debug.LogFormat("{0}: made contact! {1}", unitName, target.GetTransform());
-        base.TargetSpotted(target);
+        voiceSystem.TargetSpotted();
     }
 
     public override void StandDown() {

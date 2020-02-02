@@ -192,10 +192,21 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void TargetSpotted(IDamage target) {
 		if (target != null && !targetSelection.AlreadyHasTarget(target)) {
+			unitManager.AlertAllUnits(target);
 			targetSelection.AddTarget(target);
 			voiceSystem.TargetSpotted();
 		}
 		
+	}
+
+	/// <summary>
+	/// Used by "command" to let units know this has happened.
+	/// </summary>
+	/// <param name="target"></param>
+	public virtual void TargetReported(IDamage target) {
+		if (!targetSelection.AlreadyHasTarget(target)) {
+			targetSelection.AddTarget(target);
+		}
 	}
 
 	public virtual void TargetHeard(IDamage target) {

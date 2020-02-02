@@ -115,5 +115,14 @@ public class UnitManager : MonoBehaviour {
 	public int GetRemainingUnitCount() {
 		return units.Count;
 	}
+
+	/// <summary>
+	/// Report a hostile target. This will alert all of them
+	/// </summary>
+	/// <param name="target">The hostile unit spotted</param>
+	public void AlertAllUnits(IDamage target) {
+		Debug.LogFormat("{0} to all units, we have a hostile entity at {1}", this, target.GetTransform().position);
+		units.ForEach(unit => unit.TargetReported(target));
+	}
 	
 }
