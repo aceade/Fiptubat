@@ -99,8 +99,12 @@ public class Turret : BaseUnit
     }
 
     public override void TargetSpotted(IDamage target) {
-        base.TargetSpotted(target);
-        targetSpotted = true;
+        if (health > 0) {
+            targetSpotted = true;
+            base.TargetSpotted(target);
+        } else {
+            unitManager.AlertAllUnits(target);
+        }
     }
 
     public override void SelectUnit(bool isMyTurn) {
@@ -114,9 +118,10 @@ public class Turret : BaseUnit
     }
 
     protected override void Die() {
-        base.Die();
         targetSpotted = false;
-        this.enabled = false;
+        targetSelection.enabled = false;
+		unitManager.UnitDied(this);
+        lineOfSight.maxDetectionRange = 10f;
     }
 
 }
