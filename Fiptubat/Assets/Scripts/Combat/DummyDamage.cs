@@ -34,4 +34,8 @@ public class DummyDamage : MonoBehaviour, IDamage
     public int GetPotentialDamage() {
         return 0;
     }
+
+    public void HitNearby() {
+        // no-op - don't care about this
+    }
 }

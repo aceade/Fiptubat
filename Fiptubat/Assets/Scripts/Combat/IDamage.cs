@@ -12,4 +12,6 @@ public interface IDamage
     /// Get the damage of their current weapon, if applicable. Used for target selection.
     /// <summary>
     int GetPotentialDamage();
+
+    void HitNearby();
 }

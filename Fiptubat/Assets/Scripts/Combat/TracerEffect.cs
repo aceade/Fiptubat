@@ -12,6 +12,8 @@ public class TracerEffect : MonoBehaviour
 
     public float velocity = 2f;
 
+    public float radius = 10f;
+
     void Start()
     {
         myTransform = transform;
@@ -34,6 +36,17 @@ public class TracerEffect : MonoBehaviour
 
     void OnCollisionEnter(Collision coll) {
         toggleDisplay(false);
-        // could be used for suppression later?
+        Collider[] colliders = Physics.OverlapSphere(myTransform.position, radius, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+        for (int i= 0; i < colliders.Length; i++) {
+            var collider = colliders[i];
+            float dot = Vector3.Dot(myTransform.forward, collider.transform.position);
+            // don't suppress myself!
+            if (dot > -0.2f ) {
+                var damageScript = collider.transform.root.GetComponent<IDamage>();
+                if (damageScript != null) {
+                    damageScript.HitNearby();
+                }
+            }
+        }
     }
 }

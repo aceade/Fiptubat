@@ -17,6 +17,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	
 	public int actionPoints = 50;
 	protected int currentActionPoints;
+
+	[Tooltip("This many shots within 5 seconds will add a suppression effect")]
+	public int suppressionCriteria = 10;
+	private int suppressionCount = 0;
 	
 	public bool isCrouched = false;
 
@@ -224,6 +228,13 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			Die();
 		} else {
 			voiceSystem.Hit();
+		}
+	}
+
+	public void HitNearby() {
+		suppressionCount++;
+		if (suppressionCount >= suppressionCriteria) {
+			Debug.LogFormat("{0}: Help, help, I'm being suppressed!", this);
 		}
 	}
 
