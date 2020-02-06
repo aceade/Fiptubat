@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Gives a tracer effect to show where a "bullet" is going.
+/// Also applies the suppression effect.
+/// </summary>
 public class TracerEffect : MonoBehaviour
 {
     private Transform myTransform;
@@ -12,7 +16,10 @@ public class TracerEffect : MonoBehaviour
 
     public float velocity = 2f;
 
-    public float radius = 10f;
+    public float suppressionRadius = 5f;
+
+    [Tooltip("Vector dot product that defines angle of suppression")]
+    public float suppressionAngle = -0.2f;
 
     private int layerMask;
 
@@ -40,13 +47,12 @@ public class TracerEffect : MonoBehaviour
 
     void OnCollisionEnter(Collision coll) {
         toggleDisplay(false);
-        Collider[] colliders = Physics.OverlapSphere(myTransform.position, radius, layerMask, QueryTriggerInteraction.Ignore);
+        Collider[] colliders = Physics.OverlapSphere(myTransform.position, suppressionRadius, layerMask, QueryTriggerInteraction.Ignore);
         for (int i= 0; i < colliders.Length; i++) {
             var collider = colliders[i];
-            Debug.LogFormat("Layermask {0} hit collder {1}", layerMask, collider);
             float dot = Vector3.Dot(myTransform.forward, collider.transform.position);
             // don't suppress myself!
-            if (dot > -0.2f ) {
+            if (dot > suppressionAngle ) {
                 var damageScript = collider.transform.root.GetComponent<IDamage>();
                 if (damageScript != null) {
                     damageScript.HitNearby();

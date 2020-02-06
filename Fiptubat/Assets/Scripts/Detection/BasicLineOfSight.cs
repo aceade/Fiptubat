@@ -78,9 +78,7 @@ namespace Aceade.AI {
 			RaycastHit hit;
 			
 			if (Physics.Raycast(transform.position, coll.transform.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-				Debug.DrawRay(transform.position, hit.point - transform.position, Color.blue);
 				if (hit.transform == coll.transform) {
-					Debug.LogFormat("{0} can see {1}", this, coll.transform);
 					var damageScript = coll.GetComponent<IDamage>();
 					brain.TargetSpotted(damageScript);
 				}

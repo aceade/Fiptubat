@@ -129,7 +129,6 @@ public class AdvancedTargetSelection : UnitTargetSelection
     private int castExposureRay(Vector3 targetPosition, Transform intendedTarget) {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit, 30f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-            Debug.DrawRay(transform.position, hit.point - transform.position, Color.red);
             return hit.transform == intendedTarget ? 1 : 0;
         }
         return 0;
