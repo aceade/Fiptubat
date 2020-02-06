@@ -42,7 +42,13 @@ public class PatrolBot : BaseUnit
     void PerformAttack(IDamage target) {
         if (target.GetRemainingHealth() > 0) {
             if (Vector3.Distance(myTransform.position, target.GetTransform().position) <= weapon.maxDistance) {
-                Attack();
+                Debug.LogFormat("{0} attacking. Action points: {1}. Firing cost: {2}", this, currentActionPoints, weapon.GetCurrentFireCost());
+                
+                if (weapon.CanAttack() && currentActionPoints >= weapon.GetCurrentFireCost()) {
+                    Attack();
+                } else {
+                    unitManager.UnitFinished(this);
+                }
             } else {
                 SetDestination(target.GetTransform().position);
             }

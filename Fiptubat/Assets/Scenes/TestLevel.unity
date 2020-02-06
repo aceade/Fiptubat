@@ -153,7 +153,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 9255d318979c9545bacd3c493e498294,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.45
+      value: -6.4
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9255d318979c9545bacd3c493e498294,
         type: 3}
@@ -163,7 +163,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 9255d318979c9545bacd3c493e498294,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.34
+      value: 22.46
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9255d318979c9545bacd3c493e498294,
         type: 3}
@@ -262,9 +262,9 @@ MonoBehaviour:
   isCrouched: 0
   pathCostFactor: 2
   patrolRoute:
-  - {fileID: 934463559}
   - {fileID: 64775307}
   - {fileID: 1843929035}
+  - {fileID: 934463559}
 --- !u!1 &54975549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5133913965574556032, guid: 9255d318979c9545bacd3c493e498294,
@@ -298,7 +298,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   baseCost: 10
-  maxDistance: 10
+  maxDistance: 30
   fireModes:
   - {fileID: 11400000, guid: 087aba00c855bc0adbac8f39be9bf033, type: 2}
   magSize: 30
@@ -1328,7 +1328,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &150752957
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3538,7 +3539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &405933371
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5115,7 +5117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &581479516
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5501,7 +5504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &609120854
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5700,7 +5704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &740044584
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5824,7 +5829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &740929758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6959,7 +6965,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &861747544
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7341,7 +7348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &999935525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7765,7 +7773,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1038148354
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9734,7 +9743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1277676349
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9858,7 +9868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1280780613
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10196,7 +10207,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1333428542
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10395,7 +10407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1342588393
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10611,7 +10624,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1368335772
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11563,7 +11577,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1449897133
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11955,7 +11970,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1530009284
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13476,7 +13492,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1685349817
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14119,7 +14136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1776359076
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14517,7 +14535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1812855358
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15340,7 +15359,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &1990580655
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15556,7 +15576,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
-  radius: 10
+  suppressionRadius: 5
+  suppressionAngle: -0.2
 --- !u!135 &2025225852
 SphereCollider:
   m_ObjectHideFlags: 0
