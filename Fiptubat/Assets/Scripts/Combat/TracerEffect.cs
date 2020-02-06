@@ -14,12 +14,16 @@ public class TracerEffect : MonoBehaviour
 
     public float radius = 10f;
 
+    private int layerMask;
+
     void Start()
     {
         myTransform = transform;
         myBody = GetComponent<Rigidbody>();
         myRenderer = GetComponent<MeshRenderer>();
         toggleDisplay(false);
+        // NPC or Player only
+        layerMask = 1 << 10 | 11;
     }
 
     private void toggleDisplay(bool show) {
@@ -36,9 +40,10 @@ public class TracerEffect : MonoBehaviour
 
     void OnCollisionEnter(Collision coll) {
         toggleDisplay(false);
-        Collider[] colliders = Physics.OverlapSphere(myTransform.position, radius, Physics.AllLayers, QueryTriggerInteraction.Ignore);
+        Collider[] colliders = Physics.OverlapSphere(myTransform.position, radius, layerMask, QueryTriggerInteraction.Ignore);
         for (int i= 0; i < colliders.Length; i++) {
             var collider = colliders[i];
+            Debug.LogFormat("Layermask {0} hit collder {1}", layerMask, collider);
             float dot = Vector3.Dot(myTransform.forward, collider.transform.position);
             // don't suppress myself!
             if (dot > -0.2f ) {

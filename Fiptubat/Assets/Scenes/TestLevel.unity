@@ -258,6 +258,7 @@ MonoBehaviour:
   health: 10
   armour: 1
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
   patrolRoute:
@@ -1327,6 +1328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &150752957
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1449,6 +1451,7 @@ MonoBehaviour:
   health: 10
   armour: 0
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
 --- !u!136 &154236227
@@ -2509,6 +2512,7 @@ MonoBehaviour:
   health: 10
   armour: 0
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
 --- !u!136 &242598951
@@ -3534,6 +3538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &405933371
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5110,6 +5115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &581479516
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5495,6 +5501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &609120854
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5693,6 +5700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &740044584
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5816,6 +5824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &740929758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6950,6 +6959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &861747544
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7331,6 +7341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &999935525
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7558,6 +7569,7 @@ MonoBehaviour:
   health: 10
   armour: 0
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
 --- !u!114 &1008975556
@@ -7753,6 +7765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1038148354
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8552,6 +8565,7 @@ MonoBehaviour:
   health: 10
   armour: 0
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
   scanRotationSpeed: 10
@@ -9720,6 +9734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1277676349
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9843,6 +9858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1280780613
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10180,6 +10196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1333428542
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10378,6 +10395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1342588393
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -10593,6 +10611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1368335772
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11544,6 +11563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1449897133
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11935,6 +11955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1530009284
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13150,6 +13171,7 @@ MonoBehaviour:
   health: 10
   armour: 0
   actionPoints: 50
+  suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
   scanRotationSpeed: 10
@@ -13454,6 +13476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1685349817
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14096,6 +14119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1776359076
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14493,6 +14517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1812855358
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15315,6 +15340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &1990580655
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15530,6 +15556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 50
+  radius: 10
 --- !u!135 &2025225852
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public int actionPoints = 50;
 	protected int currentActionPoints;
 
-	[Tooltip("This many shots within 5 seconds will add a suppression effect")]
+	[Tooltip("This many shots hitting nearby will add a suppression effect")]
 	public int suppressionCriteria = 10;
 	private int suppressionCount = 0;
 	
@@ -97,7 +97,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void StartTurn() {
 		currentActionPoints = actionPoints;
-		//isStillMoving = true;
+		if (suppressionCount >= suppressionCriteria) {
+			Debug.LogFormat("{0} starting their turn suppressed", this);
+			currentActionPoints /= 2;
+			suppressionCount = 0;
+		}
 	}
 
 	protected virtual void FinishedTurn() {
@@ -235,6 +239,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		suppressionCount++;
 		if (suppressionCount >= suppressionCriteria) {
 			Debug.LogFormat("{0}: Help, help, I'm being suppressed!", this);
+			currentActionPoints = 0;
 		}
 	}
 
