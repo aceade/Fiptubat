@@ -18,6 +18,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public int actionPoints = 50;
 	protected int currentActionPoints;
 
+	protected bool targetSpotted = false;
+
 	[Tooltip("This many shots hitting nearby will add a suppression effect")]
 	public int suppressionCriteria = 10;
 	private int suppressionCount = 0;
@@ -200,11 +202,14 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void TargetSpotted(IDamage target) {
 		if (target != null && !targetSelection.AlreadyHasTarget(target)) {
+			targetSpotted = true;
 			unitManager.AlertAllUnits(target);
 			targetSelection.AddTarget(target);
 			voiceSystem.TargetSpotted();
 		}
-		
+		else if (target == null ) {
+			targetSpotted = false;
+		}
 	}
 
 	/// <summary>

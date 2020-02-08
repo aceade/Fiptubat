@@ -8,8 +8,6 @@ using UnityEngine;
 public class PatrolBot : BaseUnit
 {
 
-    private bool targetSpotted;
-
     public List<PatrolPoint> patrolRoute;
     private int patrolIndex;
 
@@ -74,11 +72,6 @@ public class PatrolBot : BaseUnit
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, 5f * Time.deltaTime, 0f);
         myTransform.rotation = Quaternion.LookRotation(desired);
 
-    }
-
-    public override void TargetSpotted(IDamage target) {
-        base.TargetSpotted(target);
-        targetSpotted = true;
     }
 
     void Patrol() {

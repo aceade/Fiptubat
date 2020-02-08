@@ -8,8 +8,6 @@ using UnityEngine;
 public class Turret : BaseUnit
 {
 
-    private bool targetSpotted;
-
     private Transform barrel;
 
     public float scanRotationSpeed = 10f;
@@ -123,5 +121,9 @@ public class Turret : BaseUnit
 		unitManager.UnitDied(this);
         lineOfSight.maxDetectionRange = 10f;
     }
+
+    public new void HitNearby() {
+		// no-op - turrets don't care about suppression
+	}
 
 }
