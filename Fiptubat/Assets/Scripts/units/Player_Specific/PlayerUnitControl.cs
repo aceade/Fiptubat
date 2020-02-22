@@ -20,8 +20,6 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private PlayerUnitDisplay unitDisplay;
 
-    public PlayerDestination destinationTrigger;
-
     private bool hasReachedDestination = true;
 
     public UIManager uiManager;
@@ -46,7 +44,6 @@ public class PlayerUnitControl : MonoBehaviour {
         unitDisplay = GetComponent<PlayerUnitDisplay>();
         myCamera = GetComponentInChildren<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        destinationTrigger.SetUnit(this);
         lastStationaryPosition = myTransform.position;
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
         unitDisplay.ToggleUsingUi(usingUI);
@@ -182,8 +179,6 @@ public class PlayerUnitControl : MonoBehaviour {
                     moveMarker.SetPosition(possibleDestination, canReachDestination);
                     if (canReachDestination) {
                         pathDisplay.enabled = false;
-                        ReachedDestination(false);
-                        destinationTrigger.SetPosition(destination);
                     }
                 }
             }

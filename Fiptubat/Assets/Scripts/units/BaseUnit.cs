@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Aceade.AI;
+using System.Linq;
 
 /// <summary>
 /// Common methods and properties for a unit.
 /// </summary>
+[RequireComponent(typeof(UnitTargetSelection))]
 public class BaseUnit : MonoBehaviour, IDamage {
 
 	public string unitName;
@@ -27,6 +29,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public bool isCrouched = false;
 
 	public float pathCostFactor = 2f;
+
+	[Tooltip("Defines angles at which to find cover. > 0 means likely to be flanked (stupid); less than that will pick good cover")]
+	public float coverAngleCriteria = 0f;
 	
 	protected NavMeshAgent navMeshAgent;
 
@@ -51,6 +56,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	protected Transform myTransform;
 
 	protected WeaponBase weapon;
+
+	public UnitDestination destinationTrigger;
 	
 	protected virtual void Start() {
 		myTransform = transform;
@@ -63,16 +70,11 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		targetSelection = GetComponent<UnitTargetSelection>();
 		weapon = GetComponentInChildren<WeaponBase>();
 		isStillMoving = false;
+		if (destinationTrigger != null) {
+			destinationTrigger.SetUnit(this);
+		}
 	}
 
-	private void LogPath() {
-		bool hasPath = navMeshAgent.hasPath;
-		Debug.LogFormat("[{0}] moving to [{1}]. Does it have a path: [{2}]. What status is the path in: [{3}]. Remaining distance: [{4}]. Is it actually stopped? [{5}]", 
-		unitName, navMeshAgent.destination, 
-			hasPath,  navMeshAgent.path.status, 
-			navMeshAgent.remainingDistance, navMeshAgent.isStopped);
-	}
-	
 	/// <summary>
 	/// Set the targeted destination, if possible
 	/// </summary>
@@ -88,7 +90,6 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			navMeshAgent.path = path;
 			voiceSystem.Moving();
 			currentActionPoints -= potentialCost;
-			LogPath();
 			return true;
 		} else {
 			Debug.LogFormat("{0}'s selected destination ({1}) is too far away!", unitName, newDestination);
@@ -153,13 +154,42 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		
 	}
 
-	public virtual void FindCover(Vector3 position, Vector3 direction) {
-		// find the closest edge
+	protected Dictionary<Vector3, float> samplePositions(Vector3 startPosition) {
+		Dictionary<Vector3, float> samples = new Dictionary<Vector3, float>();
+		samples.Add(startPosition + myTransform.forward * 10f, 0f);
+		samples.Add(startPosition - myTransform.forward * 10f, 0f);
+		samples.Add(startPosition + myTransform.right * 10f, 0f);
+		samples.Add(startPosition - myTransform.right * 10f, 0f);
+		return samples;
+	}
 
-		if (navMeshAgent.FindClosestEdge(out navMeshHit)) {
-			SetDestination(navMeshHit.position);
-		} else {
-			Debug.LogFormat("{0} cannot find cover!", unitName);
+	/// <summary>
+	/// Find cover near my position that shields me in a particular direction
+	/// </summary>
+	/// <param name="position"></param>
+	/// <param name="direction"></param>
+	public virtual void FindCover(Vector3 position, Vector3 direction) {
+
+		// source: https://forum.unity.com/threads/navmesh-agent-take-cover.403292/#post-3139813
+		// perform random samples around my position
+		// find the nearest edge
+		// then remove any where Vector3.Dot(navMeshHit.normal, (direction)) is less than the criteria
+		// then sort by distance
+		Dictionary<Vector3, float> samples = samplePositions(position);
+		foreach (Vector3 point in samples.Keys.ToList()) {
+			if(NavMesh.FindClosestEdge(point, out navMeshHit, navMeshAgent.areaMask)) {
+				float normal = Vector3.Dot(navMeshHit.normal, (direction));
+				Debug.LogFormat("Normal of vector {0} at {1} is {2}", direction, point, normal);
+				samples[point] = normal;
+			}
+		}
+		var sortedByDot = samples.OrderBy(d => d.Value).Where(d => d.Value < coverAngleCriteria);
+		Vector3 target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Key, position) < Vector3.Distance(y.Key, position) ? x : y).Key;
+
+		
+		destinationTrigger.SetPosition(target);
+		if (!SetDestination(target)) {
+			Debug.LogFormat("{0} can't reach cover at {1}!", this, target);
 		}
 	}
 
@@ -370,6 +400,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 				i++;
 			}
 			return lengthSoFar * pathCostFactor;
+	}
+
+	public virtual void ReachedDestination() {
+		// no-op for Turret or PatrolBot
 	}
 	
 	void OnCollisionEnter(Collision coll) {

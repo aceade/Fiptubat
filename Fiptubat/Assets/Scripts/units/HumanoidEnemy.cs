@@ -19,20 +19,69 @@ public class HumanoidEnemy : BaseUnit
     protected override void Start()
     {
         base.Start();
+        
     }
 
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
-            //TrackTarget(target);
+            if (lineOfSight.CanSeeTarget(target)) {
+                FindCover(myTransform.position, target.GetTransform().position - myTransform.position);
+            } else {
+                SetDestination(target.GetTransform().position);
+            }
         } else {
             Patrol();
         }
     }
 
+    /// <summary>
+    /// Should only occur when moving to cover.
+    /// </summary>
+    public override void ReachedDestination() {
+            IDamage target = targetSelection.SelectTarget();
+            int attackCost = weapon.GetCurrentFireCost();
+            if (lineOfSight.CanSeeTarget(target)) {
+                Attack();
+            } else {
+                // can we see them to the side?
+
+            }
+    }
+
     void Patrol() {
-        
+        if (patrolRoute.Count > 0) {
+            PatrolPoint nextStep = patrolRoute[patrolIndex];
+            if (!SetDestination(nextStep.GetPosition())) {
+                Debug.LogWarningFormat("{0} can't reach their destination: {1}. Length: {2}", this, nextStep);
+                Invoke("FinishedTurn", 1f);
+            }
+        } else {
+            Invoke("FinishedTurn", 2f);
+        }
+
+    }
+
+    private void IncrementPatrolIndex() {
+        patrolIndex++;
+        if (patrolIndex >= patrolRoute.Count) {
+            patrolIndex = 0;
+        }
+        Patrol();
+    }
+
+    public override void ReachedPatrolPoint(PatrolPoint point) {
+        Debug.LogFormat("{0} reached patrolpoint: {1}", this, point);
+        if (point == patrolRoute[patrolIndex]) {
+            if (!targetSpotted) {
+                IncrementPatrolIndex();
+            } else {
+                Debug.LogFormat("{0} stopping patrol, found a target!", this);
+                IDamage target = targetSelection.SelectTarget();
+                FindCover(myTransform.position, myTransform.position - target.GetTransform().position);
+            }
+        }
     }
 
 }

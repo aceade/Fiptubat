@@ -13,7 +13,7 @@ namespace Aceade.AI {
 		public float detectionInterval = 0.2f;
 		WaitForSeconds delay;
 
-		private List<Collider> currentColliders = new List<Collider>();
+		private Dictionary<Collider, IDamage> currentColliders = new Dictionary<Collider, IDamage>();
 
 		public List<int> detectionLayers;
 
@@ -43,9 +43,10 @@ namespace Aceade.AI {
 			if (!coll.isTrigger) {
 				int layer = coll.transform.root.gameObject.layer;
 
-				if (detectionLayers.Contains(layer) && !currentColliders.Contains(coll)) {
+				if (detectionLayers.Contains(layer) && !currentColliders.ContainsKey(coll)) {
 					Debug.LogFormat("{0} should consider {1}", this, coll);
-					currentColliders.Add(coll);
+					var damageScript = coll.transform.root.GetComponent<IDamage>();
+					currentColliders.Add(coll, damageScript);
 
 					if (!isProcessing) {
 						isProcessing = true;
@@ -57,7 +58,7 @@ namespace Aceade.AI {
 
 		public virtual void OnTriggerExit(Collider coll)
 		{
-			if (currentColliders.Contains(coll)) {
+			if (currentColliders.ContainsKey(coll)) {
 				currentColliders.Remove(coll);
 			}
 			if (currentColliders.Count == 0) {
@@ -68,7 +69,9 @@ namespace Aceade.AI {
 		private IEnumerator ProcessColliders()
 		{
 			while (isProcessing) {
-				currentColliders.ForEach(target => AnalyseTarget(target));
+				foreach (Collider coll in currentColliders.Keys) {
+					AnalyseTarget(coll);
+				}
 				yield return delay;
 			}
 			
@@ -79,19 +82,47 @@ namespace Aceade.AI {
 			
 			if (Physics.Raycast(transform.position, coll.transform.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
 				if (hit.transform == coll.transform) {
-					var damageScript = coll.GetComponent<IDamage>();
+					var damageScript = currentColliders[coll];
 					brain.TargetSpotted(damageScript);
 				}
 			}
 		}
 
+		private bool AnalyseTargetVisibility(Transform target) {
+			RaycastHit hit;
+			bool canSeeTarget = false;
+			
+			if (Physics.Raycast(transform.position, target.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+				if (hit.transform.root == target) {
+					canSeeTarget = true;
+				}
+			}
+			return canSeeTarget;
+		}
+
 		public virtual void ClearColliders() 
 		{
 			isProcessing = false;
+			currentColliders.Clear();
 		}
 
 		void OnDisable() {
 			coll.enabled = false;
+		}
+
+		/// <summary>
+		/// Check if we can currently see the target.
+		/// Might be better to create a wrapper class for detection results?
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
+		public bool CanSeeTarget(IDamage target) {
+			if (!currentColliders.ContainsValue(target)) {
+				return false;
+			}
+			else {
+				return AnalyseTargetVisibility(target.GetTransform());
+			}
 		}
 	}
 }

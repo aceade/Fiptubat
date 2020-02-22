@@ -4,14 +4,13 @@ using UnityEngine;
 
 /// <summary>
 /// Works around the whole "am I there yet?" issue by adding a trigger for a specific unit.
-/// Could probably be merged with PlayerMoveMarker - or repurposed for NPCs as well.
 /// </summary>
 [RequireComponent(typeof(Collider))]
-public class PlayerDestination : MonoBehaviour
+public class UnitDestination : MonoBehaviour
 {
     private Transform myTransform, parent;
 
-    private PlayerUnitControl myUnit;
+    private BaseUnit myUnit;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +21,7 @@ public class PlayerDestination : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         if (coll.transform == parent) {
-            myUnit.ReachedDestination(true);
+            myUnit.ReachedDestination();
         }
     }
 
@@ -31,7 +30,7 @@ public class PlayerDestination : MonoBehaviour
         myTransform.position = position;
     }
 
-    public void SetUnit(PlayerUnitControl unit) 
+    public void SetUnit(BaseUnit unit) 
     {
         myUnit = unit;
         parent = myUnit.transform;

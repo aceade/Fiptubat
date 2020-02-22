@@ -17,6 +17,8 @@ namespace Aceade.AI {
 		void OnTriggerExit(Collider coll);
 
 		void ClearColliders();
+
+		bool CanSeeTarget(IDamage target);
 	}
 
 }
