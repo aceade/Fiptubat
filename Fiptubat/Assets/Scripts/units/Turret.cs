@@ -26,6 +26,10 @@ public class Turret : BaseUnit
         throw new System.NotImplementedException("Turrets can't crouch!");
     }
 
+    public override void FindCover(Vector3 position, Vector3 direction) {
+        throw new System.NotSupportedException("Turrets don't take cover!");
+    }
+
     void Update() {
         if (!targetSpotted) {
             Scan();

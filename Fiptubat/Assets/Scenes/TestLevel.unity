@@ -584,6 +584,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 54975545}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &54975559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54975546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52679dae68ac437fda45d8981d65c196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 5
+  coverAngleCriteria: 0
+  maxAttempts: 3
 --- !u!1 &56850593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1997,6 +2012,7 @@ GameObject:
   - component: {fileID: 210329030}
   - component: {fileID: 210329029}
   - component: {fileID: 210329031}
+  - component: {fileID: 210329032}
   m_Layer: 11
   m_Name: Security Guard
   m_TagString: Untagged
@@ -2299,6 +2315,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionAlgorithm: 5
   calculationInterval: 0.5
+--- !u!114 &210329032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210329021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52679dae68ac437fda45d8981d65c196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 10
+  coverAngleCriteria: -0.1
+  maxAttempts: 3
 --- !u!1 &215494007
 GameObject:
   m_ObjectHideFlags: 0
@@ -9644,6 +9675,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8, y: 2.0000005, z: 2.0000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1098307692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098307685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52679dae68ac437fda45d8981d65c196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 5
+  coverAngleCriteria: 0
+  maxAttempts: 3
 --- !u!1 &1110967489
 GameObject:
   m_ObjectHideFlags: 0
@@ -14337,6 +14383,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionAlgorithm: 5
   calculationInterval: 0.5
+--- !u!114 &1679921576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679921572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52679dae68ac437fda45d8981d65c196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialRadius: 5
+  coverAngleCriteria: 0
+  maxAttempts: 3
 --- !u!1 &1684171969
 GameObject:
   m_ObjectHideFlags: 0

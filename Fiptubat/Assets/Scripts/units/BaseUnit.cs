@@ -57,6 +57,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected WeaponBase weapon;
 
+	protected CoverFinder coverFinder;
+
 	public UnitDestination destinationTrigger;
 	
 	protected virtual void Start() {
@@ -69,6 +71,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		targetSelection = GetComponent<UnitTargetSelection>();
 		weapon = GetComponentInChildren<WeaponBase>();
+		coverFinder = GetComponent<CoverFinder>();
 		isStillMoving = false;
 		if (destinationTrigger != null) {
 			destinationTrigger.SetUnit(this);
@@ -154,41 +157,15 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		
 	}
 
-	protected Dictionary<Vector3, float> samplePositions(Vector3 startPosition) {
-		Dictionary<Vector3, float> samples = new Dictionary<Vector3, float>();
-		samples.Add(startPosition + myTransform.forward * 10f, 0f);
-		samples.Add(startPosition - myTransform.forward * 10f, 0f);
-		samples.Add(startPosition + myTransform.right * 10f, 0f);
-		samples.Add(startPosition - myTransform.right * 10f, 0f);
-		return samples;
-	}
-
 	/// <summary>
 	/// Find cover near my position that shields me in a particular direction
 	/// </summary>
-	/// <param name="position"></param>
-	/// <param name="direction"></param>
+	/// <param name="position">My current position</param>
+	/// <param name="direction">Direction from which I'm being shot or saw a target</param>
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
-
-		// source: https://forum.unity.com/threads/navmesh-agent-take-cover.403292/#post-3139813
-		// perform random samples around my position
-		// find the nearest edge
-		// then remove any where Vector3.Dot(navMeshHit.normal, (direction)) is less than the criteria
-		// then sort by distance
-		Dictionary<Vector3, float> samples = samplePositions(position);
-		foreach (Vector3 point in samples.Keys.ToList()) {
-			if(NavMesh.FindClosestEdge(point, out navMeshHit, navMeshAgent.areaMask)) {
-				float normal = Vector3.Dot(navMeshHit.normal, (direction));
-				Debug.LogFormat("Normal of vector {0} at {1} is {2}", direction, point, normal);
-				samples[point] = normal;
-			}
-		}
-		var sortedByDot = samples.OrderBy(d => d.Value).Where(d => d.Value < coverAngleCriteria);
-		Vector3 target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Key, position) < Vector3.Distance(y.Key, position) ? x : y).Key;
-
-		
-		destinationTrigger.SetPosition(target);
-		if (!SetDestination(target)) {
+		CoverResult target = coverFinder.FindCover(position, direction);		
+		destinationTrigger.SetPosition(target.GetPosition());
+		if (!SetDestination(target.GetPosition())) {
 			Debug.LogFormat("{0} can't reach cover at {1}!", this, target);
 		}
 	}
