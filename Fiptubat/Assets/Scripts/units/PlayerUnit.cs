@@ -54,4 +54,8 @@ public class PlayerUnit : BaseUnit {
         unitControl.MoveCamera(offset);
     }
 
+    public override void FindCover(Vector3 position, Vector3 direction) {
+        throw new System.NotSupportedException("Player units are manually controlled!");
+    }
+
 }

@@ -77,9 +77,14 @@ public class HumanoidEnemy : BaseUnit
             if (!targetSpotted) {
                 IncrementPatrolIndex();
             } else {
-                Debug.LogFormat("{0} stopping patrol, found a target!", this);
+
                 IDamage target = targetSelection.SelectTarget();
-                FindCover(myTransform.position, myTransform.position - target.GetTransform().position);
+                Vector3 targetPos = target.GetTransform().position;
+                Vector3 dir = myTransform.position - targetPos;
+                Debug.DrawRay(targetPos, dir, Color.magenta, 3f);
+                Debug.LogFormat("{0} stopping patrol at {1}, found a target at {2}! Direction: {3}", this,
+                    point.GetPosition(), targetPos, dir);
+                FindCover(myTransform.position, dir);
             }
         }
     }

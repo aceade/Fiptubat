@@ -261,7 +261,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
   patrolRoute:
   - {fileID: 64775307}
@@ -1472,7 +1471,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
 --- !u!136 &154236227
 CapsuleCollider:
@@ -2061,7 +2059,6 @@ MonoBehaviour:
   suppressionCriteria: 5
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: -0.1
   destinationTrigger: {fileID: 351941888}
   patrolRoute:
   - {fileID: 1623838653}
@@ -2327,8 +2324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52679dae68ac437fda45d8981d65c196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRadius: 10
-  coverAngleCriteria: -0.1
+  initialRadius: 5
+  coverAngleCriteria: -0.2
   maxAttempts: 3
 --- !u!1 &215494007
 GameObject:
@@ -2870,7 +2867,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
 --- !u!136 &242598951
 CapsuleCollider:
@@ -8659,7 +8655,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
 --- !u!114 &1008975556
 MonoBehaviour:
@@ -9657,7 +9652,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
   scanRotationSpeed: 10
   combatRotationSpeed: 10
@@ -14358,7 +14352,6 @@ MonoBehaviour:
   suppressionCriteria: 10
   isCrouched: 0
   pathCostFactor: 2
-  coverAngleCriteria: 0
   destinationTrigger: {fileID: 0}
   scanRotationSpeed: 10
   combatRotationSpeed: 10

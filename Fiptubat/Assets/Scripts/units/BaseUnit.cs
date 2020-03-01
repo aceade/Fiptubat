@@ -29,9 +29,6 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public bool isCrouched = false;
 
 	public float pathCostFactor = 2f;
-
-	[Tooltip("Defines angles at which to find cover. > 0 means likely to be flanked (stupid); less than that will pick good cover")]
-	public float coverAngleCriteria = 0f;
 	
 	protected NavMeshAgent navMeshAgent;
 
@@ -161,7 +158,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// Find cover near my position that shields me in a particular direction
 	/// </summary>
 	/// <param name="position">My current position</param>
-	/// <param name="direction">Direction from which I'm being shot or saw a target</param>
+	/// <param name="direction">Direction from which I'm being shot or saw a target. Must start from my current position</param>
 	public virtual void FindCover(Vector3 position, Vector3 direction) {
 		CoverResult target = coverFinder.FindCover(position, direction);		
 		destinationTrigger.SetPosition(target.GetPosition());

@@ -13,9 +13,11 @@ public class CoverFinder : MonoBehaviour
 
     public float initialRadius = 5f;
 
+    [Tooltip("Defines angles at which to find cover. > 0 means likely to be flanked (stupid); less than that will pick good cover")]
     public float coverAngleCriteria = 0f;
 
-    public float maxAttempts = 3;
+    public int maxAttempts = 3;
+    private int currentAttempts = 0;
 
     private Transform myTransform;
 
@@ -36,21 +38,29 @@ public class CoverFinder : MonoBehaviour
 	/// <param name="position">My current position</param>
 	/// <param name="direction">Direction from which I'm being shot or saw a target</param>
     public CoverResult FindCover(Vector3 currentPosition, Vector3 direction) {
+        currentAttempts = 0;
+        float radius = initialRadius;
 
-        // obtain random positions around my current position.
-        Dictionary<Vector3, CoverResult> samples = samplePositions(currentPosition, initialRadius);
-		foreach (Vector3 point in samples.Keys.ToList()) {
-            // find the closet edge to each one
-			if(NavMesh.FindClosestEdge(point, out navMeshHit, navMeshAgent.areaMask)) {
-				float normal = Vector3.Dot(navMeshHit.normal, (direction));
-				Debug.DrawRay(currentPosition, navMeshHit.position - currentPosition, Color.green, 3f);
-				Debug.DrawRay(navMeshHit.position, navMeshHit.normal, Color.yellow, 3f);
-				samples[point].SetPosition(navMeshHit.position);
-				samples[point].SetNormal(normal);
-			}
-		}
-        // discard any that don't sufficiently point away from the target direction and choose the closest remaining
-		var sortedByDot = samples.OrderBy(d => d.Value.GetNormal()).Where(d => d.Value.GetNormal() < coverAngleCriteria);
+        Dictionary<Vector3, CoverResult> samples = new Dictionary<Vector3, CoverResult>();
+
+        while (currentAttempts < maxAttempts) {
+            // Obtain random positions around my current position.
+            samples = samplePositions(currentPosition, radius, direction);
+            if (samples.Count == 0 ) {
+                currentAttempts++;
+                radius *= 2;
+            } else  {
+                break;
+            }
+        }
+
+        if (samples.Count == 0) {
+            Debug.LogWarningFormat("{0} can't find cover!", this);
+            return new CoverResult();
+        }
+
+        // Then discard any that don't sufficiently point away from the target direction and choose the closest remaining
+        var sortedByDot = samples.OrderBy(d => d.Value.GetNormal()).Where(d => d.Value.GetNormal() > coverAngleCriteria);
 		CoverResult target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Value.GetPosition(), currentPosition) 
                 < Vector3.Distance(y.Value.GetPosition(), currentPosition) ? x : y).Value;
 
@@ -59,12 +69,24 @@ public class CoverFinder : MonoBehaviour
         return target;
     }
 
-    private Dictionary<Vector3, CoverResult> samplePositions(Vector3 startPosition, float radius) {
+    private Dictionary<Vector3, CoverResult> samplePositions(Vector3 startPosition, float radius, Vector3 targetDirection) {
 		Dictionary<Vector3, CoverResult> samples = new Dictionary<Vector3, CoverResult>();
 		samples.Add(startPosition + myTransform.forward * radius, new CoverResult());
 		samples.Add(startPosition - myTransform.forward * radius, new CoverResult());
 		samples.Add(startPosition + myTransform.right * radius, new CoverResult());
 		samples.Add(startPosition - myTransform.right * radius, new CoverResult());
+
+        foreach (Vector3 point in samples.Keys.ToList()) {
+            // find the closet edge to each one
+			if(NavMesh.FindClosestEdge(point, out navMeshHit, navMeshAgent.areaMask)) {
+				float normal = Vector3.Dot(navMeshHit.normal, (targetDirection));
+				Debug.DrawRay(navMeshHit.position, navMeshHit.normal, Color.yellow, 3f);
+				samples[point].SetPosition(navMeshHit.position);
+				samples[point].SetNormal(normal);
+			}
+		}
+
 		return samples;
 	}
+
 }
