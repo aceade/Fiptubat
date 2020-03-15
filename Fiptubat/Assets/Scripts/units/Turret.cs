@@ -93,7 +93,7 @@ public class Turret : BaseUnit
         
     }
 
-    private void TrackTarget(IDamage target) {
+    protected override void TrackTarget(IDamage target) {
         Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
         horizontalDir.y = 0;
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 0f);

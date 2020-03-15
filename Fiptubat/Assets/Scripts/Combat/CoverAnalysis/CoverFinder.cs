@@ -13,6 +13,9 @@ public class CoverFinder : MonoBehaviour
 
     public float initialRadius = 5f;
 
+    [Tooltip("If we can't find cover, return this position")]
+    public Vector3 nullPosition = Vector3.down * 200f;
+
     [Tooltip("Defines angles at which to find cover. > 0 means likely to be flanked (stupid); less than that will pick good cover")]
     public float coverAngleCriteria = 0f;
 
@@ -56,17 +59,21 @@ public class CoverFinder : MonoBehaviour
 
         if (samples.Count == 0) {
             Debug.LogWarningFormat("{0} can't find cover!", this);
-            return new CoverResult();
+            return new CoverResult(nullPosition);
         }
 
         // Then discard any that don't sufficiently point away from the target direction and choose the closest remaining
         var sortedByDot = samples.OrderBy(d => d.Value.GetNormal()).Where(d => d.Value.GetNormal() > coverAngleCriteria);
-		CoverResult target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Value.GetPosition(), currentPosition) 
-                < Vector3.Distance(y.Value.GetPosition(), currentPosition) ? x : y).Value;
+        try {
+		    CoverResult target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Value.GetPosition(), currentPosition) 
+                < Vector3.Distance(y.Value.GetPosition(), currentPosition) ? x : y).Value; 
+            Debug.LogFormat("{0} found cover at {1}", this, target);
+            return target;
+        } catch (System.InvalidOperationException e) {
+            Debug.LogWarningFormat("{0} can't find ANY cover! {1}", this, e.Message);
+            return new CoverResult(nullPosition);
+        }
 
-        Debug.LogFormat("{0} found cover at {1}", this, target);
-
-        return target;
     }
 
     private Dictionary<Vector3, CoverResult> samplePositions(Vector3 startPosition, float radius, Vector3 targetDirection) {

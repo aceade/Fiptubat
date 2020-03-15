@@ -88,11 +88,20 @@ namespace Aceade.AI {
 			}
 		}
 
-		private bool AnalyseTargetVisibility(Transform target) {
+		/// <summary>
+		/// Check if I can see the specific target from a specific location
+		/// </summary>
+		/// <param name="target">The target I'm looking for</param>
+		/// <param name="fromPosition">Either where I'm standing, or another position entirely</param>
+		/// <returns></returns>
+		private bool AnalyseTargetVisibility(Transform target, Vector3 fromPosition) {
+			Debug.LogFormat("{0} analysing {1} visibility from {2}", this, target, fromPosition);
 			RaycastHit hit;
 			bool canSeeTarget = false;
 			
-			if (Physics.Raycast(transform.position, target.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+			if (Physics.Raycast(fromPosition, target.position - fromPosition, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+				Debug.DrawRay(fromPosition, hit.point - fromPosition, Color.yellow, 2f);
+				Debug.LogFormat("Examining target {0}, saw {1} with root {2}", target, hit.transform, hit.transform.root);
 				if (hit.transform.root == target) {
 					canSeeTarget = true;
 				}
@@ -121,7 +130,16 @@ namespace Aceade.AI {
 				return false;
 			}
 			else {
-				return AnalyseTargetVisibility(target.GetTransform());
+				return AnalyseTargetVisibility(target.GetTransform(), transform.position);
+			}
+		}
+
+		public bool CanSeeTargetFromLocation(IDamage target, Vector3 location) {
+			if (!currentColliders.ContainsValue(target)) {
+				return false;
+			}
+			else {
+				return AnalyseTargetVisibility(target.GetTransform(), location);
 			}
 		}
 	}

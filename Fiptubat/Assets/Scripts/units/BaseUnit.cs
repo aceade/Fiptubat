@@ -22,6 +22,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected bool targetSpotted = false;
 
+	protected bool beenAttacked = false;
+
 	[Tooltip("This many shots hitting nearby will add a suppression effect")]
 	public int suppressionCriteria = 10;
 	private int suppressionCount = 0;
@@ -230,17 +232,26 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		voiceSystem.TargetHeard();
 	}
 
-	public void Damage(DamageType damageType, int damageAmount) {
+	protected virtual void TrackTarget(IDamage target) {
+		if (target == null) {
+            targetSpotted = false;
+        }
+
+        Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
+        horizontalDir.y = 0;
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, navMeshAgent.angularSpeed * Time.deltaTime, 0f);
+        myTransform.rotation = Quaternion.LookRotation(desired);
+    }
+
+	public virtual void Damage(DamageType damageType, int damageAmount) {
+		beenAttacked = true;
 		if (damageType != DamageType.ARMOUR_PIERCING) {
 			damageAmount -= armour;
 		} 
 
 		health -= damageAmount;
 		if (health <= 0) {
-			voiceSystem.Die();
 			Die();
-		} else {
-			voiceSystem.Hit();
 		}
 	}
 
@@ -315,6 +326,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected virtual void Die() {
 		Debug.LogFormat("{0} is dead!", this.unitName);
+		voiceSystem.Die();
 		lineOfSight.ClearColliders();
 		lineOfSight.StopAllCoroutines();
 		lineOfSight.enabled = false;

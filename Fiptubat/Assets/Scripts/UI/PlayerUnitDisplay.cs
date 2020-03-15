@@ -59,7 +59,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
         weapon = GetComponentInChildren<WeaponBase>();
         crosshairsWidth = crosshairs.rectTransform.rect.width;
         crosshairsHeight = crosshairs.rectTransform.rect.height;
-        Debug.LogFormat("Crosshairs height: {0} and width: {1}", crosshairsHeight, crosshairsWidth);
     }
 
     void Update() {

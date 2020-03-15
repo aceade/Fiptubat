@@ -62,18 +62,6 @@ public class PatrolBot : BaseUnit
         }
     }
 
-    private void TrackTarget(IDamage target) {
-        if (target == null) {
-            targetSpotted = false;
-        }
-
-        Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
-        horizontalDir.y = 0;
-        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, 5f * Time.deltaTime, 0f);
-        myTransform.rotation = Quaternion.LookRotation(desired);
-
-    }
-
     void Patrol() {
         Vector3 targetPosition = patrolRoute[patrolIndex].GetPosition();
         float pathLength = GetPathLength();

@@ -19,20 +19,33 @@ public class HumanoidEnemy : BaseUnit
     protected override void Start()
     {
         base.Start();
-        
     }
 
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
-        if (targetSpotted) {
+
+        if (targetSpotted || beenAttacked) {
             IDamage target = targetSelection.SelectTarget();
             if (lineOfSight.CanSeeTarget(target)) {
-                FindCover(myTransform.position, target.GetTransform().position - myTransform.position);
+                PerformAttack();
             } else {
-                SetDestination(target.GetTransform().position);
+                FindCover(target.GetTransform().position, target.GetTransform().position - myTransform.position);
             }
         } else {
             Patrol();
+        }
+    }
+
+    private void PerformAttack() {
+        if (weapon.GetCurrentFireCost() >= currentActionPoints) {
+            Attack();
+        } else {
+            // they're drilled to reload where possible
+            if (weapon.GetRemainingAmmo() < 2) {
+                Debug.LogFormat("{0} can't fire - reloading!", this);
+                Reload();
+            }
+            FinishedTurn();
         }
     }
 
@@ -43,10 +56,14 @@ public class HumanoidEnemy : BaseUnit
             IDamage target = targetSelection.SelectTarget();
             int attackCost = weapon.GetCurrentFireCost();
             if (lineOfSight.CanSeeTarget(target)) {
-                Attack();
+                Debug.LogFormat("{0} in cover at {1}! Opening fire on {2}", this, myTransform.position, target.GetTransform());
+                TrackTarget(target);
+                PerformAttack();
             } else {
-                // can we see them to the side?
-
+                // call in the hostile sighting
+                Debug.LogFormat("{0} in cover at {1}, but can't see {2}! Calling it in", this, myTransform.position, target.GetTransform());
+                unitManager.AlertAllUnits(target);
+                FinishedTurn();
             }
     }
 
@@ -54,7 +71,7 @@ public class HumanoidEnemy : BaseUnit
         if (patrolRoute.Count > 0) {
             PatrolPoint nextStep = patrolRoute[patrolIndex];
             if (!SetDestination(nextStep.GetPosition())) {
-                Debug.LogWarningFormat("{0} can't reach their destination: {1}. Length: {2}", this, nextStep);
+                Debug.LogWarningFormat("{0} can't reach their destination: {1}. Length: {2}", this, nextStep, GetPathLength());
                 Invoke("FinishedTurn", 1f);
             }
         } else {
@@ -86,6 +103,40 @@ public class HumanoidEnemy : BaseUnit
                     point.GetPosition(), targetPos, dir);
                 FindCover(myTransform.position, dir);
             }
+        }
+    }
+
+    /// <summary>
+    /// Unlike bots, should take cover
+    /// </summary>
+    /// <param name="damageType">What type of damage</param>
+    /// <param name="damageAmount">How much</param>
+    public override void Damage(DamageType damageType, int damageAmount) {
+        base.Damage(damageType, damageAmount);
+        if (health > 0) {
+            beenAttacked = true;
+        } else {
+            Die();
+        }
+    }
+
+    public override void FindCover(Vector3 position, Vector3 direction) {
+        CoverResult target = coverFinder.FindCover(position, direction);
+		destinationTrigger.SetPosition(target.GetPosition());
+		if (!SetDestination(target.GetPosition())) {
+			Debug.LogFormat("{0} can't reach cover at {1}!", this, target);
+            // at least crouching makes them harder to hit.
+            Crouch();
+            FinishedTurn();
+		}
+    }
+
+    void Update() {
+        if (targetSpotted) {
+            
+            IDamage target = targetSelection.SelectTarget();
+            Debug.LogFormat("{0} tracking {1}", this, target.GetTransform());
+            TrackTarget(target);
         }
     }
 
