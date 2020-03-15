@@ -133,9 +133,7 @@ public class HumanoidEnemy : BaseUnit
 
     void Update() {
         if (targetSpotted) {
-            
             IDamage target = targetSelection.SelectTarget();
-            Debug.LogFormat("{0} tracking {1}", this, target.GetTransform());
             TrackTarget(target);
         }
     }
