@@ -260,6 +260,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		if (suppressionCount >= suppressionCriteria) {
 			Debug.LogFormat("{0}: Help, help, I'm being suppressed!", this);
 			currentActionPoints = 0;
+			voiceSystem.NearlyHit();
 		}
 	}
 
