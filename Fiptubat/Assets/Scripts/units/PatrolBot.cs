@@ -95,4 +95,8 @@ public class PatrolBot : BaseUnit
             IncrementPatrolIndex();
         }
     }
+
+    public new void HitNearby() {
+        // no-op - bots don't care
+    }
 }
