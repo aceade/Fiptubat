@@ -170,6 +170,11 @@ public class WeaponBase : MonoBehaviour
         return Mathf.RoundToInt(GetCurrentFireMode().costModifier * baseCost);
     }
 
+    public bool UsingMostAccurateAttack() {
+        fireModes.Sort((x,y) => x.deviation.CompareTo(y.deviation));
+        return false;
+    }
+
     public void ToggleCrouch(bool crouching) {
         isCrouched = crouching;
     }

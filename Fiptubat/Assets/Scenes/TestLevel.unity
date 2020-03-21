@@ -368,7 +368,7 @@ MonoBehaviour:
   nearlyHitLines:
   - {fileID: 8300000, guid: ed915e1a2951b23418f2a723d0c11d14, type: 3}
   movingLines:
-  - {fileID: 8300000, guid: fa1131b8bf0f81b21980d11df428c23b, type: 3}
+  - {fileID: 8300000, guid: 5ce5dde42bd3cb139b48c49420ebb81a, type: 3}
 --- !u!82 &54975555
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2169,40 +2169,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSpottedLines:
-  - {fileID: 8300000, guid: 48629fd151b6c4e059766022c6b98e7e, type: 3}
-  - {fileID: 8300000, guid: 31c41f33bbd988e50b161af4310a13ce, type: 3}
-  - {fileID: 8300000, guid: 258f9155f02d66f42b0988b082898da6, type: 3}
+  - {fileID: 8300000, guid: c35794f4bc8f0d21bb9dbd6262e6c9a6, type: 3}
+  - {fileID: 8300000, guid: 677b1e45885b211518e8347c420172a7, type: 3}
   targetHeardLines:
-  - {fileID: 8300000, guid: 43a47178466b5a12998e99d4a375ec3d, type: 3}
-  - {fileID: 8300000, guid: d91e5bee9bc7fa2e59d90f066f16621c, type: 3}
-  - {fileID: 8300000, guid: 649ced080572d09119b03fdf88ce82f0, type: 3}
+  - {fileID: 8300000, guid: c5b7c8f5206292adfb6ef2452ebf2eab, type: 3}
+  - {fileID: 8300000, guid: 1c5b1b32106681f35a8f29f1c1fd63b2, type: 3}
+  - {fileID: 8300000, guid: 97128868c9e12051d9e153e329fc5a39, type: 3}
   targetDestroyedLines:
-  - {fileID: 8300000, guid: 9462990fff466198fae7256c597a5e86, type: 3}
-  - {fileID: 8300000, guid: eaf677153e8cc7b65a46e8e3e65b21b7, type: 3}
+  - {fileID: 8300000, guid: b5e8d586d0ddcf98f9f3f8c6a27d467f, type: 3}
+  - {fileID: 8300000, guid: 677b1e45885b211518e8347c420172a7, type: 3}
   targetMissedLines:
-  - {fileID: 8300000, guid: dbfa2f190b6544c1196b6a15ec0c1ffb, type: 3}
-  - {fileID: 8300000, guid: acf1a7bb3cf25b58a9515c1ec5e4300d, type: 3}
+  - {fileID: 8300000, guid: 5d2e33093f0fbdc45888fc932ac579de, type: 3}
   outOfAmmoLines:
-  - {fileID: 8300000, guid: f9d6f9ff5fe151eaa87929b8b9dc9d59, type: 3}
-  - {fileID: 8300000, guid: a29be219c4ffac798b20df889a3b313d, type: 3}
-  - {fileID: 8300000, guid: 807a017393e00e7ffbe3c6790895ca9d, type: 3}
+  - {fileID: 8300000, guid: 34b351424d2c3a204b3953c8f7c43fea, type: 3}
+  - {fileID: 8300000, guid: cd6187e687dabfbfdb1a1130722157a8, type: 3}
   reloadingLines:
-  - {fileID: 8300000, guid: 8c462e64fc964ab66ae9af60649c3580, type: 3}
-  - {fileID: 8300000, guid: 0a822cd56c8d06512ab7db7ca2382315, type: 3}
+  - {fileID: 8300000, guid: 677b1e45885b211518e8347c420172a7, type: 3}
+  - {fileID: 8300000, guid: 7f4c76f7e50b64866bcaa51ee78484e0, type: 3}
   takingDamageLines:
-  - {fileID: 8300000, guid: a5d863b63c7d05c90bf9b3a6e2ba0e1d, type: 3}
-  - {fileID: 8300000, guid: 510b36e05d0979418ab47e2a14d3a867, type: 3}
+  - {fileID: 8300000, guid: f8e2db2e346027178852ab431fd1f936, type: 3}
+  - {fileID: 8300000, guid: 677b1e45885b211518e8347c420172a7, type: 3}
   deathLines:
-  - {fileID: 8300000, guid: d98ca756fdde3cdc48743e55c4814a27, type: 3}
-  - {fileID: 8300000, guid: 5a80921ca48a653138216cc5f6702fe0, type: 3}
+  - {fileID: 8300000, guid: f8e2db2e346027178852ab431fd1f936, type: 3}
+  - {fileID: 8300000, guid: b5e8d586d0ddcf98f9f3f8c6a27d467f, type: 3}
   nearlyHitLines:
-  - {fileID: 8300000, guid: 322595047a3ce9a5b8e6c61ae761d9ff, type: 3}
-  - {fileID: 8300000, guid: 4eb8fd5730df0f9d08ac82b1d31011c0, type: 3}
-  - {fileID: 8300000, guid: 0fb281585b6ce5bd4996d768fc881e20, type: 3}
+  - {fileID: 8300000, guid: 97128868c9e12051d9e153e329fc5a39, type: 3}
+  - {fileID: 8300000, guid: 5d2e33093f0fbdc45888fc932ac579de, type: 3}
+  - {fileID: 8300000, guid: 1124423280d0e57e4a4a6bc36e5325e7, type: 3}
   movingLines:
-  - {fileID: 8300000, guid: 2d08ac97c1f1d890fb6334c631bd7442, type: 3}
-  - {fileID: 8300000, guid: 95306a90e8882b869adb13d1f1264b70, type: 3}
-  - {fileID: 8300000, guid: b75113e3bcc1b32c09f25725b5b1576f, type: 3}
+  - {fileID: 8300000, guid: 34b351424d2c3a204b3953c8f7c43fea, type: 3}
+  - {fileID: 8300000, guid: 34b351424d2c3a204b3953c8f7c43fea, type: 3}
 --- !u!82 &210329030
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2214,14 +2210,14 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -5079,7 +5075,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9767bab016a096f182137b74d968dae, type: 3}
   nearlyHitLines:
   - {fileID: 8300000, guid: ed915e1a2951b23418f2a723d0c11d14, type: 3}
-  movingLines: []
+  movingLines:
+  - {fileID: 8300000, guid: 5ce5dde42bd3cb139b48c49420ebb81a, type: 3}
 --- !u!82 &539912873
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13890,7 +13887,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9767bab016a096f182137b74d968dae, type: 3}
   nearlyHitLines:
   - {fileID: 8300000, guid: ed915e1a2951b23418f2a723d0c11d14, type: 3}
-  movingLines: []
+  movingLines:
+  - {fileID: 8300000, guid: 5ce5dde42bd3cb139b48c49420ebb81a, type: 3}
 --- !u!82 &1669614622
 AudioSource:
   m_ObjectHideFlags: 0

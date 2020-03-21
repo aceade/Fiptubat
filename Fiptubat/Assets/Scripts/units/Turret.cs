@@ -111,6 +111,7 @@ public class Turret : BaseUnit
 
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
+        voiceSystem.Moving();   // in this case, "scanning"
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
             TrackTarget(target);

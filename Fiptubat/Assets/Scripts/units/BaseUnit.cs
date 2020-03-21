@@ -27,6 +27,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	[Tooltip("This many shots hitting nearby will add a suppression effect")]
 	public int suppressionCriteria = 10;
 	private int suppressionCount = 0;
+
+	private int shotsMissedThisTurn;
 	
 	public bool isCrouched = false;
 
@@ -102,6 +104,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public void StartTurn() {
 		currentActionPoints = actionPoints;
+		shotsMissedThisTurn = 0;
 		if (suppressionCount >= suppressionCriteria) {
 			Debug.LogFormat("{0} starting their turn suppressed", this);
 			currentActionPoints /= 2;
@@ -298,7 +301,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 				if (weapon.GetRemainingAmmo() == 0) {
 					voiceSystem.OutOfAmmo();
 				} else {
-					voiceSystem.TargetMissed();
+					if (shotsMissedThisTurn++ > 2 && weapon.UsingMostAccurateAttack()) {
+						voiceSystem.TargetMissed();
+					}
 				}
 			}
 			currentActionPoints -= attackCost;
