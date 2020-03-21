@@ -30,7 +30,7 @@ public class WeaponBase : MonoBehaviour
 
     protected bool canAttack = true;
 
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
 
     public TracerPool tracerPool;
 

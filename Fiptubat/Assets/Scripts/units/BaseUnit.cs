@@ -414,4 +414,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		}
 	}
 
+	public override string ToString() {
+		return string.Format("Base Unit[name={0}, position={1}, health={2}, actionPoints={3}]", unitName, myTransform.position, health, currentActionPoints);
+	}
+
 }

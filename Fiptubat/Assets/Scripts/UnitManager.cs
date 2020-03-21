@@ -74,6 +74,10 @@ public class UnitManager : MonoBehaviour {
 	}
 
 	public void CycleUnit() {
+		if (activeUnits.Count == 1) {
+			Debug.LogFormat("Remaining active unit for {0} is {1}", this, activeUnits[0]);
+		}
+
 		selectedUnit.DeselectUnit();
 		currentUnit ++;
 		if (currentUnit >= activeUnits.Count) {
