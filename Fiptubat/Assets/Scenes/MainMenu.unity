@@ -2516,8 +2516,7 @@ MonoBehaviour:
     there, you''re going to be left behind.
 
 
-    The bots in this sector have gone haywire after being abandoned for so long, and
-    will attack infantry on sight. You can simply avoid their shots, or shoot back.'
+    Everything else in the sector is hostile. You may shoot back, or simply leg it.'
 --- !u!222 &781901148
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -194,21 +194,15 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// </summary>
 	/// 
 	public virtual void CrouchAnimation(bool crouched) {
-		if (crouched) {
-			// TODO: cache the collider and add animation class.
-			GetComponent<CapsuleCollider>().height = 1f;
-		} else {
-			GetComponent<CapsuleCollider>().height = 2f;
-		}
+		animator.Crouch(isCrouched);
 	}
 
 	public virtual void Vault() {
-		GetComponent<Rigidbody>().AddForce(Vector3.up * 2f, ForceMode.Impulse);
-		// will need animations
+		animator.Vault();
 	}
 
 	public virtual void Climb() {
-		// no-op - will need animations
+		animator.Climb();
 	}
 
 	public virtual void StandDown() {
