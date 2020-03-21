@@ -10,16 +10,15 @@ public class Turret : BaseUnit
 
     private Transform barrel;
 
-    public float scanRotationSpeed = 10f;
     public float combatRotationSpeed = 10f;
 
-    public float maxScanAngle = 60f;
     private Vector3 startDir;
 
     protected override void Start(){
         base.Start();
         startDir = myTransform.forward;
         barrel = myTransform.Find("Barrel");
+        animator.SetScanStatus(true);
     }
 
     public override void Crouch() {
@@ -31,9 +30,7 @@ public class Turret : BaseUnit
     }
 
     void Update() {
-        if (!targetSpotted) {
-            Scan();
-        } else {
+        if (targetSpotted) {
             // track the current target
             IDamage target = targetSelection.SelectTarget();
             
@@ -83,14 +80,7 @@ public class Turret : BaseUnit
     }
 
     private void Scan() {
-        // scan animation
-        myTransform.Rotate(Vector3.up * scanRotationSpeed * Time.deltaTime);
-        float angle = Vector3.Angle(myTransform.forward, startDir);
-        if (angle > maxScanAngle) {
-            
-            scanRotationSpeed *= -1f;
-        }
-        
+        animator.SetScanStatus(true);
     }
 
     protected override void TrackTarget(IDamage target) {
@@ -103,6 +93,7 @@ public class Turret : BaseUnit
     public override void TargetSpotted(IDamage target) {
         if (health > 0) {
             targetSpotted = true;
+            animator.SetScanStatus(false);
             base.TargetSpotted(target);
         } else {
             unitManager.AlertAllUnits(target);

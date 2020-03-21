@@ -220,6 +220,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbc80bb54902d96f3b3de844c35661fe, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 9255d318979c9545bacd3c493e498294,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d25ddafd4ed6d97ed96df4753259c1f5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9255d318979c9545bacd3c493e498294, type: 3}
 --- !u!1 &54975546 stripped
@@ -4973,7 +4978,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1679921574}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &539912868
 MonoBehaviour:
@@ -9597,6 +9602,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bbc80bb54902d96f3b3de844c35661fe, type: 2}
+    - target: {fileID: -6057140222963153312, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d25ddafd4ed6d97ed96df4753259c1f5, type: 2}
+    - target: {fileID: -6057140222963153312, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d, type: 3}
 --- !u!1 &1098307685 stripped
@@ -9658,9 +9673,7 @@ MonoBehaviour:
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
-  scanRotationSpeed: 10
   combatRotationSpeed: 10
-  maxScanAngle: 30
 --- !u!65 &1098307691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9674,6 +9687,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8, y: 2.0000005, z: 2.0000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1098307692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098307685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b8fb6d36c548a0cada29a96e424c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1110967489
 GameObject:
   m_ObjectHideFlags: 0
@@ -13861,7 +13886,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1098307686}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1669614621
 MonoBehaviour:
@@ -14291,6 +14316,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 8af5562bf687d8e88be0aadb98c435be, type: 2}
+    - target: {fileID: -6057140222963153312, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d25ddafd4ed6d97ed96df4753259c1f5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d, type: 3}
 --- !u!1 &1679921569 stripped
@@ -14345,9 +14375,7 @@ MonoBehaviour:
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
-  scanRotationSpeed: 10
   combatRotationSpeed: 10
-  maxScanAngle: 30
 --- !u!4 &1679921574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e8c5ea18edcf1ea10b3b2cf8f3387e4d,
@@ -14368,6 +14396,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionAlgorithm: 5
   calculationInterval: 0.5
+--- !u!114 &1679921577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679921572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b8fb6d36c548a0cada29a96e424c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1684171969
 GameObject:
   m_ObjectHideFlags: 0

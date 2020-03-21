@@ -57,6 +57,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected UnitTargetSelection targetSelection;
 
+	protected UnitAnimator animator;
+
 	protected Transform myTransform;
 
 	protected WeaponBase weapon;
@@ -76,6 +78,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		targetSelection = GetComponent<UnitTargetSelection>();
 		weapon = GetComponentInChildren<WeaponBase>();
 		coverFinder = GetComponent<CoverFinder>();
+		animator = GetComponent<UnitAnimator>();
 		isStillMoving = false;
 		if (destinationTrigger != null) {
 			destinationTrigger.SetUnit(this);
