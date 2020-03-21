@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
@@ -11,6 +12,7 @@ public class WeaponBase : MonoBehaviour
     public float maxDistance = 30f;
 
     public List<FireMode> fireModes;
+    private FireMode mostAccurateAttack;
 
     public int magSize = 5;
 
@@ -52,6 +54,9 @@ public class WeaponBase : MonoBehaviour
 
         float volume = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
         audioSource.volume = volume;
+
+        mostAccurateAttack = fireModes.OrderBy(o=>o.deviation).First();
+        Debug.LogFormat("Most accurate attack for {0} is {1}", this, mostAccurateAttack);
     }
 
     /// <summary>
@@ -171,8 +176,7 @@ public class WeaponBase : MonoBehaviour
     }
 
     public bool UsingMostAccurateAttack() {
-        fireModes.Sort((x,y) => x.deviation.CompareTo(y.deviation));
-        return false;
+        return GetCurrentFireMode() == mostAccurateAttack;
     }
 
     public void ToggleCrouch(bool crouching) {

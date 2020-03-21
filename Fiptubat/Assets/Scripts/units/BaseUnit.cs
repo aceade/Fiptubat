@@ -28,6 +28,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public int suppressionCriteria = 10;
 	private int suppressionCount = 0;
 
+	[Tooltip("At what point should they announce that they missed")]
+	public int tooManyMissedShotsCriteria = 3;
+
 	private int shotsMissedThisTurn;
 	
 	public bool isCrouched = false;
@@ -301,7 +304,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 				if (weapon.GetRemainingAmmo() == 0) {
 					voiceSystem.OutOfAmmo();
 				} else {
-					if (shotsMissedThisTurn++ > 2 && weapon.UsingMostAccurateAttack()) {
+					shotsMissedThisTurn++;
+					if (shotsMissedThisTurn > tooManyMissedShotsCriteria || weapon.UsingMostAccurateAttack()) {
 						voiceSystem.TargetMissed();
 					}
 				}
@@ -322,6 +326,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 				voiceSystem.Reloading();
 				weapon.Reload();
 				currentActionPoints -= reloadCost;
+				shotsMissedThisTurn = 0;
 			}
 		}
 	}

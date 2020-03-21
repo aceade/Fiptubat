@@ -259,6 +259,7 @@ MonoBehaviour:
   armour: 1
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 12
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
@@ -1470,6 +1471,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 3
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
@@ -2058,6 +2060,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 5
+  tooManyMissedShotsCriteria: 3
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 351941888}
@@ -2863,6 +2866,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 3
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
@@ -8652,6 +8656,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 3
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
@@ -9649,6 +9654,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 12
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
@@ -14335,6 +14341,7 @@ MonoBehaviour:
   armour: 0
   actionPoints: 50
   suppressionCriteria: 10
+  tooManyMissedShotsCriteria: 12
   isCrouched: 0
   pathCostFactor: 2
   destinationTrigger: {fileID: 0}
