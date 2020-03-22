@@ -12,7 +12,7 @@ The full controls will be displayed in the main menu. For the sake of convenienc
 * Cycle units using Tab
 * End your turn using Backspace. If you have units moving, this will be rejected.
 * Crouch or stand up using C.
-* Strafe by holding WASD
+* Strafe by pressing WASD
 * Freeze or enable rotation by clicking left Ctrl.
 * Fire by clicking the left mouse button
 * Reload by pressing R
@@ -47,7 +47,7 @@ Implements the `IDamage` interface, which mandates the following functionality:
 * Announce that a bullet hit nearby. This will be used to provide suppression effects.
 
 Player-controlled units will have the following additional components:
-* PlayerUnitControl - handles input for the currently selected unit.
+* PlayerUnitControl - handles input for the currently selected unit. This component is disabled when the unit is deselected.
 * PlayerUnitDisplay - displays unit health, action points and ammo count.
 
 ### Unit manager
