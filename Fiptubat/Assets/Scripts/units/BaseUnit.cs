@@ -161,10 +161,10 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			isClear = true;
 		}
 
-		if (currentActionPoints >= 2 && isClear) {
+		if (currentActionPoints >= 4 && isClear) {
 			direction.y = 0f;
 			navMeshAgent.Move(direction * offset);
-			currentActionPoints -= 2;
+			currentActionPoints -= 4;
 		}
 		
 	}
@@ -187,10 +187,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// and decreased chance to be hit.
 	/// </summary>
 	public virtual void Crouch() {
-		isCrouched = !isCrouched;
-		currentActionPoints -= 4;
-		CrouchAnimation(isCrouched);
-		weapon.ToggleCrouch(isCrouched);
+		if (currentActionPoints >= 4) {
+			isCrouched = !isCrouched;
+			currentActionPoints -= 4;
+			CrouchAnimation(isCrouched);
+			weapon.ToggleCrouch(isCrouched);
+		}
 	}
 
 	/// <summary>

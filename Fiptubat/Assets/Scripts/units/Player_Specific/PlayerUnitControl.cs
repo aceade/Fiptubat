@@ -116,7 +116,7 @@ public class PlayerUnitControl : MonoBehaviour {
                 canMove = false;
             }
 
-            if (hasReachedDestination) {
+            if (hasReachedDestination && canMove) {
                 
                 float sidestepSpeed = Input.GetAxisRaw("Sidestep");
                 float frontstepSpeed = Input.GetAxisRaw("Step");
@@ -143,18 +143,16 @@ public class PlayerUnitControl : MonoBehaviour {
                     strafingForward = false;
                 }
 
-                if (canMove) {
-                    if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
-                        unit.Attack();
-                    }
+                if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
+                    unit.Attack();
+                }
 
-                    if (Input.GetButtonDown("Reload")) {
-                        unit.Reload();
-                    }
+                if (Input.GetButtonDown("Reload")) {
+                    unit.Reload();
+                }
 
-                    if (Input.GetButtonDown("CycleFireMode")) {
-                        unit.ChangeFireMode();
-                    }
+                if (Input.GetButtonDown("CycleFireMode")) {
+                    unit.ChangeFireMode();
                 }
             }
         }
