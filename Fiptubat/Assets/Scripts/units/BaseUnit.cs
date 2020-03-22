@@ -148,19 +148,23 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// <summary>
 	/// Sidestep in a particular direction to step into/out of cover.
 	/// </summary>
-	/// <param name="startPosition">Where they start</param>
 	/// <param name="direction">The direction in which to step</param>
-	public void SideStep(Vector3 startPosition, Vector3 direction) {
+	public void SideStep(Vector3 direction) {
+		float offset = navMeshAgent.radius * 2;
 
-		if (currentActionPoints >= 2 ) {
+		RaycastHit clearanceCheck;
+		bool isClear;
+		if (Physics.Raycast(myTransform.position, direction, out clearanceCheck, offset, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+			Debug.LogFormat("Checking clearance from {0}. Hit results: Transform: {1} Position: {2}", myTransform.position, clearanceCheck, clearanceCheck.transform, clearanceCheck.point);
+			isClear = false;
+		} else {
+			isClear = true;
+		}
+
+		if (currentActionPoints >= 2 && isClear) {
 			direction.y = 0f;
-			myTransform.Translate(direction * Time.deltaTime);
-			float distance = Vector3.Distance(myTransform.position, startPosition);
-			// this seems to fire twice, so the cost is actually 4 points.
-			// leave for now
-			if (distance % 1f >= 0.99f) {
-				currentActionPoints -= 2;
-			}
+			navMeshAgent.Move(direction * offset);
+			currentActionPoints -= 2;
 		}
 		
 	}

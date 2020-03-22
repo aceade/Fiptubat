@@ -18,7 +18,7 @@ public class Turret : BaseUnit
         base.Start();
         startDir = myTransform.forward;
         barrel = myTransform.Find("Barrel");
-        animator.SetScanStatus(true);
+        Invoke("Scan", 0.5f);
     }
 
     public override void Crouch() {

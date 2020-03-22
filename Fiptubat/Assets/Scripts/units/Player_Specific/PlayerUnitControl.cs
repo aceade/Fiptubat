@@ -30,7 +30,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private float rotationSpeed;
 
-    private Vector3 lastStationaryPosition, destination;
+    private Vector3 destination;
 
     private bool canMove = true;
 
@@ -38,13 +38,15 @@ public class PlayerUnitControl : MonoBehaviour {
 
     public LineRenderer pathDisplay;
 
+    private bool sideStepping;
+    private bool strafingForward;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
         unitDisplay = GetComponent<PlayerUnitDisplay>();
         myCamera = GetComponentInChildren<Camera>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        lastStationaryPosition = myTransform.position;
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
         unitDisplay.ToggleUsingUi(usingUI);
     }
@@ -116,17 +118,27 @@ public class PlayerUnitControl : MonoBehaviour {
 
             if (hasReachedDestination) {
                 
-                float sidestepSpeed = Input.GetAxis("Sidestep");
-                float frontstepSpeed = Input.GetAxis("Step");
-                unit.SideStep(lastStationaryPosition, Vector3.left * sidestepSpeed);
-                unit.SideStep(lastStationaryPosition, Vector3.forward * frontstepSpeed);
+                float sidestepSpeed = Input.GetAxisRaw("Sidestep");
+                float frontstepSpeed = Input.GetAxisRaw("Step");
 
-                // navigation interferes with sidestepping
-                if (Mathf.Abs(sidestepSpeed) > 0 || Mathf.Abs(frontstepSpeed) > 0) {
-                    navMeshAgent.enabled = false;
-                } else {
-                    navMeshAgent.enabled = true;
-                    lastStationaryPosition = myTransform.position;
+                if (Mathf.Abs(sidestepSpeed) > 0f) {
+                    if (!sideStepping) {
+                        sideStepping = true;
+                        unit.SideStep(myTransform.right * -sidestepSpeed);
+                    }
+                }
+                else {
+                    sideStepping = false;
+                }
+
+                if (Mathf.Abs(frontstepSpeed) > 0f) {
+                    if (!strafingForward) {
+                        strafingForward = true;
+                        unit.SideStep(myTransform.forward * frontstepSpeed);
+                    }
+                }
+                else {
+                    strafingForward = false;
                 }
 
                 if (canMove) {
@@ -173,7 +185,6 @@ public class PlayerUnitControl : MonoBehaviour {
 
                 // left click to select it
                 if (Input.GetButtonDown("Fire1")) {
-                    lastStationaryPosition = myPosition;
                     destination = possibleDestination;
                     bool canReachDestination = unit.SetDestination(possibleDestination);
                     moveMarker.SetPosition(possibleDestination, canReachDestination);
@@ -182,7 +193,6 @@ public class PlayerUnitControl : MonoBehaviour {
                     }
                 }
             }
-            
         } else {
             uiManager.ClearDistanceText();
             moveMarker.Hide();
@@ -207,8 +217,6 @@ public class PlayerUnitControl : MonoBehaviour {
         navMeshAgent.updateRotation = !reached;
         if (reached) {
             Debug.LogFormat("{0} has reached their destination", this);
-            lastStationaryPosition = myTransform.position;
-            
         }
     }
 
