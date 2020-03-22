@@ -102,10 +102,6 @@ public class PlayerUnitControl : MonoBehaviour {
             // hold down the right mouse button to get paths/positions
             bool selectingPath = Input.GetButton("Fire2") && canMove;
             HandlePath(selectingPath);
-            
-            if(Input.GetButtonDown("Crouch") && canMove) {
-                unit.Crouch();
-            }
 
             if (Input.GetButtonDown("CycleUnit")) {
                 uiManager.CycleUnit();
@@ -117,6 +113,11 @@ public class PlayerUnitControl : MonoBehaviour {
             }
 
             if (hasReachedDestination && canMove) {
+
+                            
+                if(Input.GetButtonDown("Crouch")) {
+                    unit.Crouch();
+                }
                 
                 float sidestepSpeed = Input.GetAxisRaw("Sidestep");
                 float frontstepSpeed = Input.GetAxisRaw("Step");

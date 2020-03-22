@@ -49,9 +49,11 @@ public class PlayerUnit : BaseUnit {
     }
 
     public override void Crouch() {
-        base.Crouch();
-        float offset = isCrouched ? -0.6f : 0.6f;
-        unitControl.MoveCamera(offset);
+        if (currentActionPoints >= 4) {
+            base.Crouch();
+            float offset = isCrouched ? -0.6f : 0.6f;
+            unitControl.MoveCamera(offset);
+        }
     }
 
     public override void FindCover(Vector3 position, Vector3 direction) {

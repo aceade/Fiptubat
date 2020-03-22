@@ -97,6 +97,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		if (potentialCost <= GetRemainingActionPoints()) {
 			targetLocation = newDestination;
 			isStillMoving = true;
+			navMeshAgent.updateRotation = true;
 			navMeshAgent.path = path;
 			voiceSystem.Moving();
 			currentActionPoints -= potentialCost;
@@ -163,7 +164,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 		if (currentActionPoints >= 4 && isClear) {
 			direction.y = 0f;
-			navMeshAgent.Move(direction * offset);
+			navMeshAgent.updateRotation = false;
+			navMeshAgent.destination = myTransform.position + (direction * offset);
 			currentActionPoints -= 4;
 		}
 		
