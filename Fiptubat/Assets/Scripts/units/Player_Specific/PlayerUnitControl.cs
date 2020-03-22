@@ -121,6 +121,8 @@ public class PlayerUnitControl : MonoBehaviour {
                 float sidestepSpeed = Input.GetAxisRaw("Sidestep");
                 float frontstepSpeed = Input.GetAxisRaw("Step");
 
+                // effectively equivalent to "GetAxisDown" - only sidestep if pressing, 
+                // but not holding the buttons
                 if (Mathf.Abs(sidestepSpeed) > 0f) {
                     if (!sideStepping) {
                         sideStepping = true;
