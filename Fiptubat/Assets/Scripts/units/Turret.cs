@@ -91,9 +91,9 @@ public class Turret : BaseUnit
     }
 
     public override void TargetSpotted(IDamage target) {
+        animator.SetScanStatus(false);
         if (health > 0) {
             targetSpotted = true;
-            animator.SetScanStatus(false);
             base.TargetSpotted(target);
         } else {
             unitManager.AlertAllUnits(target);
