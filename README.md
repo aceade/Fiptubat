@@ -124,18 +124,18 @@ These are **not** committed to the repo.
 * Unity NavMeshComponents
 
 ### Sounds
-* Siren noises from [](https://www.freesound.org/people/guitarguy1985/packs/3355/)
-* Beeps from [](https://freesound.org/people/AlaskaRobotics/packs/14049/)
+* Siren noises from [guitarguy](https://www.freesound.org/people/guitarguy1985/packs/3355/)
+* Beeps from [AlaskaRobotics](https://freesound.org/people/AlaskaRobotics/packs/14049/)
 * Background music:
-    * Sirkoto51's background loops: [](https://freesound.org/people/Sirkoto51/packs/21233/)
-    * "Theme for Sadistic.wav" by Grezgor: [](https://freesound.org/people/Gregzor/sounds/181827/)
-    * "Orchestral Victory Fanfare" by Sheyvan: [](https://freesound.org/people/Sheyvan/sounds/470083/)
-* Laser guns from [](https://freesound.org/people/Terry93D/packs/18390/)
-* Scifi gun noise pack from AniCator: [](https://freesound.org/people/AniCator/packs/2524/)
+    * Background loops: [Sirkoto51](https://freesound.org/people/Sirkoto51/packs/21233/)
+    * "Theme for Sadistic.wav": [Grezgor](https://freesound.org/people/Gregzor/sounds/181827/)
+    * "Orchestral Victory Fanfare": [Sheyvan](https://freesound.org/people/Sheyvan/sounds/470083/)
+* Laser guns from [Terry93D](https://freesound.org/people/Terry93D/packs/18390/)
+* Scifi gun noise pack from [AniCator](https://freesound.org/people/AniCator/packs/2524/)
 
 ### Images
-* Smiley face: [](https://commons.wikimedia.org/wiki/File:Face-smile.svg) (public domain)
-* Sad face: [](https://commons.wikimedia.org/wiki/File:Face-sad.svg) (public domain)
-* Cursor: [](https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg) (CC BY-SA 2.5)
+* Smiley face: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Face-smile.svg) (public domain)
+* Sad face: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Face-sad.svg) (public domain)
+* Cursor: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg) (CC BY-SA 2.5)
 
 Numerous textures from [textures.com](https://www.textures.com/)
