@@ -45,11 +45,13 @@ public class CoverFinder : MonoBehaviour
         float radius = initialRadius;
 
         Dictionary<Vector3, CoverResult> samples = new Dictionary<Vector3, CoverResult>();
+        CoverResult result = null;
 
         while (currentAttempts < maxAttempts) {
             // Obtain random positions around my current position.
             samples = samplePositions(currentPosition, radius, direction);
-            if (samples.Count == 0 ) {
+            result = choosePosition(samples, currentPosition);
+            if (samples.Count == 0 || result == null ) {
                 currentAttempts++;
                 radius *= 2;
             } else  {
@@ -57,13 +59,22 @@ public class CoverFinder : MonoBehaviour
             }
         }
 
-        if (samples.Count == 0) {
+        if (samples.Count == 0 || result == null) {
             Debug.LogWarningFormat("{0} can't find cover!", this);
-            return new CoverResult(nullPosition);
+            result = new CoverResult(nullPosition);
         }
+        return result;
+        
+    }
 
-        // Then discard any that don't sufficiently point away from the target direction and choose the closest remaining
-        var sortedByDot = samples.OrderBy(d => d.Value.GetNormal()).Where(d => d.Value.GetNormal() > coverAngleCriteria);
+    /// <summary>
+    /// Choose a position. Discard any that don't sufficiently point away from the target direction and choose the closest remaining
+    /// </summary>
+    /// <param name="positions"></param>
+    /// <param name="currentPosition"></param>
+    /// <returns></returns>
+    private CoverResult choosePosition(Dictionary<Vector3, CoverResult> positions, Vector3 currentPosition) {
+        var sortedByDot = positions.OrderBy(d => d.Value.GetNormal()).Where(d => d.Value.GetNormal() > coverAngleCriteria);
         try {
 		    CoverResult target = sortedByDot.Aggregate((x,y) => Vector3.Distance(x.Value.GetPosition(), currentPosition) 
                 < Vector3.Distance(y.Value.GetPosition(), currentPosition) ? x : y).Value; 
@@ -71,9 +82,8 @@ public class CoverFinder : MonoBehaviour
             return target;
         } catch (System.InvalidOperationException e) {
             Debug.LogWarningFormat("{0} can't find ANY cover! {1}", this, e.Message);
-            return new CoverResult(nullPosition);
+            return null;
         }
-
     }
 
     private Dictionary<Vector3, CoverResult> samplePositions(Vector3 startPosition, float radius, Vector3 targetDirection) {

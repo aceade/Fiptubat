@@ -25,6 +25,8 @@ namespace Aceade.AI {
 
 		public float maxDetectionRange = 30f;
 
+		public Vector3 viewingOffset = Vector3.up;
+
 		// Use this for initialization
 		void Start () 
 		{
@@ -130,7 +132,7 @@ namespace Aceade.AI {
 				return false;
 			}
 			else {
-				return AnalyseTargetVisibility(target.GetTransform(), transform.position);
+				return AnalyseTargetVisibility(target.GetTransform(), transform.position + viewingOffset);
 			}
 		}
 

@@ -27,6 +27,7 @@ public class HumanoidEnemy : BaseUnit
         if (targetSpotted || beenAttacked) {
             IDamage target = targetSelection.SelectTarget();
             if (lineOfSight.CanSeeTarget(target)) {
+                Debug.LogFormat("{0} opening fire on {1}", this, target.GetTransform());
                 PerformAttack();
             } else {
                 FindCover(target.GetTransform().position, target.GetTransform().position - myTransform.position);
