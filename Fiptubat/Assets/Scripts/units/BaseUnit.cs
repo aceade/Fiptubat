@@ -303,7 +303,6 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void Attack() {
 		int attackCost = weapon.GetCurrentFireCost();
-		Debug.LogFormat("{0} attacking. Attack cost: {1}", this, attackCost);
 		if (IsWeaponReady() && currentActionPoints > 0 && currentActionPoints >= attackCost) {
 			
 			if (!weapon.Fire()) {
