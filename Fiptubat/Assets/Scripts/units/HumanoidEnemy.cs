@@ -24,11 +24,16 @@ public class HumanoidEnemy : BaseUnit
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
 
+        // they're trained to reload where possible
+        if (weapon.GetRemainingAmmo() <= 2) {
+            Reload();
+        }
+
         if (targetSpotted || beenAttacked) {
             IDamage target = targetSelection.SelectTarget();
             if (lineOfSight.CanSeeTarget(target)) {
                 Debug.LogFormat("{0} opening fire on {1}", this, target.GetTransform());
-                PerformAttack();
+                 StartCoroutine(PerformAttack());
             } else {
                 FindCover(target.GetTransform().position, target.GetTransform().position - myTransform.position);
             }
@@ -37,18 +42,20 @@ public class HumanoidEnemy : BaseUnit
         }
     }
 
-    private void PerformAttack() {
-        if (weapon.GetCurrentFireCost() >= currentActionPoints) {
+    private IEnumerator PerformAttack() {
+        while (weapon.GetCurrentFireCost() <= currentActionPoints) {
             Attack();
-        } else {
-            // they're drilled to reload where possible
-            if (weapon.GetRemainingAmmo() < 2) {
+
+            if (weapon.GetRemainingAmmo() == 0) {
                 Debug.LogFormat("{0} can't fire - reloading!", this);
                 Reload();
             }
-            FinishedTurn();
+            yield return new WaitForSeconds(weapon.fireRate);
         }
+        // if they can't attack any more, then they're done for this turn
+        FinishedTurn();
     }
+    
 
     /// <summary>
     /// Should only occur when moving to cover.
@@ -59,7 +66,7 @@ public class HumanoidEnemy : BaseUnit
             if (lineOfSight.CanSeeTarget(target)) {
                 Debug.LogFormat("{0} in cover at {1}! Opening fire on {2}", this, myTransform.position, target.GetTransform());
                 TrackTarget(target);
-                PerformAttack();
+                StartCoroutine(PerformAttack());
             } else {
                 // call in the hostile sighting
                 Debug.LogFormat("{0} in cover at {1}, but can't see {2}! Calling it in", this, myTransform.position, target.GetTransform());
@@ -123,13 +130,18 @@ public class HumanoidEnemy : BaseUnit
 
     public override void FindCover(Vector3 position, Vector3 direction) {
         CoverResult target = coverFinder.FindCover(position, direction);
-		destinationTrigger.SetPosition(target.GetPosition());
-		if (!SetDestination(target.GetPosition())) {
-			Debug.LogFormat("{0} can't reach cover at {1}!", this, target);
-            // at least crouching makes them harder to hit.
-            Crouch();
-            FinishedTurn();
-		}
+        if (Vector3.Distance(myTransform.position, target.GetPosition()) > 1f) {
+            destinationTrigger.SetPosition(target.GetPosition());
+            if (!SetDestination(target.GetPosition())) {
+                Debug.LogFormat("{0} can't reach cover at {1}!", this, target);
+                // at least crouching makes them harder to hit.
+                Crouch();
+                FinishedTurn();
+            }
+        } else {
+            // if already in position, fire at will
+            StartCoroutine(PerformAttack());
+        }
     }
 
     void Update() {
