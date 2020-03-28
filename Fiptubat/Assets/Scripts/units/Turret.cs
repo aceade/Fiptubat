@@ -14,7 +14,7 @@ public class Turret : BaseUnit
 
     protected override void Start(){
         base.Start();
-        barrel = myTransform.Find("Body").Find("Barrel");
+        barrel = myTransform.Find("Barrel");
         Invoke("Scan", 0.5f);
     }
 
@@ -83,10 +83,12 @@ public class Turret : BaseUnit
     protected override void TrackTarget(IDamage target) {
         Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
         horizontalDir.y = 0;
-        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 0f);
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 1f);
         myTransform.rotation = Quaternion.LookRotation(desired);
-        Vector3 barrelDir = Vector3.RotateTowards(barrel.up, myTransform.position - target.GetTransform().position, combatRotationSpeed * Time.deltaTime, 0f);
-        barrel.up = barrelDir;
+        barrel.LookAt(target.GetTransform());
+        // Vector3 barrelDir = Vector3.RotateTowards(barrel.forward, target.GetTransform().position - myTransform.position, combatRotationSpeed * Time.deltaTime, 1f);
+        // Debug.LogFormat("Barrel direction should be {0}", barrelDir);
+        // barrel.rotation = Quaternion.LookRotation(barrelDir);
         
     }
 

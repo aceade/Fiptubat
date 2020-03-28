@@ -75,9 +75,9 @@ public class WeaponBase : MonoBehaviour
         RaycastHit hit;
         Vector3 fireDir = CalculateFireDirection();
         ShowTracers(fireDir);
+        Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
-            Debug.DrawRay(muzzle.position, fireDir, Color.red, 2f);
             var hitTransform = hit.transform;
             Debug.LogFormat("I hit {0}", hitTransform);
             var damageScript = hitTransform.root.GetComponent<IDamage>();
@@ -103,16 +103,16 @@ public class WeaponBase : MonoBehaviour
     }
 
     protected Vector3 CalculateFireDirection() {
-        Vector3 firDir = muzzle.forward;
+        Vector3 fireDir = muzzle.forward;
         float deviation = fireModes[currentFireMode].deviation;
         if (isCrouched) {
             deviation *= (1 - crouchAccuracyModifier);
             Debug.LogFormat("Gun's accuracy was {0}, is now {1}", fireModes[currentFireMode].deviation, deviation);
         }
-        firDir.x += Random.Range(-deviation, deviation);
-        firDir.y += Random.Range(-deviation, deviation);
-        firDir.z += Random.Range(-deviation, deviation);
-        return firDir;
+        fireDir.x += Random.Range(-deviation, deviation);
+        fireDir.y += Random.Range(-deviation, deviation);
+        fireDir.z += Random.Range(-deviation, deviation);
+        return fireDir;
     }
 
     public FireMode GetCurrentFireMode() {
