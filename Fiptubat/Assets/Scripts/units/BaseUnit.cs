@@ -137,6 +137,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	/// </summary>
 	/// <param name="isMyTurn">Only used in player units. If <code>false</code>, they can't do anything but look around</param>
 	public virtual void SelectUnit(bool isMyTurn) {
+		Debug.LogFormat("{0} has been selected as the active unit", this);
 		isSelected = true;
         // no-op
     }

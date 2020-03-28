@@ -12,12 +12,9 @@ public class Turret : BaseUnit
 
     public float combatRotationSpeed = 10f;
 
-    private Vector3 startDir;
-
     protected override void Start(){
         base.Start();
-        startDir = myTransform.forward;
-        barrel = myTransform.Find("Barrel");
+        barrel = myTransform.Find("Body").Find("Barrel");
         Invoke("Scan", 0.5f);
     }
 
@@ -88,6 +85,9 @@ public class Turret : BaseUnit
         horizontalDir.y = 0;
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 0f);
         myTransform.rotation = Quaternion.LookRotation(desired);
+        Vector3 barrelDir = Vector3.RotateTowards(barrel.up, myTransform.position - target.GetTransform().position, combatRotationSpeed * Time.deltaTime, 0f);
+        barrel.up = barrelDir;
+        
     }
 
     public override void TargetSpotted(IDamage target) {
