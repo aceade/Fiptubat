@@ -144,6 +144,14 @@ public class HumanoidEnemy : BaseUnit
         }
     }
 
+    protected override void TrackTarget(IDamage target) {
+        Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
+        horizontalDir.y = 0;
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, navMeshAgent.angularSpeed * Time.deltaTime, 0f);
+        myTransform.rotation = Quaternion.LookRotation(desired);
+        weapon.transform.LookAt(target.GetTransform());
+    }
+
     void Update() {
         if (targetSpotted) {
             IDamage target = targetSelection.SelectTarget();
