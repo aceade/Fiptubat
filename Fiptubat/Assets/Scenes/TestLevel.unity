@@ -3473,7 +3473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 312466030}
   m_LocalRotation: {x: -0, y: 0.10575293, z: -0, w: 0.99439245}
-  m_LocalPosition: {x: -0.19, y: 1.12, z: -0.13}
+  m_LocalPosition: {x: -0.19, y: 0.988, z: -0.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1694203480}
@@ -4241,6 +4241,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0b000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!135 &438185537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5034,6 +5035,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0a000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!135 &539912869
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5708,7 +5710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591858229}
   m_LocalRotation: {x: -0, y: 0.10575293, z: -0, w: 0.99439245}
-  m_LocalPosition: {x: -0.56, y: 1.12, z: -0.15}
+  m_LocalPosition: {x: -0.56, y: 0.988, z: -0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1902308434}
@@ -5800,7 +5802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599332464}
   m_LocalRotation: {x: -0, y: 0.06036865, z: -0, w: 0.9981762}
-  m_LocalPosition: {x: -1.25, y: 1.12, z: 0.06}
+  m_LocalPosition: {x: -1.25, y: 0.98800004, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1694203480}
@@ -6760,7 +6762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 783751489}
   m_LocalRotation: {x: -0, y: 0.06036865, z: -0, w: 0.9981762}
-  m_LocalPosition: {x: -1.25, y: 2.15, z: 0.06}
+  m_LocalPosition: {x: -1.25, y: 1.978, z: 0.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1694203480}
@@ -7146,6 +7148,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0b000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!135 &824113128
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7970,6 +7973,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0a000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!64 &947787543
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12352,6 +12356,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0a000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!1001 &1423174508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13507,6 +13512,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0b000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!135 &1605431012
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14083,6 +14089,7 @@ MonoBehaviour:
   detectionInterval: 0.2
   detectionLayers: 0a000000
   maxDetectionRange: 30
+  viewingOffset: {x: 0, y: 1, z: 0}
 --- !u!135 &1669614624
 SphereCollider:
   m_ObjectHideFlags: 0
