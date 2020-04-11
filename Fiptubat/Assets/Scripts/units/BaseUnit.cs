@@ -101,6 +101,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			navMeshAgent.path = path;
 			voiceSystem.Moving();
 			currentActionPoints -= potentialCost;
+			animator.StartMoving();
+			destinationTrigger.SetPosition(newDestination);
 			return true;
 		} else {
 			Debug.LogFormat("{0}'s selected destination ({1}) is too far away!", unitName, newDestination);
@@ -167,6 +169,8 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			direction.y = 0f;
 			navMeshAgent.updateRotation = false;
 			navMeshAgent.destination = myTransform.position + (direction * offset);
+			animator.Strafe(direction);
+			destinationTrigger.SetPosition(myTransform.position + (direction * offset));
 			currentActionPoints -= 4;
 		}
 		
@@ -305,6 +309,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	public virtual void Attack() {
 		int attackCost = weapon.GetCurrentFireCost();
 		if (IsWeaponReady() && currentActionPoints > 0 && currentActionPoints >= attackCost) {
+			animator.Attack();
 			
 			if (!weapon.Fire()) {
 				if (weapon.GetRemainingAmmo() == 0) {
@@ -330,6 +335,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 			if (currentActionPoints > 0 && currentActionPoints >= reloadCost) {
 				voiceSystem.Reloading();
 				weapon.Reload();
+				animator.Reload();
 				currentActionPoints -= reloadCost;
 				shotsMissedThisTurn = 0;
 			}
@@ -405,7 +411,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 	}
 
 	public virtual void ReachedDestination() {
-		// no-op for Turret or PatrolBot
+		animator.StopMoving();
 	}
 	
 	void OnCollisionEnter(Collision coll) {
