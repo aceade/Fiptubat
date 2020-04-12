@@ -48,12 +48,13 @@ public class PlayerUnit : BaseUnit {
         return (navMeshAgent.velocity.sqrMagnitude > 0.1f);
     }
 
-    public override void Crouch() {
-        if (currentActionPoints >= 4) {
-            base.Crouch();
-            float offset = isCrouched ? -0.6f : 0.6f;
-            unitControl.MoveCamera(offset);
-        }
+    public override void ReachedDestination() {
+        base.ReachedDestination();
+        unitControl.ReachedDestination(true);
+    }
+
+    public void RotateVertically(float angle) {
+        animator.SetVerticalAimAngle(angle);
     }
 
     public override void FindCover(Vector3 position, Vector3 direction) {

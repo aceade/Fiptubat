@@ -57,8 +57,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
         fireModeField = texts[5];
         nameField.text = unit.unitName;
         weapon = GetComponentInChildren<WeaponBase>();
-        crosshairsWidth = crosshairs.rectTransform.rect.width;
-        crosshairsHeight = crosshairs.rectTransform.rect.height;
     }
 
     void Update() {
@@ -74,10 +72,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
         bool isSelected = unit.IsSelected();
         ShowIfSelected(isSelected);
-        if (isSelected) {
-            ShowCrosshairs();
-        }
-
         ShowUiStatus();
         
     }
@@ -108,13 +102,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
         } else {
             statusImage.sprite = damagedSprite;
         }
-    }
-
-    private void ShowCrosshairs() {
-        float deviation = weapon.GetDeviation() * 100;
-        // get the size
-        crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, crosshairsWidth + deviation);
-        crosshairs.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, crosshairsHeight + deviation);
     }
 
     public void ToggleUsingUi(bool isUsingUi) {

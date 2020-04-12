@@ -19,7 +19,8 @@ public class UnitAnimator : MonoBehaviour
     }
 
     /// <summary>
-    /// Used by humanoid units to crouch. Currently based on changing collider heights
+    /// Used by humanoid units to crouch. Currently based on changing collider heights.
+    /// TODO: add colliders based on bones
     /// </summary>
     /// <param name="crouched"></param>
     public void Crouch(bool crouched) {
@@ -34,29 +35,35 @@ public class UnitAnimator : MonoBehaviour
 		}
     }
 
+    /// <summary>
+    /// Start moving. For humans, point the gun at the ground while doing so.
+    /// </summary>
     public void StartMoving() {
         animator.SetFloat("InputMagnitude", 1f);
-        animator.SetFloat("Vertical", 1f);
+        animator.SetFloat("Vertical", 2f);
+        animator.SetFloat("Aim", 0f);
     }
 
     public void StopMoving() {
         animator.SetFloat("InputMagnitude", 0f);
+        animator.SetFloat("Vertical", 0f);
+        animator.SetFloat("Horizontal", 0f);
+        animator.SetFloat("Aim", 1f);
     }
 
     public void Strafe(Vector3 direction) {
         float frontDot = Vector3.Dot(transform.forward, direction);
         float sideDot = Vector3.Dot(transform.right, direction);
-        if (frontDot != 0) {
-            animator.SetFloat("Vertical", 1f);
-        } else {
-            animator.SetFloat("Horizontal", 1f);
-        }
-        Invoke("ResetStrafe", 1f);
+        animator.SetFloat("Vertical", frontDot);
+        animator.SetFloat("Horizontal", sideDot);
+        animator.SetFloat("InputMagnitude", 1f);
+        Invoke("ResetStrafe", 0.3f);
     }
 
     private void ResetStrafe() {
         animator.SetFloat("Vertical", 0f);
         animator.SetFloat("Horizontal", 0f);
+        animator.SetFloat("InputMagnitude", 0f);
     }
 
     public void Attack() {
@@ -67,8 +74,17 @@ public class UnitAnimator : MonoBehaviour
         animator.SetTrigger("Reload");
     }
 
+    public void SetVerticalAimAngle(float angle) {
+        if (Mathf.Abs(angle) > 0.1f) {
+            animator.SetFloat("VerAimAngle", angle);
+        }
+    }
+
+    public void SetAim(float aim) {
+        animator.SetFloat("Aim", aim);
+    }
+
     public void Vault() {
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 2f, ForceMode.Impulse);
         animator.SetTrigger("Vault");
     }
 

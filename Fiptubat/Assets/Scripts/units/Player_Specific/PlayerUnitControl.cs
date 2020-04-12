@@ -41,6 +41,8 @@ public class PlayerUnitControl : MonoBehaviour {
     private bool sideStepping;
     private bool strafingForward;
 
+    private Transform gunBase;
+
     void Start () {
         myTransform = transform;
         unit = GetComponent<PlayerUnit>();
@@ -49,6 +51,7 @@ public class PlayerUnitControl : MonoBehaviour {
         navMeshAgent = GetComponent<NavMeshAgent>();
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
         unitDisplay.ToggleUsingUi(usingUI);
+        gunBase = GetComponentInChildren<WeaponBase>().transform;
     }
 
     void OnEnable() {
@@ -93,11 +96,12 @@ public class PlayerUnitControl : MonoBehaviour {
         if (!usingUI && !uiManager.isPaused()) {
             myPosition = myTransform.position;
             myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
-            myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
+            //unit.RotateVertically(-rotationSpeed * Input.GetAxis("Mouse Y"));
 
             // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
             myTransform.Rotate(-Vector3.up * rotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime);
-            myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Vertical") * Time.deltaTime, 0f, 0f);
+            unit.RotateVertically(rotationSpeed * Input.GetAxis("Vertical"));
+            
 
             // hold down the right mouse button to get paths/positions
             bool selectingPath = Input.GetButton("Fire2") && canMove;
@@ -160,6 +164,12 @@ public class PlayerUnitControl : MonoBehaviour {
         
     }
 
+    void LateUpdate() {
+        if (hasReachedDestination) {
+            myCamera.transform.forward = gunBase.forward;
+        }
+    }
+
     private void HandlePath(bool selectingPath) {
         if (selectingPath) {
 
@@ -191,6 +201,7 @@ public class PlayerUnitControl : MonoBehaviour {
                     moveMarker.SetPosition(possibleDestination, canReachDestination);
                     if (canReachDestination) {
                         pathDisplay.enabled = false;
+                        ReachedDestination(false);
                     }
                 }
             }
