@@ -15,12 +15,6 @@ public class HumanoidEnemy : BaseUnit
 
     private int patrolIndex;
 
-    // Start is called before the first frame update
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
 
@@ -61,18 +55,19 @@ public class HumanoidEnemy : BaseUnit
     /// Should only occur when moving to cover.
     /// </summary>
     public override void ReachedDestination() {
-            IDamage target = targetSelection.SelectTarget();
-            int attackCost = weapon.GetCurrentFireCost();
-            if (lineOfSight.CanSeeTarget(target)) {
-                Debug.LogFormat("{0} in cover at {1}! Opening fire on {2}", this, myTransform.position, target.GetTransform());
-                TrackTarget(target);
-                StartCoroutine(PerformAttack());
-            } else {
-                // call in the hostile sighting
-                Debug.LogFormat("{0} in cover at {1}, but can't see {2}! Calling it in", this, myTransform.position, target.GetTransform());
-                unitManager.AlertAllUnits(target);
-                FinishedTurn();
-            }
+        base.ReachedDestination();
+        IDamage target = targetSelection.SelectTarget();
+        int attackCost = weapon.GetCurrentFireCost();
+        if (lineOfSight.CanSeeTarget(target)) {
+            Debug.LogFormat("{0} in cover at {1}! Opening fire on {2}", this, myTransform.position, target.GetTransform());
+            TrackTarget(target);
+            StartCoroutine(PerformAttack());
+        } else {
+            // call in the hostile sighting
+            Debug.LogFormat("{0} in cover at {1}, but can't see {2}! Calling it in", this, myTransform.position, target.GetTransform());
+            unitManager.AlertAllUnits(target);
+            FinishedTurn();
+        }
     }
 
     void Patrol() {

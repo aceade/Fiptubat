@@ -123,6 +123,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	protected virtual void FinishedTurn() {
 		isStillMoving = false;
+		animator.StopMoving();
 		unitManager.UnitFinished(this);
 	}
 

@@ -267,7 +267,7 @@ MonoBehaviour:
   tooManyMissedShotsCriteria: 12
   isCrouched: 0
   pathCostFactor: 2
-  destinationTrigger: {fileID: 0}
+  destinationTrigger: {fileID: 538594570}
   patrolRoute:
   - {fileID: 64775307}
   - {fileID: 1843929035}
@@ -605,6 +605,18 @@ MonoBehaviour:
   nullPosition: {x: 0, y: -200, z: 0}
   coverAngleCriteria: 0
   maxAttempts: 3
+--- !u!114 &54975560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54975546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b8fb6d36c548a0cada29a96e424c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &56850593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1051,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -3221,7 +3233,7 @@ MonoBehaviour:
   tooManyMissedShotsCriteria: 3
   isCrouched: 0
   pathCostFactor: 2
-  destinationTrigger: {fileID: 351941888}
+  destinationTrigger: {fileID: 566238240}
   patrolRoute: []
 --- !u!136 &233569348
 CapsuleCollider:
@@ -4119,7 +4131,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.2
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -4391,6 +4403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &351941889
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4402,7 +4415,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &351941890
 MeshRenderer:
@@ -6012,6 +6025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &538594571
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6023,7 +6037,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &538594572
 MeshRenderer:
@@ -6195,6 +6209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &566238241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6206,7 +6221,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &566238242
 MeshRenderer:
@@ -7036,16 +7051,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -2815356830624878522, guid: 67412a5da8be7fbb3af22ce945ebee77,
-        type: 3}
-      propertyPath: m_SkinnedMotionVectors
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -2815356830624878522, guid: 67412a5da8be7fbb3af22ce945ebee77,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -4456870181419798488, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_Layer
@@ -7441,15 +7446,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.7
       objectReference: {fileID: 0}
-    - target: {fileID: -3463847028015561138, guid: 67412a5da8be7fbb3af22ce945ebee77,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1812571883013415311, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -2815356830624878522, guid: 67412a5da8be7fbb3af22ce945ebee77,
+        type: 3}
+      propertyPath: m_SkinnedMotionVectors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2815356830624878522, guid: 67412a5da8be7fbb3af22ce945ebee77,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3463847028015561138, guid: 67412a5da8be7fbb3af22ce945ebee77,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67412a5da8be7fbb3af22ce945ebee77, type: 3}
@@ -9370,7 +9385,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -10417,6 +10432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &1045710107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13838,6 +13854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &1413292578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15457,6 +15474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &1537973083
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15468,7 +15486,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1537973084
 MeshRenderer:
@@ -18063,6 +18081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3856fdffae802055cb11ef8d92da22ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: 1
 --- !u!65 &1753638142
 BoxCollider:
   m_ObjectHideFlags: 0

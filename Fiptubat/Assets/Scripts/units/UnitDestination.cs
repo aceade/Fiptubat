@@ -12,6 +12,8 @@ public class UnitDestination : MonoBehaviour
 
     private BaseUnit myUnit;
 
+    public float offset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class UnitDestination : MonoBehaviour
 
     public void SetPosition(Vector3 position) 
     {
-        myTransform.position = position;
+        myTransform.position = position + (Vector3.up * offset);
     }
 
     public void SetUnit(BaseUnit unit) 

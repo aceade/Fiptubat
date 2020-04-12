@@ -172,7 +172,7 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void LateUpdate() {
         if (hasReachedDestination && !attacking && !reloading) {
-            //myCamera.transform.forward = gunBase.forward;
+            myCamera.transform.forward = gunBase.forward;
         }
     }
 

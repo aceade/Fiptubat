@@ -11,11 +11,6 @@ public class PatrolBot : BaseUnit
     public List<PatrolPoint> patrolRoute;
     private int patrolIndex;
 
-    protected override void Start()
-    {
-        base.Start();
-    }
-
     public override void SelectUnit(bool isMyTurn) {
         base.SelectUnit(isMyTurn);
         if (targetSpotted) {
