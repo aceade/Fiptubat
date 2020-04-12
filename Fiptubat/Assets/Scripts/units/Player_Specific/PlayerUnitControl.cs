@@ -36,6 +36,9 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private bool usingUI = true;
 
+    private bool attacking = false;
+    private bool reloading = false;
+
     public LineRenderer pathDisplay;
 
     private bool sideStepping;
@@ -148,11 +151,14 @@ public class PlayerUnitControl : MonoBehaviour {
                     strafingForward = false;
                 }
 
-                if (Input.GetButtonDown("Fire1") && unit.IsWeaponReady() && !selectingPath) {
+                attacking = Input.GetButtonDown("Fire1");
+                reloading = Input.GetButtonDown("Reload");
+
+                if (attacking && unit.IsWeaponReady() && !selectingPath) {
                     unit.Attack();
                 }
 
-                if (Input.GetButtonDown("Reload")) {
+                if (reloading) {
                     unit.Reload();
                 }
 
@@ -165,8 +171,8 @@ public class PlayerUnitControl : MonoBehaviour {
     }
 
     void LateUpdate() {
-        if (hasReachedDestination) {
-            myCamera.transform.forward = gunBase.forward;
+        if (hasReachedDestination && !attacking && !reloading) {
+            //myCamera.transform.forward = gunBase.forward;
         }
     }
 
