@@ -1051,7 +1051,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.3
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -4075,7 +4075,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340026949}
-  m_LocalRotation: {x: -0.043619405, y: -0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: -0.043619405, y: -0.000000008167887, z: -0.0000001870753, w: 0.9990483}
   m_LocalPosition: {x: 0.0000005606562, y: 0.740999, z: -0.04499885}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -4102,7 +4102,7 @@ ParentConstraint:
   m_AffectTranslationZ: 1
   m_AffectRotationX: 0
   m_AffectRotationY: 0
-  m_AffectRotationZ: 0
+  m_AffectRotationZ: 1
   m_IsContraintActive: 1
   m_IsLocked: 1
   m_Sources:
@@ -4131,7 +4131,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.15
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -4514,7 +4514,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1329251192e62074eab14e4d5f50f1e1, type: 2}
+      objectReference: {fileID: 9100000, guid: 3b7ad708108470a01939a954ee30942b, type: 2}
     - target: {fileID: -6057140222963153312, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -6964,7 +6964,7 @@ PrefabInstance:
     - target: {fileID: 8421416397384994322, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6666114030307459702, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
@@ -6985,7 +6985,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1329251192e62074eab14e4d5f50f1e1, type: 2}
+      objectReference: {fileID: 9100000, guid: 3b7ad708108470a01939a954ee30942b, type: 2}
     - target: {fileID: -6057140222963153312, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -8809,7 +8809,7 @@ PrefabInstance:
     - target: {fileID: 8421416397384994322, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6666114030307459702, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
@@ -8830,7 +8830,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1329251192e62074eab14e4d5f50f1e1, type: 2}
+      objectReference: {fileID: 9100000, guid: 3b7ad708108470a01939a954ee30942b, type: 2}
     - target: {fileID: -6057140222963153312, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -9385,7 +9385,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.3
   far clip plane: 200
   field of view: 60
   orthographic: 0
@@ -14457,7 +14457,7 @@ PrefabInstance:
     - target: {fileID: 8421416397384994322, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6666114030307459702, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
@@ -14478,7 +14478,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1329251192e62074eab14e4d5f50f1e1, type: 2}
+      objectReference: {fileID: 9100000, guid: 3b7ad708108470a01939a954ee30942b, type: 2}
     - target: {fileID: -6057140222963153312, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_ApplyRootMotion
@@ -16093,7 +16093,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1329251192e62074eab14e4d5f50f1e1, type: 2}
+      objectReference: {fileID: 9100000, guid: 3b7ad708108470a01939a954ee30942b, type: 2}
     - target: {fileID: -6057140222963153312, guid: 67412a5da8be7fbb3af22ce945ebee77,
         type: 3}
       propertyPath: m_ApplyRootMotion

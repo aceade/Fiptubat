@@ -52,6 +52,8 @@ public class MoveAnimationMarker : MonoBehaviour {
             if (moveType == MoveType.CROUCH) {
                 Debug.LogFormat("{0} should stand up!", coll);
                 unit.CrouchAnimation(false);
+            } else if (moveType == MoveType.CLIMB) {
+                unit.StopClimbing();
             }
         }
     }

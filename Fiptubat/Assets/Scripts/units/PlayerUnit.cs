@@ -57,6 +57,10 @@ public class PlayerUnit : BaseUnit {
         animator.SetVerticalAimAngle(angle);
     }
 
+    public void SetPathStatus(bool selecting) {
+        animator.SetPathStatus(selecting);
+    }
+
     public override void FindCover(Vector3 position, Vector3 direction) {
         throw new System.NotSupportedException("Player units are manually controlled!");
     }

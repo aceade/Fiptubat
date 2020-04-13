@@ -41,14 +41,14 @@ public class UnitAnimator : MonoBehaviour
     public void StartMoving() {
         animator.SetFloat("InputMagnitude", 1f);
         animator.SetFloat("Vertical", 2f);
-        animator.SetFloat("Aim", 0f);
+        SetAim(0f);
     }
 
     public void StopMoving() {
         animator.SetFloat("InputMagnitude", 0f);
         animator.SetFloat("Vertical", 0f);
         animator.SetFloat("Horizontal", 0f);
-        animator.SetFloat("Aim", 1f);
+        SetAim(1f);
     }
 
     public void Strafe(Vector3 direction) {
@@ -80,6 +80,18 @@ public class UnitAnimator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When player units are selecting their path, disable animations
+    /// </summary>
+    /// <param name="selecting"></param>
+    public void SetPathStatus(bool selecting) {
+        if (selecting) {
+            SetAim(0f);
+        } else {
+            SetAim(1f);
+        }
+    }
+
     public void SetAim(float aim) {
         animator.SetFloat("Aim", aim);
     }
@@ -90,6 +102,10 @@ public class UnitAnimator : MonoBehaviour
 
     public void Climb() {
         animator.SetTrigger("Climb");
+    }
+
+    public void StopClimbing() {
+        animator.ResetTrigger("Climb");
     }
 
     /// <summary>

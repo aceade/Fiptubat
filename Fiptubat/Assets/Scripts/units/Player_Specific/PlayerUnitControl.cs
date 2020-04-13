@@ -30,6 +30,8 @@ public class PlayerUnitControl : MonoBehaviour {
 
     private float rotationSpeed;
 
+    private float upAngle;
+
     private Vector3 destination;
 
     private bool canMove = true;
@@ -44,6 +46,8 @@ public class PlayerUnitControl : MonoBehaviour {
     private bool sideStepping;
     private bool strafingForward;
 
+    private bool selectingPath;
+
     private Transform gunBase;
 
     void Start () {
@@ -51,6 +55,7 @@ public class PlayerUnitControl : MonoBehaviour {
         unit = GetComponent<PlayerUnit>();
         unitDisplay = GetComponent<PlayerUnitDisplay>();
         myCamera = GetComponentInChildren<Camera>();
+        upAngle = myCamera.transform.rotation.x;
         navMeshAgent = GetComponent<NavMeshAgent>();
         rotationSpeed = PlayerPrefs.GetFloat("CameraSpeed", 20f);
         unitDisplay.ToggleUsingUi(usingUI);
@@ -66,10 +71,6 @@ public class PlayerUnitControl : MonoBehaviour {
 
     void OnDisable() {
         myCamera.enabled = false;
-    }
-
-    public void MoveCamera(float yOffset) {
-        myCamera.transform.Translate(0f, yOffset, 0f);
     }
 
     public void AllowMovement() {
@@ -97,18 +98,27 @@ public class PlayerUnitControl : MonoBehaviour {
         }
 
         if (!usingUI && !uiManager.isPaused()) {
-            myPosition = myTransform.position;
-            myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
-            //unit.RotateVertically(-rotationSpeed * Input.GetAxis("Mouse Y"));
-
-            // allow arrow keys to rotate (Input.GetAxis has limits on Linux)
-            myTransform.Rotate(-Vector3.up * rotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime);
-            unit.RotateVertically(rotationSpeed * Input.GetAxis("Vertical"));
-            
 
             // hold down the right mouse button to get paths/positions
-            bool selectingPath = Input.GetButton("Fire2") && canMove;
+            selectingPath = Input.GetButton("Fire2") && canMove;
             HandlePath(selectingPath);
+            unit.SetPathStatus(selectingPath);
+
+            myPosition = myTransform.position;
+            myTransform.Rotate(0f, rotationSpeed * Input.GetAxis("Mouse X") * Time.deltaTime, 0f);
+            myTransform.Rotate(-Vector3.up * rotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime);
+
+            // use a consistent angle
+            upAngle += (Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime);
+            upAngle += (Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime);
+
+            if (!selectingPath) {
+                unit.RotateVertically(upAngle);
+            } else {
+                myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
+                myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Vertical") * Time.deltaTime, 0f, 0f);
+            }
+            
 
             if (Input.GetButtonDown("CycleUnit")) {
                 uiManager.CycleUnit();
@@ -167,13 +177,16 @@ public class PlayerUnitControl : MonoBehaviour {
                 }
             }
         }
-        
     }
 
     void LateUpdate() {
-        if (hasReachedDestination && !attacking && !reloading) {
-            myCamera.transform.forward = gunBase.forward;
-        }
+        if (hasReachedDestination) {
+            // keep the camera aimed along the gun barrel
+            if(!attacking && !reloading && !selectingPath) {
+                Vector3 gunForward = gunBase.forward;
+                myCamera.transform.forward = gunForward;
+            }
+        } 
     }
 
     private void HandlePath(bool selectingPath) {

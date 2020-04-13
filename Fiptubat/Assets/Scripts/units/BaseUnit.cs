@@ -217,6 +217,12 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void Climb() {
 		animator.Climb();
+		navMeshAgent.speed /= 2f;
+	}
+
+	public virtual void StopClimbing() {
+		navMeshAgent.speed *= 2f;
+		animator.StopClimbing();
 	}
 
 	public virtual void StandDown() {
