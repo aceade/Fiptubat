@@ -112,7 +112,7 @@ public class PlayerUnitControl : MonoBehaviour {
             upAngle += (Input.GetAxis("Vertical") * rotationSpeed * Time.deltaTime);
             upAngle += (Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime);
 
-            if (!selectingPath) {
+            if (!selectingPath && hasReachedDestination) {
                 unit.RotateVertically(upAngle);
             } else {
                 myCamera.transform.Rotate(-rotationSpeed * Input.GetAxis("Mouse Y") * Time.deltaTime, 0f, 0f);
