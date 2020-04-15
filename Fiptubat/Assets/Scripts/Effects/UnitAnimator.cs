@@ -108,6 +108,10 @@ public class UnitAnimator : MonoBehaviour
         animator.ResetTrigger("Climb");
     }
 
+    public void Die() {
+        animator.SetTrigger("Dying");
+    }
+
     /// <summary>
     /// Only used by turrets.
     /// </summary>

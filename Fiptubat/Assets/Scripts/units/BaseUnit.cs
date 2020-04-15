@@ -362,6 +362,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 		lineOfSight.StopAllCoroutines();
 		lineOfSight.enabled = false;
 		targetSelection.enabled = false;
+		animator.Die();
 		unitManager.UnitDied(this);
 		this.enabled = false;
 	}
