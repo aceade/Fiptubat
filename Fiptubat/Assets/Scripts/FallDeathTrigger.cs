@@ -14,7 +14,7 @@ public class FallDeathTrigger : MonoBehaviour
     {
         if (!collider.isTrigger) {
             var damageScript = collider.transform.root.GetComponent<IDamage>();
-            damageScript.Damage(DamageType.REGULAR, damage);
+            damageScript.Damage(DamageType.REGULAR, damage, Vector3.up);
         }
     }
 }

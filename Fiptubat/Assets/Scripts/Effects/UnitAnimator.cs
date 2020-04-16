@@ -109,8 +109,10 @@ public class UnitAnimator : MonoBehaviour
     }
 
     public void Damage(Vector3 attackDirection) {
-        animator.SetFloat("Flinch_Forward", 0f);
-        animator.SetFloat("Flinch_Sideways", 0f);
+        float forDot = Mathf.RoundToInt(Vector3.Dot(attackDirection, transform.forward));
+        float sideDot = Mathf.RoundToInt(Vector3.Dot(attackDirection, transform.right));
+        animator.SetFloat("Flinch_Forward", forDot);
+        animator.SetFloat("Flinch_Sideways", sideDot);
         animator.SetTrigger("Hit");
     }
 

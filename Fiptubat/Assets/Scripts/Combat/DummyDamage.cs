@@ -20,7 +20,7 @@ public class DummyDamage : MonoBehaviour, IDamage
         return 0;
     }
 
-    public void Damage(DamageType damageType, int damageAmount) {
+    public void Damage(DamageType damageType, int damageAmount, Vector3 attackDirection) {
         Debug.LogFormat("{0} took {1} points of {2} damage", this, damageAmount, damageType);
         if (damageAmount > health) {
             Die();

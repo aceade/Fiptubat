@@ -114,8 +114,9 @@ public class HumanoidEnemy : BaseUnit
     /// </summary>
     /// <param name="damageType">What type of damage</param>
     /// <param name="damageAmount">How much</param>
-    public override void Damage(DamageType damageType, int damageAmount) {
-        base.Damage(damageType, damageAmount);
+    /// <param name="attackDirection">Roughly form where they were attacked</param>
+    public override void Damage(DamageType damageType, int damageAmount, Vector3 attackDirection) {
+        base.Damage(damageType, damageAmount, attackDirection);
         if (health > 0) {
             beenAttacked = true;
         } else {

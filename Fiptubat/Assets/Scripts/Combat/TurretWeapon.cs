@@ -47,7 +47,7 @@ public class TurretWeapon : WeaponBase
             if (damageScript == null) {
                 return false;
             } else {
-                damageScript.Damage(DamageType.REGULAR, damage);
+                damageScript.Damage(DamageType.REGULAR, damage, fireDir);
                 return true;
             }
         }

@@ -268,9 +268,9 @@ public class BaseUnit : MonoBehaviour, IDamage {
         myTransform.rotation = Quaternion.LookRotation(desired);
     }
 
-	public virtual void Damage(DamageType damageType, int damageAmount) {
+	public virtual void Damage(DamageType damageType, int damageAmount, Vector3 attackDirection) {
 		beenAttacked = true;
-		animator.Damage(Vector3.zero);
+		animator.Damage(attackDirection);
 		if (damageType != DamageType.ARMOUR_PIERCING) {
 			damageAmount -= armour;
 		} 

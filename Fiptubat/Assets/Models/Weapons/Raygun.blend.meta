@@ -6,7 +6,17 @@ ModelImporter:
   - first:
       74: 1989289236423521904
     second: Recharge
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brass
+    second: {fileID: 2100000, guid: 1761303bff41bc4f5bc5b9717504fbeb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chrome
+    second: {fileID: 2100000, guid: 49d4018a9ca32518cbc6916bdc4362c1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

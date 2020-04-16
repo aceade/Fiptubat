@@ -85,7 +85,7 @@ public class WeaponBase : MonoBehaviour
                 return false;
             } else {
                 Debug.LogFormat("I shot {0}", damageScript);
-                damageScript.Damage(DamageType.REGULAR, damage);
+                damageScript.Damage(DamageType.REGULAR, damage, fireDir);
                 return true;
             }
         } 

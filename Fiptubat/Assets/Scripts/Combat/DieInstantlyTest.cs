@@ -23,7 +23,7 @@ public class DieInstantlyTest : MonoBehaviour
     }
 
     void DieDieDie() {
-        myTarget.Damage(damageType, damage);
+        myTarget.Damage(damageType, damage, Vector3.up);
     }
 
     
