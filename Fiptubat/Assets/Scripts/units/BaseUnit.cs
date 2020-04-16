@@ -270,6 +270,7 @@ public class BaseUnit : MonoBehaviour, IDamage {
 
 	public virtual void Damage(DamageType damageType, int damageAmount) {
 		beenAttacked = true;
+		animator.Damage(Vector3.zero);
 		if (damageType != DamageType.ARMOUR_PIERCING) {
 			damageAmount -= armour;
 		} 

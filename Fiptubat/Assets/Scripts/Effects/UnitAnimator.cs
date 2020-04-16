@@ -108,6 +108,12 @@ public class UnitAnimator : MonoBehaviour
         animator.ResetTrigger("Climb");
     }
 
+    public void Damage(Vector3 attackDirection) {
+        animator.SetFloat("Flinch_Forward", 0f);
+        animator.SetFloat("Flinch_Sideways", 0f);
+        animator.SetTrigger("Hit");
+    }
+
     public void Die() {
         animator.SetTrigger("Dying");
     }
