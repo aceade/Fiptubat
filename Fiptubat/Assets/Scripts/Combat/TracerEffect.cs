@@ -48,15 +48,20 @@ public class TracerEffect : MonoBehaviour
     void OnCollisionEnter(Collision coll) {
         toggleDisplay(false);
         Collider[] colliders = Physics.OverlapSphere(myTransform.position, suppressionRadius, layerMask, QueryTriggerInteraction.Ignore);
+        List<IDamage> actualTargets = new List<IDamage>();
         for (int i= 0; i < colliders.Length; i++) {
             var collider = colliders[i];
-            float dot = Vector3.Dot(myTransform.forward, collider.transform.position);
+            var damageScript = collider.transform.root.GetComponent<IDamage>();
+            if (damageScript != null && !actualTargets.Contains(damageScript)) {
+                actualTargets.Add(damageScript);
+            }
+        }
+
+        for (int i = 0; i < actualTargets.Count; i++) {
+            float dot = Vector3.Dot(myTransform.forward, actualTargets[i].GetTransform().position);
             // don't suppress myself!
             if (dot > suppressionAngle ) {
-                var damageScript = collider.transform.root.GetComponent<IDamage>();
-                if (damageScript != null) {
-                    damageScript.HitNearby();
-                }
+                actualTargets[i].HitNearby();
             }
         }
     }

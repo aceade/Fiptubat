@@ -19,19 +19,17 @@ public class UnitAnimator : MonoBehaviour
     }
 
     /// <summary>
-    /// Used by humanoid units to crouch. Currently based on changing collider heights.
-    /// TODO: add colliders based on bones
+    /// Used by humanoid units to crouch.
+    /// Requires bones to have colliders.
     /// </summary>
     /// <param name="crouched"></param>
     public void Crouch(bool crouched) {
         if (crouched) {
             animator.SetTrigger("Crouch");
             animator.ResetTrigger("Stand");
-			GetComponent<CapsuleCollider>().height = 1f;
 		} else {
             animator.SetTrigger("Stand");
             animator.ResetTrigger("Crouch");
-			GetComponent<CapsuleCollider>().height = 2f;
 		}
     }
 
