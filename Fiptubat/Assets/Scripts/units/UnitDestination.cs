@@ -22,7 +22,7 @@ public class UnitDestination : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        if (coll.transform == parent) {
+        if (!coll.isTrigger && coll.transform.root == parent) {
             myUnit.ReachedDestination();
         }
     }

@@ -49,11 +49,13 @@ public class MoveAnimationMarker : MonoBehaviour {
     void OnTriggerExit(Collider coll) {
         if (!coll.isTrigger) {
             var unit = coll.GetComponent<BaseUnit>();
-            if (moveType == MoveType.CROUCH) {
-                Debug.LogFormat("{0} should stand up!", coll);
-                unit.CrouchAnimation(false);
-            } else if (moveType == MoveType.CLIMB) {
-                unit.StopClimbing();
+                if (unit != null){
+                if (moveType == MoveType.CROUCH) {
+                    Debug.LogFormat("{0} should stand up!", coll);
+                    unit.CrouchAnimation(false);
+                } else if (moveType == MoveType.CLIMB) {
+                    unit.StopClimbing();
+                }
             }
         }
     }

@@ -15,7 +15,6 @@ public class Turret : BaseUnit
     protected override void Start(){
         base.Start();
         barrel = myTransform.Find("Barrel");
-        Invoke("Scan", 0.5f);
     }
 
     public override void Crouch() {
@@ -76,24 +75,17 @@ public class Turret : BaseUnit
         }
     }
 
-    private void Scan() {
-        animator.SetScanStatus(true);
-    }
-
     protected override void TrackTarget(IDamage target) {
-        Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
+        Vector3 targetDir = target.GetTransform().position - myTransform.position;
+        Vector3 horizontalDir = targetDir;
         horizontalDir.y = 0;
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 1f);
-        myTransform.rotation = Quaternion.LookRotation(desired);
-        barrel.LookAt(target.GetTransform());
-        // Vector3 barrelDir = Vector3.RotateTowards(barrel.forward, target.GetTransform().position - myTransform.position, combatRotationSpeed * Time.deltaTime, 1f);
-        // Debug.LogFormat("Barrel direction should be {0}", barrelDir);
-        // barrel.rotation = Quaternion.LookRotation(barrelDir);
-        
+        myTransform.rotation = Quaternion.LookRotation(horizontalDir);
+        float angle = Vector3.Angle(myTransform.forward, targetDir);
+        animator.SetVerticalAimAngle(angle);
     }
 
     public override void TargetSpotted(IDamage target) {
-        animator.SetScanStatus(false);
         if (health > 0) {
             targetSpotted = true;
             base.TargetSpotted(target);

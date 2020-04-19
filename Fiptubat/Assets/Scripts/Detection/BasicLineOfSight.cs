@@ -13,7 +13,7 @@ namespace Aceade.AI {
 		public float detectionInterval = 0.2f;
 		WaitForSeconds delay;
 
-		private Dictionary<Collider, IDamage> currentColliders = new Dictionary<Collider, IDamage>();
+		private List<IDamage> currentColliders = new List<IDamage>();
 
 		public List<int> detectionLayers;
 
@@ -45,23 +45,26 @@ namespace Aceade.AI {
 			if (!coll.isTrigger) {
 				int layer = coll.transform.root.gameObject.layer;
 
-				if (detectionLayers.Contains(layer) && !currentColliders.ContainsKey(coll)) {
-					Debug.LogFormat("{0} should consider {1}", this, coll);
+				if (detectionLayers.Contains(layer)) {
 					var damageScript = coll.transform.root.GetComponent<IDamage>();
-					currentColliders.Add(coll, damageScript);
+					if (damageScript != null && !currentColliders.Contains(damageScript)) {
+						currentColliders.Add(damageScript);
 
-					if (!isProcessing) {
-						isProcessing = true;
-						StartCoroutine(ProcessColliders());
+						if (!isProcessing) {
+							isProcessing = true;
+							StartCoroutine(ProcessColliders());
+						}
 					}
+					
 				}
 			}
 		}
 
 		public virtual void OnTriggerExit(Collider coll)
 		{
-			if (currentColliders.ContainsKey(coll)) {
-				currentColliders.Remove(coll);
+			var damageScript = coll.transform.root.GetComponent<IDamage>();
+			if (damageScript != null && currentColliders.Contains(damageScript)) {
+				currentColliders.Remove(damageScript);
 			}
 			if (currentColliders.Count == 0) {
 				isProcessing = false;
@@ -71,7 +74,7 @@ namespace Aceade.AI {
 		private IEnumerator ProcessColliders()
 		{
 			while (isProcessing) {
-				foreach (Collider coll in currentColliders.Keys) {
+				foreach (IDamage coll in currentColliders) {
 					AnalyseTarget(coll);
 				}
 				yield return delay;
@@ -79,13 +82,12 @@ namespace Aceade.AI {
 			
 		}
 
-		private void AnalyseTarget(Collider coll) {
+		private void AnalyseTarget(IDamage target) {
 			RaycastHit hit;
 			
-			if (Physics.Raycast(transform.position, coll.transform.position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-				if (hit.transform == coll.transform) {
-					var damageScript = currentColliders[coll];
-					brain.TargetSpotted(damageScript);
+			if (Physics.Raycast(transform.position, target.GetTransform().position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+				if (hit.transform == target.GetTransform()) {
+					brain.TargetSpotted(target);
 				}
 			}
 		}
@@ -128,7 +130,7 @@ namespace Aceade.AI {
 		/// <param name="target"></param>
 		/// <returns></returns>
 		public bool CanSeeTarget(IDamage target) {
-			if (!currentColliders.ContainsValue(target)) {
+			if (!currentColliders.Contains(target)) {
 				return false;
 			}
 			else {
@@ -137,7 +139,7 @@ namespace Aceade.AI {
 		}
 
 		public bool CanSeeTargetFromLocation(IDamage target, Vector3 location) {
-			if (!currentColliders.ContainsValue(target)) {
+			if (!currentColliders.Contains(target)) {
 				return false;
 			}
 			else {
