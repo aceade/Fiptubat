@@ -33,6 +33,13 @@ namespace Aceade.AI {
 			coll = GetComponent<Collider>();
 			coll.isTrigger = true;
 			delay = new WaitForSeconds (detectionInterval);
+
+			// ignore subcolliders
+			Collider[] childrenCollders = transform.root.GetComponentsInChildren<Collider>();
+			Debug.LogFormat("Ignoring {0} colliders", childrenCollders.Length);
+			for (int i = 0; i < childrenCollders.Length; i++) {
+				Physics.IgnoreCollision(coll, childrenCollders[i]);
+			}
 		}
 
 		public void SetBrain(BaseUnit unit) 
@@ -48,6 +55,7 @@ namespace Aceade.AI {
 				if (detectionLayers.Contains(layer)) {
 					var damageScript = coll.transform.root.GetComponent<IDamage>();
 					if (damageScript != null && !currentColliders.Contains(damageScript)) {
+						Debug.LogFormat("{0} should consider {1}", this, damageScript);
 						currentColliders.Add(damageScript);
 
 						if (!isProcessing) {
@@ -74,8 +82,8 @@ namespace Aceade.AI {
 		private IEnumerator ProcessColliders()
 		{
 			while (isProcessing) {
-				foreach (IDamage coll in currentColliders) {
-					AnalyseTarget(coll);
+				foreach (IDamage target in currentColliders) {
+					AnalyseTarget(target);
 				}
 				yield return delay;
 			}
@@ -86,6 +94,7 @@ namespace Aceade.AI {
 			RaycastHit hit;
 			
 			if (Physics.Raycast(transform.position, target.GetTransform().position - transform.position, out hit, maxDetectionRange, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
+				Debug.DrawRay(transform.position, hit.point - transform.position, Color.blue, 3f);
 				if (hit.transform == target.GetTransform()) {
 					brain.TargetSpotted(target);
 				}

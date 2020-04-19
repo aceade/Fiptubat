@@ -263,7 +263,6 @@ public class BaseUnit : MonoBehaviour, IDamage {
         }
 
         Vector3 horizontalDir = target.GetTransform().position - myTransform.position;
-        // horizontalDir.y = 0;
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, navMeshAgent.angularSpeed * Time.deltaTime, 0f);
         myTransform.rotation = Quaternion.LookRotation(desired);
     }

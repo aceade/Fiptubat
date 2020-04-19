@@ -82,6 +82,7 @@ public class Turret : BaseUnit
         Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 1f);
         myTransform.rotation = Quaternion.LookRotation(horizontalDir);
         float angle = Vector3.Angle(myTransform.forward, targetDir);
+        animator.SetAim(1f);
         animator.SetVerticalAimAngle(angle);
     }
 
