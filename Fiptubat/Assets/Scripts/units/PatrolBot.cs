@@ -32,6 +32,17 @@ public class PatrolBot : BaseUnit
         }
     }
 
+    protected override void TrackTarget(IDamage target) {
+        Vector3 targetDir = target.GetTransform().position - myTransform.position;
+        Vector3 horizontalDir = targetDir;
+        horizontalDir.y = 0;
+        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, navMeshAgent.angularSpeed * Time.deltaTime, 1f);
+        myTransform.rotation = Quaternion.LookRotation(horizontalDir);
+        float angle = Vector3.Angle(myTransform.forward, targetDir);
+        animator.SetAim(1f);
+        animator.SetVerticalAimAngle(angle);
+    }
+
     void PerformAttack(IDamage target) {
         if (target.GetRemainingHealth() > 0) {
             if (Vector3.Distance(myTransform.position, target.GetTransform().position) <= weapon.maxDistance) {
@@ -70,7 +81,6 @@ public class PatrolBot : BaseUnit
             
         } else {
             Debug.LogFormat("{0} does not have enough points to move. Scanning", this);
-            // todo: scan
             FinishedTurn();
         }
     }
