@@ -55,7 +55,6 @@ public class Turret : BaseUnit
     }
 
     public override void Attack() {
-        Debug.LogFormat("Turret {0} attacking", this);
 
         // turrets don't care if they miss or run out of ammo
         // the sounds are for diagnostic purposes :)
@@ -79,8 +78,8 @@ public class Turret : BaseUnit
         Vector3 targetDir = target.GetTransform().position - myTransform.position;
         Vector3 horizontalDir = targetDir;
         horizontalDir.y = 0;
-        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, combatRotationSpeed * Time.deltaTime, 1f);
-        myTransform.rotation = Quaternion.LookRotation(horizontalDir);
+        Quaternion targetRot = Quaternion.LookRotation(horizontalDir);
+        myTransform.rotation = Quaternion.RotateTowards(myTransform.rotation, targetRot, combatRotationSpeed * Time.deltaTime);
         float angle = Vector3.Angle(myTransform.forward, targetDir);
         animator.SetAim(1f);
         animator.SetVerticalAimAngle(angle);

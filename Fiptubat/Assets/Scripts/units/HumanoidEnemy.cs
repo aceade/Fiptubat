@@ -92,7 +92,6 @@ public class HumanoidEnemy : BaseUnit
     }
 
     public override void ReachedPatrolPoint(PatrolPoint point) {
-        Debug.LogFormat("{0} reached patrolpoint: {1}", this, point);
         if (point == patrolRoute[patrolIndex]) {
             if (!targetSpotted) {
                 IncrementPatrolIndex();

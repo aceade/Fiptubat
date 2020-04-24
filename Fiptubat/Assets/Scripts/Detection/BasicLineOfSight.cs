@@ -36,7 +36,6 @@ namespace Aceade.AI {
 
 			// ignore subcolliders
 			Collider[] childrenCollders = transform.root.GetComponentsInChildren<Collider>();
-			Debug.LogFormat("Ignoring {0} colliders", childrenCollders.Length);
 			for (int i = 0; i < childrenCollders.Length; i++) {
 				Physics.IgnoreCollision(coll, childrenCollders[i]);
 			}

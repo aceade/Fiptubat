@@ -7,7 +7,7 @@ public class TurretWeapon : WeaponBase
     private int missedShots = 0;
 
     /// <summary>
-    /// Unlike the main implementation, we don't care
+    /// Unlike the main implementation, we don't care about missing shots
     /// <summary>
     public override bool Fire(){
         StartCoroutine(turretAttackCycle());
@@ -28,7 +28,6 @@ public class TurretWeapon : WeaponBase
             yield return fireCycle;
         }
         if (currentAmmo > 0) {
-            Debug.LogFormat("Turret {0} has {1} rounds remaining", this, currentAmmo);
             canAttack = true;
         }
         

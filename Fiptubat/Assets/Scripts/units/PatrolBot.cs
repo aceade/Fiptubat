@@ -36,11 +36,14 @@ public class PatrolBot : BaseUnit
         Vector3 targetDir = target.GetTransform().position - myTransform.position;
         Vector3 horizontalDir = targetDir;
         horizontalDir.y = 0;
-        Vector3 desired = Vector3.RotateTowards(myTransform.forward, horizontalDir, navMeshAgent.angularSpeed * Time.deltaTime, 1f);
-        myTransform.rotation = Quaternion.LookRotation(horizontalDir);
-        float angle = Vector3.Angle(myTransform.forward, targetDir);
+        Quaternion targetRot = Quaternion.LookRotation(horizontalDir);
+        myTransform.rotation = Quaternion.RotateTowards(myTransform.rotation, targetRot, navMeshAgent.angularSpeed * Time.deltaTime);
+        float angle = 90f - Vector3.Angle(myTransform.up, targetDir);
         animator.SetAim(1f);
-        animator.SetVerticalAimAngle(angle);
+        if (angle > 5f) {
+            animator.SetVerticalAimAngle(angle);
+        }
+        
     }
 
     void PerformAttack(IDamage target) {
@@ -95,7 +98,6 @@ public class PatrolBot : BaseUnit
     }
 
     public override void ReachedPatrolPoint(PatrolPoint point) {
-        Debug.LogFormat("{0} reached patrolpoint: {1}", this, point);
         if (point == patrolRoute[patrolIndex]) {
             IncrementPatrolIndex();
         }

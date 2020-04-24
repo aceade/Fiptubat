@@ -54,9 +54,7 @@ public class WeaponBase : MonoBehaviour
 
         float volume = PlayerPrefs.GetFloat("EffectsVolume", 0.5f);
         audioSource.volume = volume;
-
         mostAccurateAttack = fireModes.OrderBy(o=>o.deviation).First();
-        Debug.LogFormat("Most accurate attack for {0} is {1}", this, mostAccurateAttack);
     }
 
     /// <summary>
@@ -79,7 +77,7 @@ public class WeaponBase : MonoBehaviour
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
             var hitTransform = hit.transform;
-            Debug.LogFormat("I hit {0}", hitTransform);
+            Debug.LogFormat("I hit {0} in layer {1}", hitTransform, hitTransform.gameObject.layer);
             var damageScript = hitTransform.root.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;
