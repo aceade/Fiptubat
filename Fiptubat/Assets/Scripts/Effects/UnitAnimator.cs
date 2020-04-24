@@ -9,13 +9,10 @@ using UnityEngine.Animations;
 /// </summary>
 public class UnitAnimator : MonoBehaviour
 {
-    private Animator animator;
+    protected Animator animator;
 
-    private Collider myCollider;
-
-    void Start() {
+    protected void Start() {
         animator = GetComponentInChildren<Animator>();
-        myCollider = GetComponent<Collider>();
     }
 
     /// <summary>
@@ -36,16 +33,11 @@ public class UnitAnimator : MonoBehaviour
     /// <summary>
     /// Start moving. For humans, point the gun at the ground while doing so.
     /// </summary>
-    public void StartMoving() {
-        animator.SetFloat("InputMagnitude", 1f);
-        animator.SetFloat("Vertical", 2f);
+    public virtual void StartMoving() {
         SetAim(0f);
     }
 
-    public void StopMoving() {
-        animator.SetFloat("InputMagnitude", 0f);
-        animator.SetFloat("Vertical", 0f);
-        animator.SetFloat("Horizontal", 0f);
+    public virtual void StopMoving() {
         SetAim(1f);
     }
 
@@ -58,7 +50,7 @@ public class UnitAnimator : MonoBehaviour
         Invoke("ResetStrafe", 0.3f);
     }
 
-    private void ResetStrafe() {
+    protected void ResetStrafe() {
         animator.SetFloat("Vertical", 0f);
         animator.SetFloat("Horizontal", 0f);
         animator.SetFloat("InputMagnitude", 0f);
