@@ -143,3 +143,4 @@ These are **not** committed to the repo.
 * Cursor: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg) (CC BY-SA 2.5)
 
 Numerous textures from [textures.com](https://www.textures.com/)
+Skybox textures from [AllSky](https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-200-sky-skybox-set-10109#content)
