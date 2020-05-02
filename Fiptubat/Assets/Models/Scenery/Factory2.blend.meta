@@ -1,42 +1,128 @@
 fileFormatVersion: 2
 guid: 01e3bddf8766e40608c54aecd9ee4065
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: First_Floor
-    100004: Front_Steps
-    100006: Ground_Floor
-    100008: Loading_Ramp
-    100010: Shell
-    400000: //RootNode
-    400002: First_Floor
-    400004: Front_Steps
-    400006: Ground_Floor
-    400008: Loading_Ramp
-    400010: Shell
-    2100000: Concrete
-    2100002: Wooden_Floor
-    2100004: Window
-    2100006: Metal_Roof
-    2300000: First_Floor
-    2300002: Front_Steps
-    2300004: Ground_Floor
-    2300006: Loading_Ramp
-    2300008: Shell
-    3300000: First_Floor
-    3300002: Front_Steps
-    3300004: Ground_Floor
-    3300006: Loading_Ramp
-    3300008: Shell
-    4300000: Front_Steps
-    4300002: Ground_Floor
-    4300004: First_Floor
-    4300006: Loading_Ramp
-    4300008: Shell
-    7400000: Default Take
-    9500000: //RootNode
-  externalObjects: {}
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: First_Floor
+  - first:
+      1: 100004
+    second: Front_Steps
+  - first:
+      1: 100006
+    second: Ground_Floor
+  - first:
+      1: 100008
+    second: Loading_Ramp
+  - first:
+      1: 100010
+    second: Shell
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: First_Floor
+  - first:
+      4: 400004
+    second: Front_Steps
+  - first:
+      4: 400006
+    second: Ground_Floor
+  - first:
+      4: 400008
+    second: Loading_Ramp
+  - first:
+      4: 400010
+    second: Shell
+  - first:
+      21: 2100000
+    second: Concrete
+  - first:
+      21: 2100002
+    second: Wooden_Floor
+  - first:
+      21: 2100004
+    second: Window
+  - first:
+      21: 2100006
+    second: Metal_Roof
+  - first:
+      23: 2300000
+    second: First_Floor
+  - first:
+      23: 2300002
+    second: Front_Steps
+  - first:
+      23: 2300004
+    second: Ground_Floor
+  - first:
+      23: 2300006
+    second: Loading_Ramp
+  - first:
+      23: 2300008
+    second: Shell
+  - first:
+      33: 3300000
+    second: First_Floor
+  - first:
+      33: 3300002
+    second: Front_Steps
+  - first:
+      33: 3300004
+    second: Ground_Floor
+  - first:
+      33: 3300006
+    second: Loading_Ramp
+  - first:
+      33: 3300008
+    second: Shell
+  - first:
+      43: 4300000
+    second: Front_Steps
+  - first:
+      43: 4300002
+    second: Ground_Floor
+  - first:
+      43: 4300004
+    second: First_Floor
+  - first:
+      43: 4300006
+    second: Loading_Ramp
+  - first:
+      43: 4300008
+    second: Shell
+  - first:
+      74: 7400000
+    second: Default Take
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: 6b82005e228e25a82b0eb03ef6157703, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Roof
+    second: {fileID: 2100000, guid: bbc80bb54902d96f3b3de844c35661fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 868d4d045b262be899e3b5a52dffc7e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wooden_Floor
+    second: {fileID: 2100000, guid: fb907d94124dc8d27a677bc33debfe41, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,6 +156,8 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -77,27 +165,32 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -107,8 +200,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

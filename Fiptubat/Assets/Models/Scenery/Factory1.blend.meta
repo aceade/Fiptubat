@@ -1,42 +1,128 @@
 fileFormatVersion: 2
 guid: 36eeca4668857428abba62513673dbbf
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Backdoor
-    100002: Chimney
-    100004: Chimney_001
-    100006: //RootNode
-    100008: Inner
-    100010: Shell
-    400000: Backdoor
-    400002: Chimney
-    400004: Chimney_001
-    400006: //RootNode
-    400008: Inner
-    400010: Shell
-    2100000: Red_Brick
-    2100002: Metal_Roof
-    2100004: Concrete
-    2100006: Window
-    2300000: Backdoor
-    2300002: Chimney
-    2300004: Chimney_001
-    2300006: Inner
-    2300008: Shell
-    3300000: Backdoor
-    3300002: Chimney
-    3300004: Chimney_001
-    3300006: Inner
-    3300008: Shell
-    4300000: Chimney_001
-    4300002: Chimney
-    4300004: Backdoor
-    4300006: Inner
-    4300008: Shell
-    7400000: Default Take
-    9500000: //RootNode
-  externalObjects: {}
+  serializedVersion: 26
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Backdoor
+  - first:
+      1: 100002
+    second: Chimney
+  - first:
+      1: 100004
+    second: Chimney_001
+  - first:
+      1: 100006
+    second: //RootNode
+  - first:
+      1: 100008
+    second: Inner
+  - first:
+      1: 100010
+    second: Shell
+  - first:
+      4: 400000
+    second: Backdoor
+  - first:
+      4: 400002
+    second: Chimney
+  - first:
+      4: 400004
+    second: Chimney_001
+  - first:
+      4: 400006
+    second: //RootNode
+  - first:
+      4: 400008
+    second: Inner
+  - first:
+      4: 400010
+    second: Shell
+  - first:
+      21: 2100000
+    second: Red_Brick
+  - first:
+      21: 2100002
+    second: Metal_Roof
+  - first:
+      21: 2100004
+    second: Concrete
+  - first:
+      21: 2100006
+    second: Window
+  - first:
+      23: 2300000
+    second: Backdoor
+  - first:
+      23: 2300002
+    second: Chimney
+  - first:
+      23: 2300004
+    second: Chimney_001
+  - first:
+      23: 2300006
+    second: Inner
+  - first:
+      23: 2300008
+    second: Shell
+  - first:
+      33: 3300000
+    second: Backdoor
+  - first:
+      33: 3300002
+    second: Chimney
+  - first:
+      33: 3300004
+    second: Chimney_001
+  - first:
+      33: 3300006
+    second: Inner
+  - first:
+      33: 3300008
+    second: Shell
+  - first:
+      43: 4300000
+    second: Chimney_001
+  - first:
+      43: 4300002
+    second: Chimney
+  - first:
+      43: 4300004
+    second: Backdoor
+  - first:
+      43: 4300006
+    second: Inner
+  - first:
+      43: 4300008
+    second: Shell
+  - first:
+      74: 7400000
+    second: Default Take
+  - first:
+      95: 9500000
+    second: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete
+    second: {fileID: 2100000, guid: 0e086fa35525dbe8e9fe991de0bfd7ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal_Roof
+    second: {fileID: 2100000, guid: bbc80bb54902d96f3b3de844c35661fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red_Brick
+    second: {fileID: 2100000, guid: 0e086fa35525dbe8e9fe991de0bfd7ad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 868d4d045b262be899e3b5a52dffc7e2, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,6 +156,8 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -77,27 +165,32 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -107,8 +200,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
