@@ -11,7 +11,8 @@ public class ExtractionPoint : MonoBehaviour
     public UnitManager playerUnitManager;
 
     private ParticleSystem particles;
-    private int currentUnits;
+
+    private List<PlayerUnit> activeUnits = new List<PlayerUnit>();
 
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,14 @@ public class ExtractionPoint : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         if (!coll.isTrigger) {
-            Debug.LogFormat("{0} has reached the extraction point", coll);
-            currentUnits++;
-            if (currentUnits >= playerUnitManager.GetRemainingUnitCount()) {
+            var unitScript = coll.transform.root.GetComponent<PlayerUnit>();
+            if (!activeUnits.Contains(unitScript)) {
+                Debug.LogFormat("{0} has reached the extraction point", unitScript);
+                activeUnits.Add(unitScript);
+            }
+
+            
+            if (activeUnits.Count >= playerUnitManager.GetRemainingUnitCount()) {
                 playerUnitManager.AllUnitsExtracted();
             }
         }

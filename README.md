@@ -126,6 +126,8 @@ These are **not** committed to the repo.
 ### Models & Animations
 * Kubold's [PistolAimsetPro](https://assetstore.unity.com/packages/3d/animations/pistol-animset-pro-15828) animation pack
 * Autarca's [Dieselpunk Corvetter](https://assetstore.unity.com/packages/3d/vehicles/air/dieselpunk-airship-corvette-131140) as an escape or scenery vehicle
+* vUv's [Workshop Props](https://assetstore.unity.com/packages/3d/props/workshop-props-81112)
+* [Container Collection](https://assetstore.unity.com/packages/3d/props/industrial/container-collection-750) by VIS Games
 
 ### Sounds
 * Siren noises from [guitarguy](https://www.freesound.org/people/guitarguy1985/packs/3355/)

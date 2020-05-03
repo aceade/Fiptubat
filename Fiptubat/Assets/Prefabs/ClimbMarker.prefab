@@ -124,16 +124,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: -6681310456669153421, guid: 5ad97cf8469d61669bb25ae07467de7e,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: -6681310456669153421, guid: 5ad97cf8469d61669bb25ae07467de7e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -152,22 +142,22 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
@@ -177,7 +167,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 5ad97cf8469d61669bb25ae07467de7e,
         type: 3}
@@ -188,6 +178,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6681310456669153421, guid: 5ad97cf8469d61669bb25ae07467de7e,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -6681310456669153421, guid: 5ad97cf8469d61669bb25ae07467de7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad97cf8469d61669bb25ae07467de7e, type: 3}
