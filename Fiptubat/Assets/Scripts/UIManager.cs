@@ -60,8 +60,11 @@ public class UIManager : MonoBehaviour {
 		playerDistanceText.text = "";
 	}
 
-	public void AnnounceTurn(string playerName) {
-		turnEndedText.text = playerName + " Turn";
+	public void AnnounceTurn(UnitManager faction) {
+		turnEndedText.text = faction.factionName + " Turn";
+		if (!faction.canAttack) {
+			turnEndedText.text += " (CANNOT ATTACK!)";
+		}
 		Invoke("ClearAnnounceText", 2f);
 	}
 

@@ -21,6 +21,9 @@ public class UnitManager : MonoBehaviour {
 
 	private GameStateManager gameStateManager;
 
+	[Tooltip("For debugging use only - prevents this side attacking ANYTHING!")]
+	public bool canAttack = true;
+
 	// Use this for initialization
 	void Start () {
 		if (String.IsNullOrWhiteSpace(factionName)) {
@@ -67,10 +70,14 @@ public class UnitManager : MonoBehaviour {
 	}
 
 	public void StartTurn() {
-		activeUnits.Clear();
-		activeUnits.AddRange(units);
-		activeUnits.ForEach(unit => unit.StartTurn());
-		selectedUnit.SelectUnit(true);
+		if (canAttack) {
+			activeUnits.Clear();
+			activeUnits.AddRange(units);
+			activeUnits.ForEach(unit => unit.StartTurn());
+			selectedUnit.SelectUnit(true);
+		} else {
+			Invoke("EndTurn", 2f);
+		}
 	}
 
 	public void CycleUnit() {

@@ -92,7 +92,7 @@ public class GameStateManager : MonoBehaviour {
 			if (currentFactionIndex >= factions.Count) {
 				currentFactionIndex = 0;
 			}
-			uiManager.AnnounceTurn(factions[currentFactionIndex].factionName);
+			uiManager.AnnounceTurn(factions[currentFactionIndex]);
 			factions[currentFactionIndex].StartTurn();
 		}
 	}
@@ -130,6 +130,7 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	private void Victory() {
+		Debug.LogFormat("Victory! The player took {0} turns", turns);
 		factions.ForEach(faction => faction.DisableAllUnits());
 		uiManager.ShowGameOverScreen(true);
 		soundManager.PlayVictoryMusic();
