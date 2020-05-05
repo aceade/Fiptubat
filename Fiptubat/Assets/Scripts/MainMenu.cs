@@ -14,6 +14,11 @@ public class MainMenu : MonoBehaviour
     public Image infoPanel, controlsPanel, optionsPanel;
     public Slider musicVolumeControl, speechVolumeControl, effectsVolumeControl, cameraSpeedControl;
 
+    void Start() {
+        // prevent animations from freezing when exiting the level
+        Time.timeScale = 1f;
+    }
+
     public void StartTheGame() {
         SceneManager.LoadScene(sceneName);
     }

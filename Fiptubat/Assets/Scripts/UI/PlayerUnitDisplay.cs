@@ -16,8 +16,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
 
     private Text fireModeField;
 
-    private Image statusImage;
-
     private Image uiStatusImage;
 
     [Tooltip("The button that selects this unit")]
@@ -27,9 +25,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
     private Vector2 crosshairsCoordinates;
     private float crosshairsWidth;
     private float crosshairsHeight;
-
-
-    public Sprite healthyImage, damagedSprite, criticalSprite, deadSprite;
 
     public float criticalDamageThreshold = 0.3f;
 
@@ -46,7 +41,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
         maxHealth = unit.health;
         maxPoints = unit.actionPoints;
         maxArmour = unit.armour;
-        statusImage = parentImage.rectTransform.Find("DisplayImage").GetComponent<Image>();
         uiStatusImage = parentImage.rectTransform.Find("UiStatusImage").GetComponent<Image>();
         Text[] texts = parentImage.GetComponentsInChildren<Text>();
         healthBar = texts[0];
@@ -60,15 +54,11 @@ public class PlayerUnitDisplay: MonoBehaviour {
     }
 
     void Update() {
-        healthBar.text = string.Format("{0}/{1}", unit.health, maxHealth);
-        actionPointsBar.text = string.Format("{0}/{1}", unit.GetCurrentActionPoints(), maxPoints);
-        armourBar.text = string.Format("{0}/{1}", unit.armour, maxArmour);
-        ammoCounter.text = weapon.GetAmmoCounter();
-        fireModeField.text = weapon.GetCurrentFireMode().name;
-
-        if (unit.health < maxHealth) {
-            SetImage(unit.health);
-        }
+        healthBar.text = string.Format("HP: {0}/{1}", unit.health, maxHealth);
+        actionPointsBar.text = string.Format("AP: {0}/{1}", unit.GetCurrentActionPoints(), maxPoints);
+        armourBar.text = string.Format("Armour: {0}/{1}", unit.armour, maxArmour);
+        ammoCounter.text = string.Format("Ammo: {0}", weapon.GetAmmoCounter());
+        fireModeField.text = string.Format("Firemode: {0}", weapon.GetCurrentFireMode().name);
 
         bool isSelected = unit.IsSelected();
         ShowIfSelected(isSelected);
@@ -91,17 +81,6 @@ public class PlayerUnitDisplay: MonoBehaviour {
     private void ShowUiStatus() {
         float alpha = usingUi? 1f : 0f;
         uiStatusImage.CrossFadeAlpha(alpha, 0.1f, true);
-    }
-
-    private void SetImage(int health) {
-        if (health <= (criticalDamageThreshold * maxHealth)) {
-            statusImage.sprite = criticalSprite;
-        }
-        else if (health <= 0) {
-            statusImage.sprite = deadSprite;
-        } else {
-            statusImage.sprite = damagedSprite;
-        }
     }
 
     public void ToggleUsingUi(bool isUsingUi) {

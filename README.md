@@ -146,3 +146,7 @@ These are **not** committed to the repo.
 
 Numerous textures from [textures.com](https://www.textures.com/)
 Skybox textures from [AllSky](https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-200-sky-skybox-set-10109#content)
+
+### Fonts
+* [Archaic 1897](https://www.dafont.com/archaic1897.font) (c) 2015 Paul Davy
+* [Ampad brush set](https://www.dafont.com/ampad.font), public domain(?) by Gene Gilmore
