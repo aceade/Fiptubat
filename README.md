@@ -130,14 +130,15 @@ These are **not** committed to the repo.
 * [Container Collection](https://assetstore.unity.com/packages/3d/props/industrial/container-collection-750) by VIS Games
 
 ### Sounds
-* Siren noises from [guitarguy](https://www.freesound.org/people/guitarguy1985/packs/3355/)
-* Beeps from [AlaskaRobotics](https://freesound.org/people/AlaskaRobotics/packs/14049/)
+* Siren noises from [guitarguy](https://www.freesound.org/people/guitarguy1985/packs/3355/) (public domain)
+* Beeps from [AlaskaRobotics](https://freesound.org/people/AlaskaRobotics/packs/14049/) (public domain)
 * Background music:
-    * Background loops: [Sirkoto51](https://freesound.org/people/Sirkoto51/packs/21233/)
-    * "Theme for Sadistic.wav": [Grezgor](https://freesound.org/people/Gregzor/sounds/181827/)
-    * "Orchestral Victory Fanfare": [Sheyvan](https://freesound.org/people/Sheyvan/sounds/470083/)
-* Laser guns from [Terry93D](https://freesound.org/people/Terry93D/packs/18390/)
-* Scifi gun noise pack from [AniCator](https://freesound.org/people/AniCator/packs/2524/)
+    * Background loops: [Sirkoto51](https://freesound.org/people/Sirkoto51/packs/21233/) (CC BY 3.0)
+    * "Theme for Sadistic.wav": [Grezgor](https://freesound.org/people/Gregzor/sounds/181827/) (CC0)
+    * "Orchestral Victory Fanfare": [Sheyvan](https://freesound.org/people/Sheyvan/sounds/470083/) (CC BY 3.0)
+* Laser guns from [Terry93D](https://freesound.org/people/Terry93D/packs/18390/) (public domain)
+* Scifi gun noise pack from [AniCator](https://freesound.org/people/AniCator/packs/2524/) (CC BY 3.0)
+* Propellor noises by [JillianCallahan](http://www.freesound.org/people/JillianCallahan/packs/671/) (Sampling+)
 
 ### Images
 * Smiley face: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Face-smile.svg) (public domain)

@@ -11,7 +11,7 @@ public class UnitAnimator : MonoBehaviour
 {
     protected Animator animator;
 
-    protected void Start() {
+    protected virtual void Start() {
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -106,7 +106,7 @@ public class UnitAnimator : MonoBehaviour
         animator.SetTrigger("Hit");
     }
 
-    public void Die() {
+    public virtual void Die() {
         animator.SetTrigger("Dying");
     }
 
