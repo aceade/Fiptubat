@@ -19,8 +19,12 @@ public class HoverBotAnimator : UnitAnimator
     }
 
     private void SetPropellorNoise(AudioClip noise) {
-        propellors.ForEach(x => x.clip = noise);
-        propellors.ForEach(x => x.Play());
+        for (int i = 0 ; i < propellors.Count; i++) {
+            if (propellors[i].clip != noise) {
+                propellors[i].clip = noise;
+                propellors[i].Play();
+            }
+        }
     }
 
     public override void StartMoving() {
