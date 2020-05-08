@@ -82,7 +82,10 @@ public class AdvancedTargetSelection : UnitTargetSelection
 
     private IDamage getMostExposedEnemy() {
         var sortedTargets = targetsByExposure.OrderByDescending(x => x.Value).ToList();
-        return sortedTargets[0].Key;
+        if (sortedTargets.Count > 0) {
+            return sortedTargets[0].Key;
+        }
+        return null;
     }
 
     private IEnumerator performExposureCalculations() {
@@ -124,11 +127,14 @@ public class AdvancedTargetSelection : UnitTargetSelection
     /// </summary>
     /// <param name="targetPosition"></param>
     /// <param name="intendedTarget"></param>
-    /// <returns>1 if it hits the intended target, 0 otherwise</returns>
+    /// <returns>1 if it hits the intended target and is not critical, 2 if it is critical, and 0 otherwise</returns>
     private int castExposureRay(Vector3 targetPosition, Transform intendedTarget) {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, targetPosition - transform.position, out hit, 30f, Physics.AllLayers, QueryTriggerInteraction.Ignore)) {
-            return hit.transform == intendedTarget ? 1 : 0;
+            if (hit.transform == intendedTarget) {
+                return hit.collider.CompareTag("CriticalCollider") ? 2 : 1;
+            }
+            return 0;
         }
         return 0;
     }

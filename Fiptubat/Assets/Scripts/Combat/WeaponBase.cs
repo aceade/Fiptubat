@@ -7,6 +7,8 @@ public class WeaponBase : MonoBehaviour
 {
     public int damage = 1;
 
+    public int criticalDamage = 2;
+
     public int baseCost = 5;
 
     public float maxDistance = 30f;
@@ -77,13 +79,14 @@ public class WeaponBase : MonoBehaviour
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
             var hitTransform = hit.transform;
-            Debug.LogFormat("I hit {0} in layer {1}", hitTransform, hitTransform.gameObject.layer);
             var damageScript = hitTransform.root.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;
             } else {
-                Debug.LogFormat("I shot {0}", damageScript);
-                damageScript.Damage(DamageType.REGULAR, damage, fireDir);
+                // critical damage occurs if we hit the player head
+                int damageAmount = hit.collider.CompareTag("CriticalCollider") ? criticalDamage : damage;
+                Debug.LogFormat("I shot {0} for {1} damage", damageScript, damageAmount);
+                damageScript.Damage(DamageType.REGULAR, damageAmount, fireDir);
                 return true;
             }
         } 

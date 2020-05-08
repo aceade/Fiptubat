@@ -41,12 +41,13 @@ public class TurretWeapon : WeaponBase
         if (Physics.Raycast(muzzle.position, fireDir, out hit, maxDistance, layerMask, QueryTriggerInteraction.Ignore)) {
             
             var hitTransform = hit.transform;
-            Debug.LogFormat("Turret hit {0}", hitTransform);
             var damageScript = hitTransform.root.GetComponent<IDamage>();
             if (damageScript == null) {
                 return false;
             } else {
-                damageScript.Damage(DamageType.REGULAR, damage, fireDir);
+                int damageAmount = hit.collider.CompareTag("CriticalCollider") ? criticalDamage : damage;
+                Debug.LogFormat("Turret shot {0} for {1} damage", damageScript, damageAmount);
+                damageScript.Damage(DamageType.REGULAR, damageAmount, fireDir);
                 return true;
             }
         }
