@@ -24,9 +24,12 @@ public class UIManager : MonoBehaviour {
 
 	public Text turnCounter;
 
+	private List<Button> mainScreenButtons = new List<Button>();
+
 	void Start() {
 		gameOverScreen.gameObject.SetActive(false);
 		pauseScreen.gameObject.SetActive(false);
+		mainScreen.GetComponentsInChildren<Button>(mainScreenButtons);
 	}
 
 	public void Pause() {
@@ -112,5 +115,15 @@ public class UIManager : MonoBehaviour {
 
 	public bool isPaused() {
 		return gameStateManager.IsCurrentlyPaused();
+	}
+
+	/// <summary>
+	/// Enable or disable buttons depending on how the 
+	/// </summary>
+	/// <param name="usingUi"></param>
+	public void ToggleUiStatus(bool usingUi) {
+		for (int i = 0; i < mainScreenButtons.Count; i++) {
+			mainScreenButtons[i].interactable = usingUi;
+		}
 	}
 }

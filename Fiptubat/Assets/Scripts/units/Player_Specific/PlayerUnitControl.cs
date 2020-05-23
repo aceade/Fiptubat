@@ -90,6 +90,7 @@ public class PlayerUnitControl : MonoBehaviour {
         if (Input.GetButtonDown("ToggleUi")) {
             usingUI = !usingUI;
             unitDisplay.ToggleUsingUi(usingUI);
+            uiManager.ToggleUiStatus(usingUI);
         }
 
         // default keymapping for Escape
