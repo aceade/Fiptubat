@@ -31,7 +31,6 @@ The unit itself. Has the following attributes:
 * Armour
 
 Has the following components:
-* Hearing (TODO, see [#6](https://github.com/aceade/Fiptubat/issues/6) )
 * LineOfSight (visual detection)
 * WeaponBase (weapon)
 * UnitVoice (voice lines, primarily for atmospheric purposes)
@@ -72,7 +71,7 @@ Subclass of UnitTargetSelection. Allows for more intelligent target selection by
 * Target with the highest damage output
 
 ### UIManager
-Handles UI interactions.
+Handles UI interactions (hiding/displaying panels, disable or enabling buttons)
 
 ### GameStateManager
 Main controller for the game logic. Handles the following functionality:
@@ -87,35 +86,27 @@ Also contains methods to check if the specified target can be seen from a specif
 
 ### Weapon system
 Manages the low-level weapon physics, animations, etc. Aiming is free-form for player units; computer-controlled units will select from a list of visible units.
-Units may be able to suppress targets by means of dumping ammo into the targets' surroundings.
+Units may suppress targets by dumping ammo into the targets' surroundings.
 
 ### Sound manager
-Manages music and environmental sounds.
-
-### UI Manager
-Manages the UI elements. Interface into player's unit manager and menu.
+Manages music.
 
 ### Miscellaneous
-* FallDeathTrigger: deal fatal damage to anything that enters it. Will be used in case some idiot walks off a cliff.
-* DummyDamage: used when testing combat and dealing damage. Original intention was to drop it into the `FallDeathTrigger` to test that.
-* ExtractionPoint: the player's goal.
-* DieInstantlyTest: Attached to an `IDamage` implementation to check what happens when a unit dies.
+* FallDeathTrigger: deal fatal damage to anything that enters it. This was intended to be in case some idiot walked off a cliff.
+* DummyDamage: used when testing combat and dealing damage. The original intention was to drop it into the `FallDeathTrigger` to test that.
+* ExtractionPoint: the player's goal. Once the last surviving unit enters this, the player wins.
+* DieInstantlyTest: attached to an `IDamage` implementation to check what happens when a unit dies.
 * TracerEffect: used to show where units are aiming. Could be converted into regular projectile instead of using hitscan.
+* TimeBoundVictory: instant victory for one side. Used to test cleanup after one side wins.
 
-## Art style
+## Current levels
 
-* Basic 3D shapes and textures. 
-    * Scenery will be greyscale; characters in red (player) or yellow (opponents). 
-    * Enemy units will only be visible based on line-of-sight; there will not be an outline to aid the player in keeping track of them.
+1. Main menu. This has some basic scenery, with the menus and other panels visible as "grafitti" in the scene.
+2. Main level. This is an industrial complex with a bridge down the far end. The extraction point is on the other side of the bridge; the player starts at the entrance to the yard.
 
-* Minimal UI – just enough to portray the required details.
-    * Panel along the bottom edge of the screen will display 2D images for up to six characters. Each image will contain a button to select that unit. Health and action points will be reported as numbers instead of bars.
-    * Represent state using basic faces: be smiley faces for normal, frowning for under fire, and various states of blood spatter to indicate damage.
-
-## Required levels
-
-1. Main menu. This will be very bare-bones - just links to the main level or the options panel.
-2. Main level. This will involve a "corridor" through various buildings. The player's goal will be for at least one unit to reach the far end of the level (referred to henceforth as the "extraction point"). The AI player will attempt to stop them.
+### Possible future levels
+1. Motorway bridge through a city. Lots of potential sniper roosts.
+2. Sky docks. The Autarca has docked and is waiting for the player. Could be used to add more NPC units that are allied with the player.
 
 ## Third-party components used
 These are **not** committed to the repo.
@@ -125,7 +116,7 @@ These are **not** committed to the repo.
 
 ### Models & Animations
 * Kubold's [PistolAimsetPro](https://assetstore.unity.com/packages/3d/animations/pistol-animset-pro-15828) animation pack
-* Autarca's [Dieselpunk Corvetter](https://assetstore.unity.com/packages/3d/vehicles/air/dieselpunk-airship-corvette-131140) as an escape or scenery vehicle
+* Autarca's [Dieselpunk Corvette](https://assetstore.unity.com/packages/3d/vehicles/air/dieselpunk-airship-corvette-131140) as an escape or scenery vehicle
 * vUv's [Workshop Props](https://assetstore.unity.com/packages/3d/props/workshop-props-81112)
 * [Container Collection](https://assetstore.unity.com/packages/3d/props/industrial/container-collection-750) by VIS Games
 
@@ -141,10 +132,7 @@ These are **not** committed to the repo.
 * Propellor noises by [JillianCallahan](http://www.freesound.org/people/JillianCallahan/packs/671/) (Sampling+)
 
 ### Images
-* Smiley face: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Face-smile.svg) (public domain)
-* Sad face: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Face-sad.svg) (public domain)
-* Cursor: [WikiMedia Commonds](https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg) (CC BY-SA 2.5)
-
+Cursor from [WikiMedia Commons](https://commons.wikimedia.org/wiki/File:Mouse_pointer.svg) (CC BY-SA 2.5)
 Numerous textures from [textures.com](https://www.textures.com/)
 Skybox textures from [AllSky](https://assetstore.unity.com/packages/2d/textures-materials/sky/allsky-200-sky-skybox-set-10109#content)
 
