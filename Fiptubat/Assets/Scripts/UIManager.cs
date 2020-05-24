@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour {
 
 	private List<Button> mainScreenButtons = new List<Button>();
 
+	public Sprite gameOverImage, victoryImage;
+
 	void Start() {
 		gameOverScreen.gameObject.SetActive(false);
 		pauseScreen.gameObject.SetActive(false);
@@ -94,10 +96,11 @@ public class UIManager : MonoBehaviour {
 	public void ShowGameOverScreen(bool victory) {
 
 		if (victory) {
-			// TODO: show different background image
 			gameStatusText.text = "VICTORY!";
+			gameOverScreen.sprite = victoryImage;
 		} else {
 			gameStatusText.text = "GAME\nOVER!";
+			gameOverScreen.sprite = gameOverImage;
 		}
 
 		mainScreen.gameObject.SetActive(false);
@@ -118,7 +121,7 @@ public class UIManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Enable or disable buttons depending on how the 
+	/// Enable or disable buttons.
 	/// </summary>
 	/// <param name="usingUi"></param>
 	public void ToggleUiStatus(bool usingUi) {

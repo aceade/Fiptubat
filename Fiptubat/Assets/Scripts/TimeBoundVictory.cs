@@ -19,6 +19,8 @@ public class TimeBoundVictory : MonoBehaviour
 
     private bool invoked = false;
 
+    public bool playerVictory;
+
     void Start()
     {
         gameStateManager = GetComponent<GameStateManager>();
@@ -29,7 +31,11 @@ public class TimeBoundVictory : MonoBehaviour
         time += Time.deltaTime;
         if (time > maxTimeSeconds && !invoked) {
             invoked = true;
-            gameStateManager.FactionDefeated(playerManager);
+            if (playerVictory) {
+                gameStateManager.FactionEscaped(playerManager);
+            } else {
+                gameStateManager.FactionDefeated(playerManager);
+            }
         }
     }
 }
