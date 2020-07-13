@@ -74,6 +74,9 @@ public class UnitManager : MonoBehaviour {
 			activeUnits.Clear();
 			activeUnits.AddRange(units);
 			activeUnits.ForEach(unit => unit.StartTurn());
+			if (selectedUnit == null) {
+				selectedUnit = activeUnits[currentUnit];
+			}
 			selectedUnit.SelectUnit(true);
 		} else {
 			Invoke("EndTurn", 2f);

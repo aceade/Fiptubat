@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 4322375081088699104}
   - component: {fileID: 4322375081088699105}
   - component: {fileID: 4322375081088699118}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &4322375081088699119
 Transform:
